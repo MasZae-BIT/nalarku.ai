@@ -230,7 +230,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .greeting-name{font-size:22px;font-weight:800;}
 .greeting-date{font-size:12px;color:var(--t2);margin-top:4px;}
 
-/* ZAE AI BANNER */
+/* NALA AI BANNER */
 .zae-banner{
   background:linear-gradient(135deg,rgba(249,115,22,.1),rgba(234,88,12,.05));
   border:1px solid rgba(249,115,22,.28);
@@ -398,7 +398,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .cal-day.empty{background:var(--bg2);color:var(--t3);}
 
 /* ═══════════════════════════════
-   ZAE AI CHAT
+   NALA AI CHAT
 ═══════════════════════════════ */
 .chat-wrap{
   display:flex;flex-direction:column;
@@ -1122,7 +1122,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
     <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
   </div>
   <div class="splash-name">Nalarku<span>.ai</span></div>
-  <div class="splash-tagline">Belajar lebih cerdas dengan Zae AI</div>
+  <div class="splash-tagline">Belajar lebih cerdas dengan Nala AI</div>
   <div class="splash-bar"><div class="splash-fill"></div></div>
 </div>
 
@@ -1136,7 +1136,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
     </div>
 
     <div class="ob-progress" id="ob-prog">
-      <div class="ob-step done" id="op0"></div>
       <div class="ob-step active" id="op1"></div>
       <div class="ob-step" id="op2"></div>
       <div class="ob-step" id="op3"></div>
@@ -1194,7 +1193,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
           Institusi
         </div>
         <div class="ob-title">Dari mana kamu<br>berasal?</div>
-        <div class="ob-sub">Informasi ini membantu Zae AI menyesuaikan konten belajar yang relevan untukmu.</div>
+        <div class="ob-sub">Informasi ini membantu Nala AI menyesuaikan konten belajar yang relevan untukmu.</div>
       </div>
       <div class="ob-field">
         <label>Jenjang Pendidikan</label>
@@ -1248,7 +1247,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
           Gaya Belajar
         </div>
         <div class="ob-title">Gimana cara belajarmu<br>yang paling nyaman?</div>
-        <div class="ob-sub">Zae AI akan menyesuaikan metode dan rekomendasi berdasarkan preferensimu.</div>
+        <div class="ob-sub">Nala AI akan menyesuaikan metode dan rekomendasi berdasarkan preferensimu.</div>
       </div>
       <div class="ob-field">
         <label>Gaya Belajar Favorit (boleh pilih lebih dari satu)</label>
@@ -1331,7 +1330,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
           Kembali
         </button>
         <button class="ob-btn-next" onclick="finishOnboard()">
-          Selesai & Mulai Belajar
+          Selesai & Simpan
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       </div>
@@ -1341,11 +1340,11 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
       <div class="ob-welcome">
         <div class="ob-welcome-ava" id="ob-welcome-ava" style="background:linear-gradient(135deg,#a855f7,#6366f1)">M</div>
         <h2 id="ob-welcome-title">Selamat datang!</h2>
-        <p id="ob-welcome-sub">Profil kamu sudah siap. Zae AI akan mempelajari pola belajarmu dari sekarang.</p>
+        <p id="ob-welcome-sub">Profil kamu sudah siap. Nala AI akan mempelajari pola belajarmu dari sekarang.</p>
         <div id="ob-summary"></div>
-        <button class="ob-btn-next" style="margin-top:20px;max-width:300px;margin-left:auto;margin-right:auto" onclick="goToLogin()">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
-          Lanjut ke Login
+        <button class="ob-btn-next" style="margin-top:20px;max-width:300px;margin-left:auto;margin-right:auto" onclick="goToDashboard()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Masuk ke Dashboard
         </button>
       </div>
     </div>
@@ -1360,7 +1359,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
     </div>
     <div>
       <div class="plag-title">Cek Plagiarisme</div>
-      <div class="plag-sub">Powered by Zae AI</div>
+      <div class="plag-sub">Powered by Nala AI</div>
     </div>
   </div>
   <div class="plag-content">
@@ -1369,7 +1368,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
       </div>
       <div>
-        <div style="font-size:10px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px">Zae AI — Cek Plagiarisme</div>
+        <div style="font-size:10px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px">Nala AI — Cek Plagiarisme</div>
         <div style="font-size:12px;color:var(--t2)">Analisis kemiripan teks dengan sumber internet, jurnal ilmiah, dan database akademik.</div>
       </div>
     </div>
@@ -1432,7 +1431,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 
     <div class="plag-loading" id="plag-loading">
       <div class="plag-spinner"></div>
-      <div class="plag-load-msg">Zae AI sedang menganalisis teksmu...</div>
+      <div class="plag-load-msg">Nala AI sedang menganalisis teksmu...</div>
       <div class="plag-load-steps">
         <div class="plag-load-step active-s" id="pls-1">
           <svg class="plag-step-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -1486,7 +1485,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
       </div>
 
       <div class="plag-ai-rec">
-        <div class="plag-ai-rec-label">Zae AI — Rekomendasi</div>
+        <div class="plag-ai-rec-label">Nala AI — Rekomendasi</div>
         <div class="plag-ai-rec-txt" id="plag-ai-rec-txt"></div>
       </div>
 
@@ -1647,7 +1646,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
         </div>
         <div style="flex:1">
-          <div class="zae-label">Zae AI — Rekomendasi Hari Ini</div>
+          <div class="zae-label">Nala AI — Rekomendasi Hari Ini</div>
           <div class="zae-msg" id="zae-msg">Menganalisis pola belajarmu...</div>
         </div>
         <div class="zae-dot"></div>
@@ -1771,7 +1770,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
           </div>
           <div>
-            <div class="ai-analysis-title">Analisis Zae AI</div>
+            <div class="ai-analysis-title">Analisis Nala AI</div>
             <div class="ai-analysis-sub">Diperbarui hari ini</div>
           </div>
         </div>
@@ -1821,7 +1820,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
             </div>
             <div>
-              <div class="chat-name">Zae AI</div>
+              <div class="chat-name">Nala AI</div>
               <div class="chat-status">Aktif sekarang</div>
             </div>
           </div>
@@ -1841,7 +1840,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
             </div>
             <div class="cmsg-body">
-              <div class="cmsg-bubble">Halo Muhammad! Aku Zae AI, asisten belajar pintarmu di Nalarku.ai.<br><br>Aku sudah menganalisis pola belajarmu dan siap membantu kamu belajar lebih efektif. Mau mulai dari mana hari ini?</div>
+              <div class="cmsg-bubble">Halo Muhammad! Aku Nala AI, asisten belajar pintarmu di Nalarku.ai.<br><br>Aku sudah menganalisis pola belajarmu dan siap membantu kamu belajar lebih efektif. Mau mulai dari mana hari ini?</div>
               <div class="cmsg-time">11:29</div>
             </div>
           </div>
@@ -1865,7 +1864,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
             <button class="sug-btn" onclick="quickAsk('Evaluasi progres belajarku minggu ini')">Evaluasi progres</button>
           </div>
           <div class="chat-input-row">
-            <textarea class="chat-ta" id="chat-ta" placeholder="Tanya Zae AI apa saja..." rows="1" onkeydown="chatKey(event)" oninput="autoResize(this)"></textarea>
+            <textarea class="chat-ta" id="chat-ta" placeholder="Tanya Nala AI apa saja..." rows="1" onkeydown="chatKey(event)" oninput="autoResize(this)"></textarea>
             <button class="chat-send" onclick="sendMsg()">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>
             </button>
@@ -1879,7 +1878,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
         <div class="quiz-meta">
           <div>
             <div style="font-size:16px;font-weight:800">Latihan & Ujian</div>
-            <div style="font-size:11px;color:var(--t2);margin-top:2px">Direkomendasikan Zae AI</div>
+            <div style="font-size:11px;color:var(--t2);margin-top:2px">Direkomendasikan Nala AI</div>
           </div>
           <span class="chip chip-o" id="quiz-badge">Soal 1 / 5</span>
         </div>
@@ -1892,11 +1891,11 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           </div>
           <div>
-            <div style="font-size:13px;font-weight:700">Tips Zae AI</div>
+            <div style="font-size:13px;font-weight:700">Tips Nala AI</div>
             <div style="font-size:11px;color:var(--t2)">Berdasarkan pola jawabanmu</div>
           </div>
         </div>
-        <div class="zae-tip-txt" id="zae-tip-txt">Jawab soal dengan tenang. Zae AI akan memberikan analisis setelah kamu selesai.</div>
+        <div class="zae-tip-txt" id="zae-tip-txt">Jawab soal dengan tenang. Nala AI akan memberikan analisis setelah kamu selesai.</div>
       </div>
     </div>
 
@@ -1914,7 +1913,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
         </div>
         <div>
-          <div class="lb-zae-label">Analisis Zae AI <div class="lb-zae-dot"></div></div>
+          <div class="lb-zae-label">Analisis Nala AI <div class="lb-zae-dot"></div></div>
           <div class="lb-zae-msg" id="lb-zae-insight">Kamu naik <strong>2 peringkat</strong> minggu ini! Performa di modul <strong>Algoritma Lanjut</strong> sangat baik. Pertahankan momentum untuk masuk ke Top 3.</div>
         </div>
       </div>
@@ -1945,7 +1944,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
           </div>
           <div>
-            <div class="ai-analysis-title">Profil Belajar Zae AI</div>
+            <div class="ai-analysis-title">Profil Belajar Nala AI</div>
             <div class="ai-analysis-sub">Analisis gaya belajar kamu</div>
           </div>
         </div>
@@ -1957,7 +1956,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
         <div class="prof-item-ico" style="background:var(--orange-dim);color:var(--orange)">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
         </div>
-        <div class="prof-item-txt"><div class="prof-item-name">Notifikasi Zae AI</div><div class="prof-item-sub">Pengingat belajar otomatis</div></div>
+        <div class="prof-item-txt"><div class="prof-item-name">Notifikasi Nala AI</div><div class="prof-item-sub">Pengingat belajar otomatis</div></div>
         <svg class="prof-item-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
       </div>
       <div class="prof-item" onclick="showToast('Preferensi belajar disimpan!')">
@@ -1983,7 +1982,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
     </div>
     <div class="bnav-item" id="bn-ai-chat" onclick="showScreen('ai-chat')">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      <span class="bnav-label">Zae AI</span>
+      <span class="bnav-label">Nala AI</span>
     </div>
     <div class="bnav-item" id="bn-ujian" onclick="showScreen('ujian')">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
@@ -2009,11 +2008,12 @@ setTimeout(() => {
   s.style.transition = 'opacity .35s'; s.style.opacity = '0';
   setTimeout(() => {
     s.style.display = 'none';
-    // Check if onboarding done
-    if (localStorage.getItem('nk_ob_done')) {
-      showPage('pg-login');
+    // Menampilkan halaman login terlebih dahulu sesuai permintaan (Loading -> Login)
+    if (localStorage.getItem('nk_ob_done') && localStorage.getItem('nk_logged_in')) {
+      showPage('pg-app');
+      initApp();
     } else {
-      showPage('pg-onboard');
+      showPage('pg-login');
     }
   }, 350);
 }, 2400);
@@ -2103,7 +2103,7 @@ function finishOnboard() {
   const welcomeAva = document.getElementById('ob-welcome-ava');
   welcomeAva.textContent = obData.avatar || obData.nickname[0]?.toUpperCase() || 'M';
   document.getElementById('ob-welcome-title').textContent = `Hai, ${obData.nickname || 'Kamu'}! 👋`;
-  document.getElementById('ob-welcome-sub').textContent = `Profilmu sudah tersimpan. Zae AI siap menemani perjalanan belajarmu!`;
+  document.getElementById('ob-welcome-sub').textContent = `Profilmu sudah tersimpan. Nala AI siap menemani perjalanan belajarmu!`;
 
   const sum = document.getElementById('ob-summary');
   const rows = [
@@ -2125,8 +2125,10 @@ function finishOnboard() {
   document.getElementById('ob-s5').classList.add('show');
 }
 
-function goToLogin() {
-  showPage('pg-login');
+function goToDashboard() {
+  localStorage.setItem('nk_logged_in', '1');
+  showPage('pg-app');
+  initApp();
 }
 
 function shakeEl(id) {
@@ -2148,10 +2150,38 @@ function togglePass() {
   inp.type = inp.type==='password' ? 'text' : 'password';
 }
 function doLogin() {
-  showPage('pg-app');
-  initApp();
+  // Munculkan Splash kembali setelah klik login (Login -> Loading)
+  const s = document.getElementById('splash');
+  s.style.display = 'flex';
+  s.style.opacity = '1';
+  s.style.transition = 'none';
+  
+  // Restart animasi bar oren
+  const fill = document.querySelector('.splash-fill');
+  fill.style.animation = 'none';
+  void fill.offsetWidth;
+  fill.style.animation = 'sfill 2.2s ease forwards';
+
+  // Lanjut setelah animasi loading
+  setTimeout(() => {
+    s.style.transition = 'opacity .35s';
+    s.style.opacity = '0';
+    setTimeout(() => {
+      s.style.display = 'none';
+      // Hapus history lama agar selalu muncul pertanyaan setelah klik login saat testing
+      localStorage.removeItem('nk_ob_done'); 
+      
+      // Masuk Onboarding (Loading -> Pertanyaan)
+      currentObStep = 1;
+      updateObProgress(1);
+      document.querySelectorAll('.ob-screen').forEach(el => el.classList.remove('show'));
+      document.getElementById('ob-s1').classList.add('show');
+      showPage('pg-onboard');
+    }, 350);
+  }, 2400);
 }
 function doLogout() {
+  localStorage.removeItem('nk_logged_in');
   showPage('pg-login');
 }
 
@@ -2362,10 +2392,10 @@ function showResult(){
       <div style="font-size:38px;font-weight:800;color:var(--orange)">${pct}%</div>
       <div style="font-size:15px;font-weight:700;margin:6px 0">${score} / ${QS.length} Jawaban Benar</div>
       <div style="font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:20px">
-        ${pct>=80?'Luar biasa! Zae AI mencatat kemajuanmu.':pct>=60?'Bagus! Ada beberapa yang perlu dipelajari ulang.':'Terus semangat! Zae AI akan bantu kamu.'}
+        ${pct>=80?'Luar biasa! Nala AI mencatat kemajuanmu.':pct>=60?'Bagus! Ada beberapa yang perlu dipelajari ulang.':'Terus semangat! Nala AI akan bantu kamu.'}
       </div>
       <div style="background:var(--orange-dim);border:1px solid var(--orange-glow);border-radius:12px;padding:14px;text-align:left;margin-bottom:16px">
-        <div style="font-size:10px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px">Zae AI — Rekomendasi Selanjutnya</div>
+        <div style="font-size:10px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px">Nala AI — Rekomendasi Selanjutnya</div>
         <div style="font-size:13px;color:var(--t1)">
           ${pct>=80?'Lanjutkan ke materi berikutnya. Kamu sudah menguasai topik ini!':'Review kembali materi yang salah, lalu coba lagi besok.'}
         </div>
@@ -2376,7 +2406,7 @@ function showResult(){
       </button>
     </div>
   `;
-  document.getElementById('zae-tip-txt').textContent='Zae AI sudah mencatat semua jawabanmu dan akan menyesuaikan rekomendasi belajar selanjutnya.';
+  document.getElementById('zae-tip-txt').textContent='Nala AI sudah mencatat semua jawabanmu dan akan menyesuaikan rekomendasi belajar selanjutnya.';
 }
 
 function retryQuiz(){curQ=0;score=0;answered=false;buildQuiz();}
@@ -2431,7 +2461,7 @@ function buildLB(){
     </div>`).join('');
 }
 
-// ── ZAE AI CHAT ──
+// ── NALA AI CHAT ──
 let chatHist=[], chatBusy=false;
 
 function chatKey(e){
@@ -2498,7 +2528,7 @@ async function sendMsg(){
       body:JSON.stringify({
         model:'claude-sonnet-4-6',
         max_tokens:1000,
-        system:`Kamu adalah Zae AI, asisten belajar cerdas di platform Nalarku.ai. Kamu membantu pengguna bernama ${nick} (dari ${school}, tujuan: ${goal}) belajar lebih efektif dengan menganalisis pola belajarnya.
+        system:`Kamu adalah Nala AI, asisten belajar cerdas di platform Nalarku.ai. Kamu membantu pengguna bernama ${nick} (dari ${school}, tujuan: ${goal}) belajar lebih efektif dengan menganalisis pola belajarnya.
 
 Kemampuan utamamu:
 1. Menjawab pertanyaan tentang semua mata pelajaran
@@ -2592,7 +2622,7 @@ async function runPlagCheck() {
       body: JSON.stringify({
         model: 'claude-sonnet-4-6',
         max_tokens: 1000,
-        system: `Kamu adalah sistem pendeteksi plagiarisme AI bernama Zae AI. Analisis teks yang diberikan dan berikan hasil dalam format JSON yang ketat.
+        system: `Kamu adalah sistem pendeteksi plagiarisme AI bernama Nala AI. Analisis teks yang diberikan dan berikan hasil dalam format JSON yang ketat.
 
 PENTING: Balas HANYA dengan JSON, tanpa teks lain, tanpa markdown.
 
@@ -2737,4 +2767,3 @@ function showToast(msg,isErr=false){
 </script>
 </body>
 </html>
-

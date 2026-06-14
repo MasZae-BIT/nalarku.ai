@@ -2168,15 +2168,15 @@ function doLogin() {
     s.style.opacity = '0';
     setTimeout(() => {
       s.style.display = 'none';
-      // Hapus history lama agar selalu muncul pertanyaan setelah klik login saat testing
-      localStorage.removeItem('nk_ob_done'); 
-      
-      // Masuk Onboarding (Loading -> Pertanyaan)
-      currentObStep = 1;
-      updateObProgress(1);
-      document.querySelectorAll('.ob-screen').forEach(el => el.classList.remove('show'));
-      document.getElementById('ob-s1').classList.add('show');
-      showPage('pg-onboard');
+      if (localStorage.getItem('nk_ob_done')) {
+        // Jika sudah pernah isi pertanyaan, langsung masuk Dashboard
+        localStorage.setItem('nk_logged_in', '1');
+        showPage('pg-app');
+        initApp();
+      } else {
+        // Jika belum, masuk Onboarding (Loading -> Pertanyaan)
+        showPage('pg-onboard');
+      }
     }, 350);
   }, 2400);
 }

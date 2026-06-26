@@ -2000,9 +2000,15 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 </div>
 
 <script>
-// ── GANTI URL INI DENGAN WEBHOOK N8N KAMU ──
-const N8N_CHAT_URL  = 'https://budionosiregar.app.n8n.cloud/webhook-test/chatbot';
-const N8N_PLAG_URL  = 'https://YOUR-N8N-DOMAIN/webhook/nala-plagiarism';
+// ── N8N WEBHOOK URLs ──
+// Ganti ke Production URL saat sudah siap deploy
+const IS_TEST_MODE  = true; // ubah ke false saat production
+const N8N_CHAT_URL  = IS_TEST_MODE
+  ? 'https://budionosiregar.app.n8n.cloud/webhook-test/chatbot'
+  : 'https://budionosiregar.app.n8n.cloud/webhook/chatbot';
+const N8N_PLAG_URL  = IS_TEST_MODE
+  ? 'https://budionosiregar.app.n8n.cloud/webhook-test/chatbot'
+  : 'https://budionosiregar.app.n8n.cloud/webhook/chatbot';
 
 // Helper: panggil n8n dan ambil teks balasan AI
 async function callN8N(url, payload) {

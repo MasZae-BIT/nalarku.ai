@@ -42,16 +42,6 @@ body{
 }
 button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 
-/* ── MOBILE / DESKTOP VISIBILITY ── */
-.mobile-only{display:block;}
-.desktop-dashboard{display:none;}
-
-@media(min-width:1024px){
-  .mobile-only{display:none!important;}
-  .desktop-dashboard{display:grid;}
-  .beranda-scroll{display:flex;flex-direction:column;}
-}
-
 /* ── ICONS (inline SVG system) ── */
 .ico{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
 .ico svg{display:block;}
@@ -225,9 +215,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 /* ── SCREENS (within app) ── */
 .ascreen{display:none;}
 .ascreen.on{display:block;}
-
-/* beranda scroll container — hidden on mobile, shown on desktop */
-.beranda-scroll{display:none;}
 
 /* ═══════════════════════════════
    BERANDA
@@ -609,318 +596,8 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .chat-send:hover{transform:scale(1.07);box-shadow:0 5px 16px rgba(249,115,22,.4);}
 .chat-send:active{transform:scale(.96);}
 
-/* ═══════════════════════════════
-   DESKTOP FULLSCREEN LAYOUT
-═══════════════════════════════ */
-@media(min-width:1024px){
-
-  /* ── APP SHELL ── */
-  #pg-app{
-    display:grid;
-    grid-template-areas:
-      "topbar topbar"
-      "sidebar main";
-    grid-template-rows:64px 1fr;
-    grid-template-columns:220px 1fr;
-    height:100vh;
-    overflow:hidden;
-  }
-
-  /* ── TOPBAR FULL WIDTH ACROSS TOP ── */
-  .topbar{
-    grid-area:topbar;
-    position:relative;
-    max-width:100%;
-    padding:0 28px;
-    height:64px;
-    justify-content:space-between;
-  }
-  .topbar-brand-name{font-size:18px;font-weight:800;}
-  .topbar-brand-icon{width:38px;height:38px;border-radius:12px;}
-  .topbar-right{gap:12px;}
-  .btn-upgrade{font-size:13px;padding:9px 18px;}
-  .user-ava{width:38px;height:38px;font-size:14px;}
-
-  /* ── LEFT SIDEBAR NAV ── */
-  .bnav{
-    grid-area:sidebar;
-    position:relative;
-    bottom:auto;left:auto;right:auto;
-    flex-direction:column;
-    justify-content:flex-start;
-    align-items:stretch;
-    padding:16px 0 20px;
-    border-top:none;
-    border-right:1px solid var(--border);
-    background:var(--bg2);
-    height:100%;
-    gap:2px;
-    overflow-y:auto;
-  }
-  .bnav-item{
-    flex-direction:row;
-    justify-content:flex-start;
-    padding:12px 18px;
-    min-width:auto;
-    gap:12px;
-    border-radius:10px;
-    margin:0 10px;
-    font-size:13px;
-    position:relative;
-  }
-  .bnav-item.on{
-    background:var(--orange-dim);
-    border:1px solid rgba(249,115,22,.25);
-    color:var(--orange);
-  }
-  .bnav-item.on::before{
-    content:'';
-    position:absolute;
-    left:-10px;
-    top:50%;
-    transform:translateY(-50%);
-    width:3px;
-    height:60%;
-    background:var(--orange);
-    border-radius:0 3px 3px 0;
-  }
-  .bnav-item:hover:not(.on){
-    background:var(--card);
-    color:var(--t1);
-  }
-  .bnav-label{
-    font-size:13px;
-    font-weight:600;
-  }
-
-  /* ── MAIN CONTENT AREA ── */
-  .app-content{
-    grid-area:main;
-    padding:0;
-    max-width:100%;
-    margin:0;
-    overflow:hidden;
-    height:100%;
-    position:relative;
-  }
-
-  /* ── All screens use full area switch — NO page scroll on desktop ── */
-  .ascreen{
-    position:absolute;
-    inset:0;
-    overflow-y:auto;
-    display:none !important;
-    min-height:unset;
-  }
-  .ascreen.on{
-    display:flex !important;
-    flex-direction:column;
-  }
-
-  /* ── BERANDA ── */
-  #s-beranda{
-    overflow:hidden;
-    background:var(--bg);
-  }
-  #s-beranda .greeting{ display:none; }
-
-  /* beranda inner scroll */
-  .beranda-scroll{
-    flex:1;
-    overflow-y:auto;
-    padding:24px 28px 28px;
-  }
-
-  /* Desktop tile grid */
-  .desktop-dashboard{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:16px;
-    align-content:start;
-  }
-
-  /* ── TILE BASE ── */
-  .dt{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:var(--r2);
-    padding:18px;
-    cursor:pointer;
-    transition:all .2s;
-    overflow:hidden;
-    position:relative;
-  }
-  .dt:hover{
-    border-color:var(--border2);
-    transform:translateY(-2px);
-    box-shadow:0 8px 24px rgba(0,0,0,.3);
-  }
-
-  /* Tile sizes */
-  .dt-wide{grid-column:span 2;}
-  .dt-full{grid-column:span 4;}
-  .dt-tall{grid-row:span 2;}
-  .dt-2x2{grid-column:span 2;grid-row:span 2;}
-
-  /* Tile header */
-  .dt-hdr{
-    display:flex;align-items:center;gap:10px;margin-bottom:14px;
-  }
-  .dt-ico{
-    width:36px;height:36px;border-radius:10px;
-    display:flex;align-items:center;justify-content:center;flex-shrink:0;
-  }
-  .dt-ico.o{background:var(--orange-dim);color:var(--orange);}
-  .dt-ico.g{background:var(--green-dim);color:var(--green);}
-  .dt-ico.b{background:var(--blue-dim);color:var(--blue);}
-  .dt-ico.p{background:var(--purple-dim);color:var(--purple);}
-  .dt-title{font-size:12px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;}
-
-  /* Stat number inside tile */
-  .dt-stat{font-size:42px;font-weight:800;line-height:1;letter-spacing:-2px;}
-  .dt-stat.o{color:var(--orange);}
-  .dt-stat.g{color:var(--green);}
-  .dt-stat.b{color:var(--blue);}
-  .dt-stat.p{color:var(--purple);}
-  .dt-sub{font-size:12px;color:var(--t3);margin-top:4px;}
-
-  /* AI Banner tile */
-  .dt-ai{
-    background:linear-gradient(135deg,rgba(249,115,22,.12),rgba(234,88,12,.06));
-    border-color:rgba(249,115,22,.3);
-    display:flex;align-items:center;gap:14px;
-    padding:18px 20px;
-  }
-  .dt-ai:hover{border-color:rgba(249,115,22,.55);}
-  .dt-ai-ico{
-    width:48px;height:48px;border-radius:14px;flex-shrink:0;
-    background:rgba(249,115,22,.18);
-    display:flex;align-items:center;justify-content:center;color:var(--orange);
-  }
-  .dt-ai-label{font-size:10px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px;}
-  .dt-ai-msg{font-size:13px;color:var(--t1);line-height:1.5;}
-  .dt-ai-dot{
-    width:8px;height:8px;border-radius:50%;background:var(--green);
-    flex-shrink:0;margin-left:auto;
-    animation:pulse-dot 2s ease infinite;
-  }
-
-  /* Timer tile */
-  .dt-timer-display{
-    font-size:48px;font-weight:800;letter-spacing:-2px;
-    color:var(--t1);margin:6px 0 10px;
-    font-variant-numeric:tabular-nums;text-align:center;
-  }
-  .dt-timer-tabs{display:flex;gap:5px;justify-content:center;margin-bottom:12px;flex-wrap:wrap;}
-  .dt-timer-tab{
-    padding:4px 12px;border-radius:var(--r4);border:1px solid var(--border);
-    background:transparent;color:var(--t3);font-size:10px;font-weight:700;cursor:pointer;transition:all .2s;
-  }
-  .dt-timer-tab.on{background:var(--orange-dim);border-color:rgba(249,115,22,.4);color:var(--orange);}
-  .dt-timer-btns{display:flex;gap:10px;justify-content:center;}
-  .dt-timer-btn{
-    width:40px;height:40px;border-radius:50%;border:1px solid var(--border);
-    background:var(--card2);cursor:pointer;color:var(--t2);
-    display:flex;align-items:center;justify-content:center;transition:all .2s;
-  }
-  .dt-timer-btn.main{
-    width:52px;height:52px;
-    background:linear-gradient(135deg,var(--orange),var(--orange2));
-    border:none;color:#fff;
-    box-shadow:0 4px 14px rgba(249,115,22,.35);
-  }
-  .dt-timer-btn:hover{background:var(--card2);color:var(--t1);}
-  .dt-sessions{font-size:11px;color:var(--t3);text-align:center;margin-top:8px;}
-
-  /* Quick create tile */
-  .dt-qbtns{display:flex;flex-wrap:wrap;gap:7px;}
-  .dt-qbtn{
-    display:flex;align-items:center;gap:6px;
-    padding:7px 12px;border-radius:8px;
-    border:1px solid var(--border);background:transparent;
-    color:var(--t2);font-size:11px;font-weight:600;
-    cursor:pointer;transition:all .2s;
-  }
-  .dt-qbtn svg{color:var(--orange);}
-  .dt-qbtn:hover{background:var(--card2);border-color:var(--border2);color:var(--t1);}
-
-  /* Calendar tile */
-  .dt-cal .cal-days{gap:3px;}
-  .dt-cal .cal-day{font-size:10px;border-radius:5px;}
-
-  /* Notes tile */
-  .dt-notes .tcard{
-    padding:10px 12px;margin-bottom:7px;
-  }
-  .dt-notes .tcard-name{font-size:13px;}
-  .dt-notes .tcard-sub{font-size:10px;}
-
-  /* AI Analysis tile */
-  .dt-analysis .ai-row{padding:7px 0;}
-  .dt-analysis .ai-row-label{font-size:11px;}
-  .dt-analysis .ai-row-val{font-size:12px;}
-
-  /* Desktop greeting bar replaces mobile greeting */
-  .desktop-greet{
-    display:flex;align-items:center;justify-content:space-between;
-    margin-bottom:20px;
-    grid-column:1 / -1;
-  }
-  .desktop-greet-left{display:flex;align-items:center;gap:14px;}
-  .desktop-greet-ava{
-    width:50px;height:50px;border-radius:15px;
-    background:linear-gradient(135deg,#a855f7,#6366f1);
-    display:flex;align-items:center;justify-content:center;
-    font-size:19px;font-weight:800;
-    box-shadow:0 4px 14px rgba(168,85,247,.35);
-  }
-  .desktop-greet-name{font-size:24px;font-weight:800;letter-spacing:-.4px;}
-  .desktop-greet-date{font-size:12px;color:var(--t2);margin-top:3px;}
-  .desktop-greet-right{display:flex;align-items:center;gap:10px;}
-
-  /* ── SCREEN-SPECIFIC DESKTOP ── */
-  #s-ai-chat.on{
-    overflow:hidden;
-  }
-  #s-ujian, #s-peringkat, #s-profil{
-    padding:28px 36px;
-  }
-  #s-ujian.on, #s-peringkat.on, #s-profil.on{
-    display:block;
-  }
-
-  /* Chat screen desktop */
-  .chat-wrap{
-    flex:1;
-    height:100%;
-    background:var(--bg2);
-    border-left:1px solid var(--border);
-    border-right:1px solid var(--border);
-    border-radius:0;
-    padding:0 28px 16px;
-    margin:0 auto;
-    max-width:960px;
-    width:100%;
-    overflow:hidden;
-    display:flex;
-    flex-direction:column;
-  }
-  .chat-hdr{padding:20px 0 14px;}
-  .cmsg-bubble{font-size:14px;}
-
-  /* Plagiarism desktop */
-  #pg-plagiarism.show{
-    display:grid;
-    grid-template-rows:auto 1fr;
-  }
-  .plag-content{
-    max-width:860px;
-    padding:24px 28px;
-  }
-}
-
 /* Desktop layout — sidebar feel */
-@media(min-width:768px) and (max-width:1023px){
+@media(min-width:768px){
   .app-content{padding:64px 24px 24px;}
   #s-ai-chat{
     display:flex;flex-direction:column;
@@ -2086,8 +1763,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   <div class="app-content">
 
     <div id="s-beranda" class="ascreen on">
-      <!-- MOBILE: original greeting -->
-      <div class="greeting mobile-only">
+      <div class="greeting">
         <div class="greeting-wave">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </div>
@@ -2095,237 +1771,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
         <div class="greeting-date" id="gdate"></div>
       </div>
 
-      <!-- DESKTOP: Enhanced Dashboard inside scroll wrapper -->
-      <div class="beranda-scroll">
-      <div class="desktop-dashboard" id="desktop-dashboard">
-
-        <!-- Row 0: Greeting bar -->
-        <div class="desktop-greet">
-          <div class="desktop-greet-left">
-            <div class="desktop-greet-ava">M</div>
-            <div>
-              <div class="desktop-greet-name">Halo, Muhammad! 👋</div>
-              <div class="desktop-greet-date" id="gdate-desktop"></div>
-            </div>
-          </div>
-          <div class="desktop-greet-right">
-            <button class="btn-upgrade" style="font-size:13px;padding:9px 18px">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-              Tingkatkan ke Pro
-            </button>
-          </div>
-        </div>
-
-        <!-- Tile 1: Nala AI banner (full width) -->
-        <div class="dt dt-full dt-ai" onclick="showScreen('ai-chat')" style="padding:20px 24px;">
-          <div class="dt-ai-ico" style="width:52px;height:52px;border-radius:16px;">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
-          </div>
-          <div style="flex:1">
-            <div class="dt-ai-label" style="font-size:11px;margin-bottom:5px">Nala AI — Rekomendasi Hari Ini</div>
-            <div class="dt-ai-msg" id="zae-msg-dt" style="font-size:14px;font-weight:600">Menganalisis pola belajarmu...</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:12px;flex-shrink:0">
-            <div style="font-size:11px;color:var(--orange);font-weight:700;display:flex;align-items:center;gap:5px">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-              Mulai Chat
-            </div>
-            <div class="dt-ai-dot"></div>
-          </div>
-        </div>
-
-        <!-- Tile 2: Kartu Hari Ini -->
-        <div class="dt" onclick="showScreen('ujian')" style="position:relative;overflow:hidden;">
-          <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:var(--orange-dim);border-radius:0 14px 0 80px;opacity:.6"></div>
-          <div class="dt-hdr">
-            <div class="dt-ico o">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            </div>
-            <span class="dt-title">Kartu Hari Ini</span>
-          </div>
-          <div class="dt-stat o" style="font-size:52px;margin:4px 0">0</div>
-          <div class="dt-sub">kartu selesai hari ini</div>
-          <div class="xp-bar" style="margin-top:12px"><div class="xp-fill" style="width:3%"></div></div>
-          <div style="font-size:10px;color:var(--t3);margin-top:6px">Target: 10 kartu / hari</div>
-        </div>
-
-        <!-- Tile 3: Streak -->
-        <div class="dt" style="position:relative;overflow:hidden;">
-          <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:var(--green-dim);border-radius:0 14px 0 80px;opacity:.6"></div>
-          <div class="dt-hdr">
-            <div class="dt-ico g">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-            </div>
-            <span class="dt-title">Streak Belajar</span>
-          </div>
-          <div class="dt-stat g" style="font-size:52px;margin:4px 0">0</div>
-          <div class="dt-sub">hari berturut-turut</div>
-          <div style="margin-top:12px;display:flex;align-items:center;gap:6px">
-            <div style="font-size:10px;color:var(--t3)">Terbaik: <span style="color:var(--green);font-weight:700">0 hari</span></div>
-          </div>
-        </div>
-
-        <!-- Tile 4: Timer (2x2 tall) -->
-        <div class="dt dt-2x2" style="text-align:center">
-          <div class="dt-hdr" style="justify-content:center;margin-bottom:8px">
-            <div class="dt-ico o">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
-            <span class="dt-title">Pomodoro Timer</span>
-          </div>
-          <div class="dt-timer-tabs">
-            <button class="dt-timer-tab on" onclick="setTimerMode('focus',this);syncTimerTabs(this,'focus')">Fokus</button>
-            <button class="dt-timer-tab" onclick="setTimerMode('short',this);syncTimerTabs(this,'short')">Istirahat</button>
-            <button class="dt-timer-tab" onclick="setTimerMode('long',this);syncTimerTabs(this,'long')">Panjang</button>
-          </div>
-          <div class="dt-timer-display" id="dt-timer-display">25:00</div>
-          <div class="dt-timer-btns">
-            <button class="dt-timer-btn" onclick="resetTimer()" title="Reset">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.95"/></svg>
-            </button>
-            <button class="dt-timer-btn main" id="dt-timer-main-btn" onclick="toggleTimer()">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" id="dt-timer-ico"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            </button>
-            <button class="dt-timer-btn" onclick="showToast('Notifikasi timer aktif!')">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-            </button>
-          </div>
-          <div class="dt-sessions" id="dt-timer-sessions">Sesi 0 / 4 selesai hari ini</div>
-        </div>
-
-        <!-- Tile 5: Level -->
-        <div class="dt" onclick="showScreen('peringkat')" style="position:relative;overflow:hidden;">
-          <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:var(--purple-dim);border-radius:0 14px 0 80px;opacity:.6"></div>
-          <div class="dt-hdr">
-            <div class="dt-ico p">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
-            </div>
-            <span class="dt-title">Level Kamu</span>
-          </div>
-          <div class="dt-stat p" style="font-size:38px;margin:4px 0">Lvl 1</div>
-          <div class="dt-sub">0 XP terkumpul</div>
-          <div class="xp-bar" style="margin-top:12px"><div class="xp-fill" style="width:3%"></div></div>
-          <div style="font-size:10px;color:var(--t3);margin-top:6px">Butuh 100 XP ke Level 2</div>
-        </div>
-
-        <!-- Tile 6: Peringkat -->
-        <div class="dt" onclick="showScreen('peringkat')" style="position:relative;overflow:hidden;">
-          <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:var(--blue-dim);border-radius:0 14px 0 80px;opacity:.6"></div>
-          <div class="dt-hdr">
-            <div class="dt-ico b">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
-            </div>
-            <span class="dt-title">Peringkat Global</span>
-          </div>
-          <div class="dt-stat b" style="font-size:38px;margin:4px 0">Top 59%</div>
-          <div class="dt-sub">dari semua pengguna</div>
-          <div style="margin-top:12px;font-size:10px;color:var(--t3)">Naik <span style="color:var(--blue);font-weight:700">2 peringkat</span> minggu ini</div>
-        </div>
-
-        <!-- Section divider: Alat & Aktivitas -->
-        <div style="grid-column:1 / -1;display:flex;align-items:center;gap:12px;margin-top:4px">
-          <div style="font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.7px;white-space:nowrap">Alat &amp; Aktivitas</div>
-          <div style="flex:1;height:1px;background:var(--border)"></div>
-        </div>
-
-        <!-- Tile 7: Kalender Streak (wide) -->
-        <div class="dt dt-wide dt-cal">
-          <div class="dt-hdr">
-            <div class="dt-ico o">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            </div>
-            <span class="dt-title">Streak Belajar — Juni 2026</span>
-            <span class="chip chip-o" style="margin-left:auto;font-size:10px">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-              0 Hari
-            </span>
-          </div>
-          <div class="cal-days" id="cal-days-dt"></div>
-        </div>
-
-        <!-- Tile 8: Quick Create -->
-        <div class="dt dt-wide">
-          <div class="dt-hdr">
-            <div class="dt-ico g">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            </div>
-            <span class="dt-title">Buat Baru</span>
-          </div>
-          <div class="dt-qbtns">
-            <button class="dt-qbtn" onclick="showToast('Unggah file materi')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-              Unggah File
-            </button>
-            <button class="dt-qbtn" onclick="showToast('Masukkan link YouTube')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-              YouTube
-            </button>
-            <button class="dt-qbtn" onclick="showToast('Rekam audio pembelajaran')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
-              Audio
-            </button>
-            <button class="dt-qbtn" onclick="showScreen('ai-chat')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-              Tulis Catatan
-            </button>
-            <button class="dt-qbtn" onclick="openPlagiarism()">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-              Cek Plagiarisme
-            </button>
-            <button class="dt-qbtn" onclick="showScreen('ujian')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-              Mulai Ujian
-            </button>
-          </div>
-        </div>
-
-        <!-- Section divider: Catatan & Insight -->
-        <div style="grid-column:1 / -1;display:flex;align-items:center;gap:12px;margin-top:4px">
-          <div style="font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.7px;white-space:nowrap">Catatan &amp; Insight</div>
-          <div style="flex:1;height:1px;background:var(--border)"></div>
-        </div>
-
-        <!-- Tile 9: Analisis Nala AI -->
-        <div class="dt dt-wide dt-analysis">
-          <div class="dt-hdr">
-            <div class="dt-ico o">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-            </div>
-            <span class="dt-title">Analisis Nala AI</span>
-            <span style="font-size:10px;color:var(--t3);margin-left:auto">Diperbarui hari ini</span>
-          </div>
-          <div class="ai-row"><div class="ai-row-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>&nbsp;Waktu Optimal</div><div class="ai-row-val g">19.00 – 21.00</div></div>
-          <div class="ai-row"><div class="ai-row-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>&nbsp;Fokus Minggu Ini</div><div class="ai-row-val o">Manajemen Data</div></div>
-          <div class="ai-row"><div class="ai-row-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>&nbsp;Kemajuan</div><div class="ai-row-val g">+12% dari minggu lalu</div></div>
-          <div class="ai-row"><div class="ai-row-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>&nbsp;Materi Perlu Diulang</div><div class="ai-row-val r">Regresi Linear</div></div>
-        </div>
-
-        <!-- Tile 10: Catatan Terakhir -->
-        <div class="dt dt-wide dt-notes">
-          <div class="dt-hdr">
-            <div class="dt-ico b">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-            </div>
-            <span class="dt-title">Catatan Terakhir</span>
-            <a style="font-size:11px;color:var(--orange);font-weight:600;text-decoration:none;cursor:pointer;margin-left:auto">Lihat Semua</a>
-          </div>
-          <div class="tcard" onclick="openTopic('statistika')" style="margin-bottom:0">
-            <div class="tcard-ico" style="background:var(--blue-dim);color:var(--blue)">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-            </div>
-            <div class="tcard-info">
-              <div class="tcard-name">Catatan Manajemen Data, Analisi...</div>
-              <div class="tcard-sub">Statistika • STA1111-9-Manajemen Data... • 3 hari lalu</div>
-            </div>
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          </div>
-        </div>
-
-      </div><!-- end .desktop-dashboard -->
-      </div><!-- end .beranda-scroll -->
-
-      <!-- MOBILE ONLY: all content below hidden on desktop via .mobile-only -->
-      <div class="mobile-only">
       <div class="zae-banner" onclick="showScreen('ai-chat')">
         <div class="zae-ico">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
@@ -2495,7 +1940,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
           <div class="ai-row-val g">3 / 5 tercapai</div>
         </div>
       </div>
-      </div><!-- end .mobile-only -->
     </div>
 
     <div id="s-ai-chat" class="ascreen">
@@ -2666,7 +2110,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
     </div>
 
   </div><nav class="bnav">
-    <div style="padding:4px 20px 12px;font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.7px">Menu Utama</div>
     <div class="bnav-item on" id="bn-beranda" onclick="showScreen('beranda')">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       <span class="bnav-label">Beranda</span>
@@ -2683,8 +2126,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
       <span class="bnav-label">Peringkat</span>
     </div>
-    <div style="margin:12px 10px;height:1px;background:var(--border)"></div>
-    <div style="padding:0 20px 8px;font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.7px">Akun</div>
     <div class="bnav-item" id="bn-profil" onclick="showScreen('profil')">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       <span class="bnav-label">Profil</span>
@@ -2912,23 +2353,17 @@ function applyProfile() {
   try {
     const p = JSON.parse(localStorage.getItem('nk_profile') || '{}');
     const nick = p.nickname || 'Muhammad';
-    const avatarChar = (p.avatar || nick[0] || 'M').toUpperCase();
     // Update greeting
     const gn = document.getElementById('gdate');
     if (gn) gn.dataset.nick = nick;
     // Update topbar avatar
     const ava = document.querySelector('.user-ava');
-    if (ava) ava.textContent = avatarChar;
-    // Update greeting name (mobile)
+    if (ava) ava.textContent = (p.avatar || nick[0] || 'M').toUpperCase();
+    // Update greeting name
     const grName = document.querySelector('.greeting-name');
     if (grName) grName.textContent = `Halo, ${nick}!`;
-    // Update desktop greeting name & avatar
-    const dtName = document.querySelector('.desktop-greet-name');
-    if (dtName) dtName.textContent = `Halo, ${nick}! 👋`;
-    const dtAva = document.querySelector('.desktop-greet-ava');
-    if (dtAva) dtAva.textContent = avatarChar;
     // Update chat initial
-    document.querySelectorAll('.cmsg-ava.u').forEach(el => el.textContent = avatarChar);
+    document.querySelectorAll('.cmsg-ava.u').forEach(el => el.textContent = (p.avatar || nick[0] || 'M').toUpperCase());
     // Update chat system prompt data
     window._userProfile = p;
     // Update profile page
@@ -2937,7 +2372,7 @@ function applyProfile() {
     const pe = document.querySelector('.prof-email');
     if (pe && p.school) pe.textContent = p.school;
     const pa = document.querySelector('.prof-ava');
-    if (pa) pa.textContent = avatarChar;
+    if (pa) pa.textContent = (p.avatar || nick[0] || 'M').toUpperCase();
   } catch(e) {}
 }
 
@@ -2945,10 +2380,7 @@ function setDate() {
   const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
   const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
   const d = new Date();
-  const dateStr = `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
-  document.getElementById('gdate').textContent = dateStr;
-  const dtDate = document.getElementById('gdate-desktop');
-  if (dtDate) dtDate.textContent = dateStr;
+  document.getElementById('gdate').textContent = `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
 }
 
 const ZAE_MSGS = [
@@ -2960,10 +2392,7 @@ const ZAE_MSGS = [
 ];
 function setZaeRec() {
   setTimeout(() => {
-    const msg = ZAE_MSGS[Math.floor(Math.random()*ZAE_MSGS.length)];
-    document.getElementById('zae-msg').textContent = msg;
-    const dtMsg = document.getElementById('zae-msg-dt');
-    if (dtMsg) dtMsg.textContent = msg;
+    document.getElementById('zae-msg').textContent = ZAE_MSGS[Math.floor(Math.random()*ZAE_MSGS.length)];
   }, 900);
 }
 
@@ -2971,19 +2400,10 @@ function setZaeRec() {
 function showScreen(name) {
   document.querySelectorAll('.ascreen').forEach(s => s.classList.remove('on'));
   document.querySelectorAll('.bnav-item').forEach(b => b.classList.remove('on'));
-  const screen = document.getElementById('s-'+name);
-  if (screen) screen.classList.add('on');
+  document.getElementById('s-'+name).classList.add('on');
   const bn = document.getElementById('bn-'+name);
   if (bn) bn.classList.add('on');
-  // On desktop, scroll the active screen to top
-  if (window.innerWidth >= 1024) {
-    if (screen) screen.scrollTop = 0;
-    // Also reset scroll for beranda's inner scroll container
-    const berandaScroll = document.querySelector('.beranda-scroll');
-    if (berandaScroll && name === 'beranda') berandaScroll.scrollTop = 0;
-  } else {
-    window.scrollTo(0,0);
-  }
+  window.scrollTo(0,0);
 }
 
 // ── STREAK CALENDAR ──
@@ -3002,25 +2422,14 @@ function buildCal() {
     html+=`<div class="cal-day ${cls}">${d}</div>`;
   }
   document.getElementById('cal-days').innerHTML = html;
-  // Also populate desktop calendar
-  const dtCal = document.getElementById('cal-days-dt');
-  if (dtCal) dtCal.innerHTML = html;
 }
 
 // ── TIMER ──
 let timerInt=null, timerSecs=25*60, timerRunning=false, timerSessions=0;
 const MODES = { focus:25*60, short:5*60, long:15*60 };
 
-function syncTimerTabs(el, mode) {
-  // Sync desktop timer tabs when mobile tabs change and vice versa
-  document.querySelectorAll('.dt-timer-tab').forEach(t=>t.classList.remove('on'));
-  document.querySelectorAll('.timer-tab').forEach(t=>t.classList.remove('on'));
-  el.classList.add('on');
-}
-
 function setTimerMode(m, el) {
   document.querySelectorAll('.timer-tab').forEach(t=>t.classList.remove('on'));
-  document.querySelectorAll('.dt-timer-tab').forEach(t=>t.classList.remove('on'));
   el.classList.add('on');
   resetTimer();
   timerSecs = MODES[m];
@@ -3029,28 +2438,16 @@ function setTimerMode(m, el) {
 function toggleTimer() {
   if (timerRunning) {
     clearInterval(timerInt); timerRunning=false;
-    const pauseIco = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
-    const playIco = '<polygon points="5 3 19 12 5 21 5 3"/>';
-    document.getElementById('timer-ico').innerHTML = playIco;
-    const dtIco = document.getElementById('dt-timer-ico');
-    if (dtIco) dtIco.innerHTML = playIco;
+    document.getElementById('timer-ico').innerHTML = '<polygon points="5 3 19 12 5 21 5 3"/>';
   } else {
     timerRunning=true;
-    const pauseIco = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
-    document.getElementById('timer-ico').innerHTML = pauseIco;
-    const dtIco = document.getElementById('dt-timer-ico');
-    if (dtIco) dtIco.innerHTML = pauseIco;
+    document.getElementById('timer-ico').innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
     timerInt = setInterval(()=>{
       if (timerSecs<=0) {
         clearInterval(timerInt); timerRunning=false;
         timerSessions++;
-        const playIco = '<polygon points="5 3 19 12 5 21 5 3"/>';
         document.getElementById('timer-sessions').textContent=`Sesi ${timerSessions} / 4 selesai hari ini`;
-        const dtSessions = document.getElementById('dt-timer-sessions');
-        if (dtSessions) dtSessions.textContent=`Sesi ${timerSessions} / 4 selesai hari ini`;
-        document.getElementById('timer-ico').innerHTML=playIco;
-        const dtIco2 = document.getElementById('dt-timer-ico');
-        if (dtIco2) dtIco2.innerHTML=playIco;
+        document.getElementById('timer-ico').innerHTML='<polygon points="5 3 19 12 5 21 5 3"/>';
         showToast('Sesi selesai! Istirahat sebentar.');
         timerSecs = MODES.focus;
         updateTimerDisplay();
@@ -3067,18 +2464,12 @@ function resetTimer() {
   const keys = ['focus','short','long'];
   timerSecs = MODES[keys[idx]];
   updateTimerDisplay();
-  const playIco = '<polygon points="5 3 19 12 5 21 5 3"/>';
-  document.getElementById('timer-ico').innerHTML=playIco;
-  const dtIco = document.getElementById('dt-timer-ico');
-  if (dtIco) dtIco.innerHTML=playIco;
+  document.getElementById('timer-ico').innerHTML='<polygon points="5 3 19 12 5 21 5 3"/>';
 }
 function updateTimerDisplay() {
   const m = Math.floor(timerSecs/60).toString().padStart(2,'0');
   const s = (timerSecs%60).toString().padStart(2,'0');
-  const txt = `${m}:${s}`;
-  document.getElementById('timer-display').textContent=txt;
-  const dtDisp = document.getElementById('dt-timer-display');
-  if (dtDisp) dtDisp.textContent=txt;
+  document.getElementById('timer-display').textContent=`${m}:${s}`;
 }
 
 // ── QUIZ ──

@@ -614,7 +614,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 
   /* ── APP SHELL ── */
   #pg-app{
-    display:grid;
+    display:grid !important;
     grid-template-rows:64px 1fr;
     grid-template-columns:220px 1fr;
     height:100vh;
@@ -1043,7 +1043,18 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 
 /* Desktop layout — sidebar feel + Bento Grid for tablet */
 @media(min-width:768px) and (max-width:1023px){
-  .app-content{padding:64px 0 0;}
+  /* Override .page.show flex so tablet beranda renders properly */
+  #pg-app{
+    display:block !important;
+    height:auto;
+    overflow:visible;
+  }
+  .app-content{
+    padding:64px 0 0;
+    /* Tablet: app-content takes full height minus topbar */
+    min-height:calc(100dvh - 64px);
+    position:relative;
+  }
   #s-ai-chat{
     display:flex;flex-direction:column;
     height:calc(100dvh - 64px);
@@ -1060,7 +1071,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   .chat-hdr{padding:16px 0 14px;}
   .cmsg-bubble{font-size:14px;}
 
-  /* Tablet shows beranda as scrollable full page (no sidebar) */
+  /* Tablet: hide mobile-only, show desktop dashboard */
   .mobile-only{display:none !important;}
   .desktop-dashboard{
     display:grid !important;
@@ -1070,13 +1081,13 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   .dt-full{grid-column:span 3;}
   .dt-wide{grid-column:span 2;}
   .dt-2x2{grid-column:span 2;}
-  #s-beranda.on{
-    display:flex;
-    flex-direction:column;
-    overflow:hidden;
-  }
 
-  /* Tablet topbar: logo left, controls right */
+  /* Tablet: ascreen behaves like normal block for beranda */
+  .ascreen{position:static;display:none;overflow-y:visible;}
+  .ascreen.on{display:block;}
+  #s-beranda.on{display:block;}
+
+  /* Tablet topbar */
   .topbar{
     padding:0 20px;
     height:64px;
@@ -1088,6 +1099,8 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   /* Show desktop greeting in tablet too */
   #s-beranda .greeting{display:none;}
   .desktop-greet{grid-column:1 / -1;}
+  /* Bottom nav hidden on tablet */
+  .bnav{display:none;}
 }
 
 /* ═══════════════════════════════
@@ -2326,10 +2339,4 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
           </div>
           <div class="dt-timer-tabs">
             <button class="dt-timer-tab on" onclick="setTimerMode('focus',this);syncTimerTabs(this,'focus')">Fokus</button>
-            <button class="dt-timer-tab" onclick="setTimerMode('short',this);syncTimerTabs(this,'short')">Istirahat</button>
-            <button class="dt-timer-tab" onclick="setTimerMode('long',this);syncTimerTabs(this,'long')">Panjang</button>
-          </div>
-          <div class="dt-timer-display" id="dt-timer-display">25:00</div>
-          <div class="dt-timer-btns">
-            <button class="dt-timer-btn" onclick="resetTimer()" title="Reset">
-            
+            <button class="dt-timer-tab" onclick="set

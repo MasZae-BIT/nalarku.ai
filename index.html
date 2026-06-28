@@ -163,10 +163,8 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   border-bottom:1px solid var(--border);
   padding:13px 18px;
   display:flex;align-items:center;justify-content:space-between;
-  max-width:680px;margin:0 auto;
+  width:100%;margin:0;
 }
-/* fix topbar to full width */
-.topbar{left:0;right:0;max-width:100%;}
 .topbar-brand{display:flex;align-items:center;gap:10px;}
 .topbar-brand-icon{
   width:34px;height:34px;border-radius:10px;
@@ -624,14 +622,26 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   }
 
   /* ── TOPBAR FULL WIDTH ACROSS TOP ── */
-  .topbar{
+.topbar{
     grid-column:1 / -1;
     grid-row:1;
     position:relative;
-    max-width:100%;
-    padding:0 24px;
+    top:auto;
+    left:auto;
+    right:auto;
+    width:100%;
     height:64px;
+    padding:0 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin:0;
+    background:rgba(11,13,24,.95);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+    z-index:200;
   }
+  
 
   /* ── LEFT SIDEBAR NAV ── */
   .bnav{
@@ -724,6 +734,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 
   /* Beranda inner scroll area */
   .beranda-scroll{
+    display:block;
     flex:1;
     overflow-y:auto;
     padding:24px 28px 28px;
@@ -2914,6 +2925,7 @@ function doLogout() {
 
 // ── APP INIT ──
 function initApp() {
+  showScreen('beranda'); 
   applyProfile();
   setDate();
   setZaeRec();

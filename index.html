@@ -3097,6 +3097,30 @@ const N8N_PLAG_URL  = IS_TEST_MODE
   ? 'https://budionosiregar.app.n8n.cloud/webhook-test/chatbot'
   : 'https://budionosiregar.app.n8n.cloud/webhook/chatbot';
 
+// ── SUPABASE via N8N URLs ──
+const N8N_SAVE_PROFILE_URL   = 'https://nalarku.app.n8n.cloud/webhook/student-onboarding';
+const N8N_GET_PROFILE_URL    = 'https://nalarku.app.n8n.cloud/webhook/student-profile';
+const N8N_UPDATE_STATS_URL   = 'https://nalarku.app.n8n.cloud/webhook/student-update';
+
+// ── UUID Generator ──
+function generateUUID() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    const r = Math.random() * 16 | 0;
+    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
+// ── Get or Create Student ID ──
+function getStudentId() {
+  let sid = localStorage.getItem('nk_student_id');
+  if (!sid) {
+    sid = generateUUID();
+    localStorage.setItem('nk_student_id', sid);
+  }
+  return sid;
+}
+
 // Helper: panggil n8n dan ambil teks balasan AI
 async function callN8N(url, payload) {
   const res = await fetch(url, {
@@ -3202,9 +3226,38 @@ function finishOnboard() {
   obData.motivation = document.getElementById('ob-motivation').value;
   obData.goal = [...document.querySelectorAll('#ob-goal-chips .ob-chip.sel')].map(c=>c.textContent.trim()).join('') || 'Tambah skill baru';
 
-  // Save to localStorage
+  // Save ke Supabase via N8n
+  const studentId = getStudentId();
   localStorage.setItem('nk_ob_done', '1');
-  localStorage.setItem('nk_profile', JSON.stringify(obData));
+
+  fetch(N8N_SAVE_PROFILE_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      student_id: studentId,
+      nickname: obData.nickname,
+      age: parseInt(obData.age) || 0,
+      gender: obData.gender,
+      education_level: obData.level,
+      school: obData.school,
+      city: obData.city,
+      learning_styles: obData.styles,
+      best_time: obData.time,
+      study_duration: obData.dur,
+      avatar: obData.avatar,
+      goal: obData.goal,
+      motivation: obData.motivation
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log('Profile saved to Supabase:', data);
+    localStorage.setItem('nk_profile', JSON.stringify(obData));
+  })
+  .catch(err => {
+    console.error('Gagal simpan ke Supabase, fallback ke localStorage:', err);
+    localStorage.setItem('nk_profile', JSON.stringify(obData));
+  });
 
   // Show welcome screen
   const welcomeAva = document.getElementById('ob-welcome-ava');
@@ -3293,15 +3346,97 @@ function doLogout() {
 }
 
 // ── APP INIT ──
-function initApp() {
-  showScreen('beranda'); 
-  applyProfile();
-  renderMatkulList();
+async function initApp() {
+  showScreen('beranda');
   setDate();
-  setZaeRec();
   buildCal();
   currentQS = QS;
   buildLB();
+
+  // Coba ambil profil dari Supabase dulu
+  const studentId = getStudentId();
+  try {
+    const res = await fetch(N8N_GET_PROFILE_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ student_id: studentId })
+    });
+    const data = await res.json();
+
+    if (data.exists && data.profile) {
+      // Profil ditemukan di Supabase — sync ke localStorage
+      const p = data.profile;
+      const localProfile = {
+        nickname: p.nickname || 'Mahasiswa',
+        avatar: p.avatar || 'M',
+        level: p.education_level || '',
+        school: p.school || '',
+        city: p.city || '',
+        goal: p.goal || '',
+        styles: p.learning_styles || [],
+        time: p.best_time || '',
+        dur: p.study_duration || ''
+      };
+      localStorage.setItem('nk_profile', JSON.stringify(localProfile));
+
+      // Update stats dari Supabase
+      window._supabaseStats = {
+        xp: p.xp || 0,
+        streak: p.streak || 0,
+        cards: p.cards_completed_today || 0
+      };
+      applyProfileFromSupabase(p);
+    } else {
+      // Tidak ada di Supabase, fallback ke localStorage
+      applyProfile();
+    }
+  } catch(err) {
+    console.error('Gagal ambil profil dari Supabase, fallback localStorage:', err);
+    applyProfile();
+  }
+
+  renderMatkulList();
+  setZaeRec();
+}
+
+function applyProfileFromSupabase(p) {
+  const nick = p.nickname || 'Mahasiswa';
+  const avatarChar = (p.avatar || nick[0] || 'M').toUpperCase();
+
+  // Update semua elemen UI
+  const grName = document.querySelector('.greeting-name');
+  if (grName) grName.textContent = `Halo, ${nick}!`;
+  const dtName = document.querySelector('.desktop-greet-name');
+  if (dtName) dtName.textContent = `Halo, ${nick}! 👋`;
+  const dtAva = document.querySelector('.desktop-greet-ava');
+  if (dtAva) dtAva.textContent = avatarChar;
+  const ava = document.querySelector('.user-ava');
+  if (ava) ava.textContent = avatarChar;
+  const pn = document.querySelector('.prof-name');
+  if (pn) pn.textContent = nick;
+  const pe = document.querySelector('.prof-email');
+  if (pe && p.school) pe.textContent = p.school;
+  const pa = document.querySelector('.prof-ava');
+  if (pa) pa.textContent = avatarChar;
+
+  // Update stats XP, streak, cards
+  const xp = p.xp || 0;
+  const streak = p.streak || 0;
+  const cards = p.cards_completed_today || 0;
+
+  document.querySelectorAll('.scard-val.o').forEach(el => {
+    if (el.closest('.scard')?.querySelector('.scard-label')?.textContent === 'Kartu Hari Ini') {
+      el.textContent = cards;
+    }
+  });
+  document.querySelectorAll('.scard-val.g').forEach(el => {
+    if (el.closest('.scard')?.querySelector('.scard-label')?.textContent === 'Streak') {
+      el.textContent = streak + ' hari';
+    }
+  });
+
+  window._userProfile = p;
+  console.log('Profile loaded from Supabase:', nick, '| XP:', xp, '| Streak:', streak);
 }
 
 function applyProfile() {
@@ -3910,8 +4045,27 @@ function pickOpt(i) {
   });
   document.getElementById('qexp').style.display='block';
   document.getElementById('btn-nxt').style.display='flex';
-  if(i===q.ans){score++;showToast('Jawaban benar! +10 XP');}
-  else showToast('Kurang tepat. Baca penjelasannya ya!');
+  if(i===q.ans){
+    score++;
+    showToast('Jawaban benar! +10 XP');
+    // Update XP ke Supabase
+    const studentId = getStudentId();
+    fetch(N8N_UPDATE_STATS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        student_id: studentId,
+        xp_gained: 10,
+        cards_completed_increment: 1,
+        streak_action: 'none'
+      })
+    })
+    .then(res => res.json())
+    .then(data => { console.log('Stats updated:', data); })
+    .catch(err => console.error('Gagal update stats:', err));
+  } else {
+    showToast('Kurang tepat. Baca penjelasannya ya!');
+  }
 }
 
 function nextQ(){curQ++;renderQ(curQ);}

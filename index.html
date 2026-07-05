@@ -2289,7 +2289,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
           <div class="field-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           </div>
-          <input type="email" placeholder="nama@email.com" id="email-in" value=" ">
+          <input type="email" placeholder="nama@email.com" id="email-in" value="muhammad@nalarku.ai">
         </div>
       </div>
       <div class="field">
@@ -2298,7 +2298,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
           <div class="field-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
           </div>
-          <input type="password" placeholder=" " id="pass-in" value="12345678">
+          <input type="password" placeholder="••••••••" id="pass-in" value="12345678">
           <button class="field-eye" onclick="togglePass()" id="eye-btn">
             <svg id="eye-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
           </button>
@@ -3345,6 +3345,7 @@ function doLogin() {
   }, 2400);
 }
 function doLogout() {
+  stopLBPolling();
   localStorage.removeItem('nk_logged_in');
   showPage('pg-login');
 }
@@ -3584,7 +3585,35 @@ function showScreen(name) {
   } else {
     window.scrollTo(0,0);
   }
+
+  // Realtime peringkat: polling jalan cuma pas screen Peringkat aktif
+  if (name === 'peringkat') startLBPolling();
+  else stopLBPolling();
 }
+
+// ── PERINGKAT REALTIME (polling ke n8n tiap beberapa detik) ──
+let lbPollInterval = null;
+const LB_POLL_MS = 10000; // refresh tiap 10 detik selama halaman Peringkat dibuka
+
+function startLBPolling() {
+  stopLBPolling(); // jaga-jaga biar gak dobel interval
+  loadLeaderboard(getStudentId()); // fetch langsung begitu screen dibuka, gak nunggu interval pertama
+  lbPollInterval = setInterval(() => {
+    if (document.hidden) return; // skip kalau tab lagi di-background, hemat request
+    loadLeaderboard(getStudentId());
+  }, LB_POLL_MS);
+}
+
+function stopLBPolling() {
+  if (lbPollInterval) { clearInterval(lbPollInterval); lbPollInterval = null; }
+}
+
+// Kalau user balik ke tab ini sambil masih di halaman Peringkat, langsung refresh
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden && document.getElementById('s-peringkat')?.classList.contains('on')) {
+    loadLeaderboard(getStudentId());
+  }
+});
 
 // ── STREAK CALENDAR ──
 function buildCal() {

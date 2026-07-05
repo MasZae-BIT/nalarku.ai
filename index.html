@@ -3091,11 +3091,11 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 // Ganti ke Production URL saat sudah siap deploy
 const IS_TEST_MODE  = true; // ubah ke false saat production
 const N8N_CHAT_URL  = IS_TEST_MODE
-  ? 'https://nalarku.app.n8n.cloud/webhook-test/chatbot'
-  : 'https://nalarku.app.n8n.cloud/webhook/chatbot';
+  ? 'https://budionosiregar.app.n8n.cloud/webhook-test/chatbot'
+  : 'https://budionosiregar.app.n8n.cloud/webhook/chatbot';
 const N8N_PLAG_URL  = IS_TEST_MODE
-  ? 'https://nalarku.app.n8n.cloud/webhook/chatbot'
-  : 'https://nalarku.app.n8n.cloud/webhook/chatbot';
+  ? 'https://budionosiregar.app.n8n.cloud/webhook-test/chatbot'
+  : 'https://budionosiregar.app.n8n.cloud/webhook/chatbot';
 
 // ── SUPABASE via N8N URLs ──
 const N8N_SAVE_PROFILE_URL   = 'https://nalarku.app.n8n.cloud/webhook/student-onboarding';
@@ -3480,12 +3480,24 @@ async function loadLeaderboard(studentId) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ student_id: studentId })
     });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
     const rows = data.leaderboard || [];
-    if (!rows.length) throw new Error('Leaderboard kosong dari n8n');
 
-    const total = rows.length;
-    let myIndex = rows.findIndex(r => r.student_id === studentId);
+    if (!rows.length) {
+      // Beneran belum ada peserta ber-XP sama sekali -> ini BUKAN error, tampilin kosong
+      const setDash = document.getElementById('dash-rank-val');
+      if (setDash) setDash.textContent = '—';
+      const setDt = document.getElementById('dt-rank-val');
+      if (setDt) setDt.textContent = '—';
+      renderLeaderboardUI([], studentId);
+      return;
+    }
+
+    // Sort ulang di client berdasarkan XP asli, biar rank selalu akurat
+    const sorted = [...rows].sort((a, b) => (b.xp || 0) - (a.xp || 0));
+    const total = sorted.length;
+    const myIndex = sorted.findIndex(r => r.student_id === studentId);
     const myRank = myIndex >= 0 ? myIndex + 1 : total;
     const topPercent = Math.max(1, Math.round((myRank / total) * 100));
 
@@ -3494,10 +3506,10 @@ async function loadLeaderboard(studentId) {
     const setDt = document.getElementById('dt-rank-val');
     if (setDt) setDt.textContent = `Top ${topPercent}%`;
 
-    renderLeaderboardUI(rows, studentId);
+    renderLeaderboardUI(sorted, studentId);
   } catch (e) {
-    console.warn('[n8n] Gagal ambil leaderboard, tampilan peringkat pakai fallback:', e);
-    buildLB(); // fallback data dummy biar gak kosong
+    console.warn('[n8n] Gagal ambil leaderboard:', e);
+    renderLeaderboardUI(null, studentId, 'error');
   }
 }
 
@@ -4206,23 +4218,20 @@ function showResult(){
 function retryQuiz(){curQ=0;score=0;answered=false;renderQ(0);}
 
 // ═══════════════════════════════════════
-//   PODIUM LEADERBOARD
+//   PODIUM LEADERBOARD (100% dari Supabase, gak ada data dummy)
 // ═══════════════════════════════════════
-const LB_FALLBACK=[
-  {r:1,name:'Siti A.',full:'Siti Aisyah',xp:2450,ini:'SA',col:'#a855f7'},
-  {r:2,name:'Budi S.',full:'Budi Santoso',xp:2100,ini:'BS',col:'#f97316'},
-  {r:3,name:'Andi K.',full:'Andi Kurnia',xp:1950,ini:'AK',col:'#22c55e'},
-  {r:4,name:'User Profile',full:'Muhammad (Kamu)',xp:1820,ini:'M',col:'#6366f1',me:true},
-  {r:5,name:'Rina M.',full:'Rina Marlina',xp:1700,ini:'RM',col:'#ec4899'},
-  {r:6,name:'Deni S.',full:'Deni Saputra',xp:1650,ini:'DS',col:'#3b82f6'},
-  {r:7,name:'Eka P.',full:'Eka Putri',xp:1500,ini:'EP',col:'#eab308'},
-];
 const LB_COLORS = ['#a855f7','#f97316','#22c55e','#6366f1','#ec4899','#3b82f6','#eab308'];
 
 // Ubah hasil webhook n8n [{student_id, nickname, xp}] jadi format buildLB()
-function renderLeaderboardUI(rows, myStudentId) {
-  if (!rows || rows.length < 3) { buildLB(); return; }
-  const list = rows.map((row, i) => {
+// rows boleh kosong ([]) -> artinya beneran belum ada peserta ber-XP
+function renderLeaderboardUI(rows, myStudentId, state) {
+  if (!rows || rows.length === 0) { buildLB([], state); return; }
+
+  // Urutan ulang berdasarkan XP asli (DESC) -> siapapun XP-nya lebih tinggi otomatis naik ke rank 1,
+  // gak peduli urutan yang dibalikin n8n
+  const sorted = [...rows].sort((a, b) => (b.xp || 0) - (a.xp || 0));
+
+  const list = sorted.map((row, i) => {
     const isMe = row.student_id === myStudentId;
     const name = row.nickname || 'Mahasiswa';
     return {
@@ -4238,16 +4247,44 @@ function renderLeaderboardUI(rows, myStudentId) {
   buildLB(list);
 }
 
-function buildLB(list){
-  const LB = list || LB_FALLBACK;
-  // PODIUM (top 3)
-  // Order: 2nd left, 1st center, 3rd right
-  const podiumOrder = [LB[1], LB[0], LB[2]]; // [2nd, 1st, 3rd]
+function buildLB(list, state){
+  const podiumEl = document.getElementById('lb-podium');
+  const listEl = document.getElementById('lb-list');
+
+  // Belum ada peserta ber-XP sama sekali -> tampilan kosong, BUKAN data dummy
+  if (!list || list.length === 0) {
+    podiumEl.innerHTML = '';
+    const msg = state === 'error'
+      ? 'Gagal memuat data peringkat. Coba lagi sebentar.'
+      : 'Peringkat masih kosong — belum ada peserta yang punya XP. Jawab kuis dan jadilah rank 1 pertama! 🚀';
+    listEl.innerHTML = `<div style="text-align:center;padding:48px 20px;color:var(--t2);font-size:13px;line-height:1.6">${msg}</div>`;
+    return;
+  }
+
+  const LB = list;
+  // PODIUM (top 3) — kalau pesertanya cuma 1-2 orang, slot sisanya ditampilin kosong/samar
+  const top3 = LB.slice(0, 3);
+  const podiumOrder = [top3[1], top3[0], top3[2]]; // [2nd, 1st, 3rd]
   const podiumClasses = ['second','first','third'];
   const podiumCrowns = ['','👑',''];
   const podiumRanks = ['2','1','3'];
 
-  document.getElementById('lb-podium').innerHTML = podiumOrder.map((p,i)=>`
+  podiumEl.innerHTML = podiumOrder.map((p,i)=>{
+    if (!p) {
+      return `
+      <div class="lb-podium-slot ${podiumClasses[i]}" style="opacity:.3">
+        <div class="lb-pod-ava-wrap">
+          <div class="lb-pod-ava" style="background:var(--card2);color:var(--t3)">
+            —
+            <div class="lb-pod-rank">${podiumRanks[i]}</div>
+          </div>
+        </div>
+        <div class="lb-pod-name">Belum ada</div>
+        <div class="lb-pod-xp">—</div>
+        <div class="lb-pod-stage"></div>
+      </div>`;
+    }
+    return `
     <div class="lb-podium-slot ${podiumClasses[i]}">
       <div class="lb-pod-ava-wrap">
         ${podiumCrowns[i] ? `<div class="lb-pod-crown">${podiumCrowns[i]}</div>` : ''}
@@ -4259,11 +4296,12 @@ function buildLB(list){
       <div class="lb-pod-name">${p.name}</div>
       <div class="lb-pod-xp">${p.xp.toLocaleString()} XP</div>
       <div class="lb-pod-stage"></div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 
   // LIST (rank 4+)
-  document.getElementById('lb-list').innerHTML = LB.slice(3).map((p,i)=>`
+  const rest = LB.slice(3);
+  listEl.innerHTML = rest.length ? rest.map((p)=>`
     <div class="lb-row${p.me?' me':''}">
       <div class="lb-row-rank">${p.r}</div>
       <div class="lb-row-ava" style="background:${p.col}22;color:${p.col}">${p.ini}</div>
@@ -4273,7 +4311,7 @@ function buildLB(list){
       </div>
       ${p.me ? `<div class="lb-row-badge">KAMU</div>` : ''}
       <div class="lb-row-xp">${p.xp.toLocaleString()} XP</div>
-    </div>`).join('');
+    </div>`).join('') : '';
 }
 
 // ── NALA AI CHAT ──

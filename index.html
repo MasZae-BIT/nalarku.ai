@@ -1956,6 +1956,96 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 }
 .quiz-load-txt{font-size:13px;color:var(--t2);}
 
+/* =========================================
+   REDESIGN OVERRIDES (Nala AI & Ujian)
+========================================= */
+
+/* Hapus border/background berlebih agar lebih clean */
+#s-ai-chat .chat-wrap, 
+.ujian-right {
+  background: var(--bg);
+  border: none !important;
+}
+
+/* Chat Header Redesign */
+.chat-hdr {
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px;
+}
+.chat-hdr-btn {
+  background: transparent;
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+}
+.chat-hdr-btn:hover {
+  background: var(--card);
+}
+
+/* Bubble Chat Redesign */
+.cmsg { margin-bottom: 8px; }
+.cmsg.ai .cmsg-bubble {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  border-top-left-radius: 4px;
+  box-shadow: none;
+}
+.cmsg.u .cmsg-bubble {
+  background: var(--orange);
+  border: none;
+  border-radius: 12px;
+  border-top-right-radius: 4px;
+  box-shadow: none;
+}
+.cmsg-ava.ai { border-radius: 50%; }
+
+/* Input Chat Area Redesign */
+.chat-bottom {
+  padding: 16px 24px 24px;
+}
+.chat-input-row, .ujian-ai-input-row {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 10px 12px 10px 16px;
+  align-items: center;
+  gap: 12px;
+}
+.chat-ta, .ujian-ai-ta {
+  font-size: 14px;
+  padding-top: 4px;
+}
+.chat-action-ico {
+  color: var(--t3);
+  cursor: pointer;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+}
+.chat-action-ico:hover { color: var(--t1); }
+.chat-send, .ujian-ai-send {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+/* Latihan & Ujian Empty State Redesign */
+.ujian-header { padding: 24px; border-bottom: 1px solid var(--border); }
+.btn-add-matkul { border-radius: 10px; width: 40px; height: 40px; }
+.matkul-empty { padding: 80px 20px; }
+.matkul-empty-ico {
+  width: 80px; height: 80px;
+  background: var(--card);
+  border: none;
+  border-radius: 20px;
+  color: var(--orange);
+}
+.matkul-empty-title { font-size: 22px; margin-top: 8px; }
+.btn-matkul-action.primary {
+  padding: 12px 24px;
+  font-size: 14px;
+  border-radius: 12px;
+}
 </style>
 </head>
 <body>
@@ -2492,7 +2582,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   <div class="app-content">
 
     <div id="s-beranda" class="ascreen on">
-      <!-- MOBILE: original greeting -->
       <div class="greeting mobile-only">
         <div class="greeting-wave">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -2501,11 +2590,9 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
         <div class="greeting-date" id="gdate"></div>
       </div>
 
-      <!-- DESKTOP: Enhanced Dashboard inside scroll wrapper -->
       <div class="beranda-scroll">
       <div class="desktop-dashboard" id="desktop-dashboard">
 
-        <!-- Row 0: Greeting bar -->
         <div class="desktop-greet">
           <div class="desktop-greet-left">
             <div class="desktop-greet-ava">M</div>
@@ -2518,7 +2605,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
           </div>
         </div>
 
-        <!-- Tile 1: Nala AI banner (full width) -->
         <div class="dt dt-full dt-ai" onclick="showScreen('ai-chat')">
           <div class="dt-ai-ico">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
@@ -2532,12 +2618,10 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
           </div>
         </div>
 
-        <!-- Row: 4 equal stat cards -->
         <div class="dd-body">
           <div class="dd-main">
 
             <div class="dd-stats-row">
-              <!-- Tile 2: Kartu Hari Ini -->
               <div class="dt" onclick="showScreen('ujian')">
                 <div class="dt-hdr">
                   <div class="dt-ico o">
@@ -2549,7 +2633,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
                 <div class="dt-sub">Selesai!</div>
               </div>
 
-              <!-- Tile 3: Streak -->
               <div class="dt">
                 <div class="dt-hdr">
                   <div class="dt-ico g">
@@ -2561,7 +2644,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
                 <div class="dt-sub">Terbaik: 0</div>
               </div>
 
-              <!-- Tile 5: Level -->
               <div class="dt" onclick="showScreen('peringkat')">
                 <div class="dt-hdr">
                   <div class="dt-ico p">
@@ -2575,7 +2657,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
                 <div style="font-size:10px;color:var(--t3);margin-top:6px" id="dt-level-need">Butuh 100 XP ke Level 2</div>
               </div>
 
-              <!-- Tile 6: Peringkat -->
               <div class="dt" onclick="showScreen('peringkat')">
                 <div class="dt-hdr">
                   <div class="dt-ico b">
@@ -2588,7 +2669,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
               </div>
             </div>
 
-            <!-- Tile 8: Quick Create -->
             <div class="dt">
               <div class="dt-title" style="margin-bottom:12px">Buat Baru</div>
               <div class="dt-qbtns">
@@ -2619,10 +2699,8 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
               </div>
             </div>
 
-            <!-- Split row: Analisis Nala AI + Pomodoro -->
             <div class="dd-split-row">
 
-              <!-- Tile 9: Analisis Nala AI -->
               <div class="dt dt-analysis">
                 <div class="dt-hdr">
                   <div class="dt-ico o">
@@ -2638,7 +2716,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
                 <div class="ai-row"><div class="ai-row-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>&nbsp;Target Minggu Ini</div><div class="ai-row-val g">3 / 5 tercapai</div></div>
               </div>
 
-              <!-- Tile 4: Timer -->
               <div class="dt" style="text-align:center">
                 <div class="dt-hdr" style="justify-content:center">
                   <div class="dt-ico o">
@@ -2666,13 +2743,8 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
                 <div class="dt-sessions" id="dt-timer-sessions">Sesi 0 / 4 selesai hari ini</div>
               </div>
 
-            </div><!-- end .dd-split-row -->
+            </div></div><div class="dd-side">
 
-          </div><!-- end .dd-main -->
-
-          <div class="dd-side">
-
-            <!-- Tile 10: Catatan Terakhir -->
             <div class="dt dt-notes">
               <div class="dd-side-title" style="margin-bottom:12px">
                 <h3>Catatan Kamu</h3>
@@ -2700,7 +2772,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
               </div>
             </div>
 
-            <!-- Tile 7: Kalender Streak -->
             <div class="dt dt-cal">
               <div class="dt-hdr">
                 <span class="dt-title" style="text-transform:none;font-size:15px;font-weight:800;color:var(--t1);letter-spacing:0">Juni 2026 — Streak Belajar</span>
@@ -2712,15 +2783,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
               <div class="cal-days" id="cal-days-dt"></div>
             </div>
 
-          </div><!-- end .dd-side -->
-
-        </div><!-- end .dd-body -->
-
-      </div><!-- end .desktop-dashboard -->
-      </div><!-- end .beranda-scroll -->
-
-      <!-- MOBILE ONLY: all content below hidden on desktop via .mobile-only -->
-      <div class="mobile-only">
+          </div></div></div></div><div class="mobile-only">
       <div class="zae-banner" onclick="showScreen('ai-chat')">
         <div class="zae-ico">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
@@ -2890,51 +2953,39 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
           <div class="ai-row-val g">3 / 5 tercapai</div>
         </div>
       </div>
-      </div><!-- end .mobile-only -->
-    </div>
+      </div></div>
 
     <div id="s-ai-chat" class="ascreen">
       <div class="chat-wrap">
         <div class="chat-hdr">
           <div class="chat-hdr-left">
-            <div class="chat-avatar">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+            <div class="chat-avatar" style="border-radius: 50%;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
             </div>
             <div>
               <div style="display:flex;align-items:center;gap:6px;">
                 <div class="chat-name">Nala AI</div>
-                <span class="chat-badge">GPT-4o mini</span>
               </div>
-              <div class="chat-status">Aktif sekarang</div>
+              <div class="chat-status" style="margin-top: 2px;">Aktif sekarang</div>
             </div>
           </div>
           <div class="chat-hdr-btns">
-            <div class="chat-hdr-btn" onclick="showToast('Riwayat chat disimpan')" title="Simpan">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+            <div class="chat-hdr-btn" onclick="showScreen('beranda')" title="Beranda">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
             </div>
             <div class="chat-hdr-btn" onclick="clearChat()" title="Reset chat">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.95"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.95"/></svg>
             </div>
           </div>
         </div>
 
         <div class="chat-msgs" id="chat-msgs">
-          <div class="chat-divider">Hari ini</div>
           <div class="cmsg ai">
-            <div class="cmsg-ava ai">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+            <div class="cmsg-ava ai" style="border-radius: 50%;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
             </div>
             <div class="cmsg-body">
-              <div class="cmsg-bubble">Halo! 👋 Aku <strong>Nala AI</strong>, asisten belajar pintarmu di Nalarku.ai.<br><br>Aku sudah menganalisis pola belajarmu dan siap membantu kamu belajar lebih efektif. Mau mulai dari mana hari ini?</div>
-              <div class="cmsg-time">11:29</div>
-            </div>
-          </div>
-          <div class="cmsg ai">
-            <div class="cmsg-ava ai">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-            </div>
-            <div class="cmsg-body">
-              <div class="cmsg-bubble">⚠️ Berdasarkan analisisku, risiko lupamu cukup tinggi pada materi <strong>Analisis Data Bab 3</strong>. Sebaiknya kamu review sekarang sebelum lupa!</div>
+              <div class="cmsg-bubble">Halo Muhammad! Aku Nala AI, asisten belajar pintarmu di Nalarku.ai.<br><br>Aku sudah menganalisis pola belajarmu dan siap membantu kamu belajar lebih efektif. Mau mulai dari mana hari ini?</div>
               <div class="cmsg-time">11:29</div>
             </div>
           </div>
@@ -2942,16 +2993,21 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 
         <div class="chat-bottom">
           <div class="chat-suggestions">
-            <button class="sug-btn" onclick="quickAsk('Kapan waktu terbaik aku belajar hari ini?')">⏰ Kapan harus belajar?</button>
-            <button class="sug-btn" onclick="quickAsk('Buat ringkasan singkat tentang Manajemen Data Statistika')">📖 Ringkasan materi</button>
-            <button class="sug-btn" onclick="quickAsk('Apa yang perlu aku ulang sekarang berdasarkan analisismu?')">🔁 Apa yang perlu diulang?</button>
-            <button class="sug-btn" onclick="quickAsk('Buat soal latihan dari materi yang aku pelajari')">✏️ Buat soal latihan</button>
-            <button class="sug-btn" onclick="quickAsk('Evaluasi progres belajarku minggu ini')">📊 Evaluasi progres</button>
+            <button class="sug-btn" onclick="quickAsk('Kapan waktu terbaik aku belajar hari ini?')">Kapan harus belajar?</button>
+            <button class="sug-btn" onclick="quickAsk('Buat ringkasan singkat tentang Analisis Data Bab 3 agar aku bisa me-review dengan cepat.')">Ringkasan materi</button>
+            <button class="sug-btn" onclick="quickAsk('Apa yang perlu aku ulang sekarang berdasarkan analisismu?')">Apa yang perlu diulang?</button>
+            <button class="sug-btn" onclick="quickAsk('Buat soal latihan dari materi yang aku pelajari')">Buat soal latihan</button>
           </div>
           <div class="chat-input-row">
-            <textarea class="chat-ta" id="chat-ta" placeholder="Tanya Nala AI apa saja..." rows="1" onkeydown="chatKey(event)" oninput="autoResize(this)"></textarea>
+            <div class="chat-action-ico" title="Tambah Lampiran">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+            <textarea class="chat-ta" id="chat-ta" placeholder="Ketik pesan untuk Nala AI..." rows="1" onkeydown="chatKey(event)" oninput="autoResize(this)"></textarea>
+            <div class="chat-action-ico" title="Pesan Suara">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+            </div>
             <button class="chat-send" onclick="sendMsg()">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
             </button>
           </div>
         </div>
@@ -2959,101 +3015,102 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
     </div>
 
     <div id="s-ujian" class="ascreen">
-  <div class="ujian-wrap">
+      <div class="ujian-wrap">
 
-    <!-- HEADER -->
-    <div class="ujian-header">
-      <div>
-        <div class="ujian-title">Latihan & Ujian</div>
-        <div style="font-size:11px;color:var(--t2);margin-top:2px">Powered by Nala AI</div>
+        <div class="ujian-header">
+          <div>
+            <div class="ujian-title">Latihan & Ujian</div>
+            <div style="font-size:12px;color:var(--t2);margin-top:4px">Powered by Nala AI</div>
+          </div>
+          <button class="btn-add-matkul" onclick="openAddMatkul()" title="Tambah Matkul">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+        </div>
+
+        <div class="ujian-bento">
+
+          <div class="ujian-left" style="display: flex; flex-direction: column;">
+            
+            <div class="matkul-empty" id="matkul-empty" style="margin: auto;">
+              <div class="matkul-empty-ico">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              </div>
+              <div class="matkul-empty-title">Belum ada matkul</div>
+              <div class="matkul-empty-sub" style="max-width: 300px; text-align: center; margin: 8px auto 24px;">Tekan tombol + di atas untuk menambahkan mata kuliah dan upload PPT materi kamu.</div>
+              <button class="btn-matkul-action primary" onclick="openAddMatkul()">
+                + Tambah Matkul
+              </button>
+            </div>
+
+            <div id="matkul-list" style="display:none">
+              <div id="matkul-cards"></div>
+            </div>
+
+            <div class="quiz-panel" id="quiz-panel">
+              <div style="margin-bottom:14px">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+                  <div style="font-size:12px;color:var(--t2);font-weight:600" id="quiz-matkul-label">Matkul</div>
+                  <span class="chip chip-o" id="quiz-badge">Soal 1 / 5</span>
+                </div>
+                <div class="quiz-pbar"><div class="quiz-pfill" id="quiz-pf" style="width:20%"></div></div>
+              </div>
+              <div class="quiz-loading" id="quiz-loading">
+                <div class="quiz-spinner"></div>
+                <div class="quiz-load-txt">Nala AI sedang membuat soal dari PPT kamu...</div>
+              </div>
+              <div id="quiz-area"></div>
+              <button class="btn-sec" style="margin-top:10px;width:100%" onclick="backToMatkul()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                Kembali ke Matkul
+              </button>
+            </div>
+          </div>
+
+          <div class="ujian-right">
+            <div class="ujian-ai-hdr" style="padding: 24px 20px;">
+              <div class="ujian-ai-ava" style="border-radius: 12px; width: 44px; height: 44px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </div>
+              <div>
+                <div class="ujian-ai-name" style="font-size: 15px;">Nala AI</div>
+                <div class="ujian-ai-status" style="font-size: 12px;">Siap membantu</div>
+              </div>
+            </div>
+            
+            <div class="ujian-ai-msgs" id="ujian-ai-msgs">
+              <div class="ujian-ai-bubble" style="border-radius: 12px; border: 1px solid var(--border); background: transparent;">
+                <div class="ujian-ai-label">NALA AI</div>
+                Halo! 👋 Tambahkan mata kuliah dan upload PPT, aku akan otomatis buat soal latihan dari materinya. Kamu juga bisa tanya aku tentang soal yang lagi dikerjain!
+              </div>
+            </div>
+
+            <div style="padding: 0 16px 8px;">
+               <div class="chat-suggestions" style="padding-top:0;">
+                  <button class="sug-btn" onclick="quickAsk('Kapan harus belajar?')">Kapan harus belajar?</button>
+                  <button class="sug-btn" onclick="quickAsk('Ringkasan materi')">Ringkasan materi</button>
+               </div>
+            </div>
+
+            <div class="ujian-ai-input-wrap" style="padding: 0 16px 24px; border-top: none;">
+              <div class="ujian-ai-input-row">
+                <div class="chat-action-ico" title="Tambah Lampiran">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </div>
+                <textarea class="ujian-ai-ta" id="ujian-ai-ta" placeholder="Tanya Nala AI apa saja..." rows="1" onkeydown="ujianAiKey(event)" oninput="autoResize(this)"></textarea>
+                <div class="chat-action-ico" title="Pesan Suara">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                </div>
+                <button class="ujian-ai-send" onclick="sendUjianAi()" style="border-radius: 50%;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
-      <button class="btn-add-matkul" onclick="openAddMatkul()" title="Tambah Matkul">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      </button>
     </div>
 
-    <!-- BENTO GRID -->
-    <div class="ujian-bento">
-
-      <!-- LEFT: Matkul + Soal -->
-      <div class="ujian-left">
-
-        <!-- Empty state -->
-        <div class="matkul-empty" id="matkul-empty">
-          <div class="matkul-empty-ico">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          </div>
-          <div class="matkul-empty-title">Belum ada matkul</div>
-          <div class="matkul-empty-sub">Tekan tombol <strong>+</strong> di atas untuk menambahkan mata kuliah dan upload PPT materi kamu.</div>
-          <button class="btn-matkul-action primary" style="max-width:180px;padding:10px 16px;border-radius:10px" onclick="openAddMatkul()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Tambah Matkul
-          </button>
-        </div>
-
-        <!-- Matkul list -->
-        <div id="matkul-list" style="display:none">
-          <div id="matkul-cards"></div>
-        </div>
-
-        <!-- Quiz panel -->
-        <div class="quiz-panel" id="quiz-panel">
-          <!-- Progress bar -->
-          <div style="margin-bottom:14px">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-              <div style="font-size:12px;color:var(--t2);font-weight:600" id="quiz-matkul-label">Matkul</div>
-              <span class="chip chip-o" id="quiz-badge">Soal 1 / 5</span>
-            </div>
-            <div class="quiz-pbar"><div class="quiz-pfill" id="quiz-pf" style="width:20%"></div></div>
-          </div>
-          <!-- Loading state -->
-          <div class="quiz-loading" id="quiz-loading">
-            <div class="quiz-spinner"></div>
-            <div class="quiz-load-txt">Nala AI sedang membuat soal dari PPT kamu...</div>
-          </div>
-          <!-- Soal area -->
-          <div id="quiz-area"></div>
-          <!-- Back button -->
-          <button class="btn-sec" style="margin-top:10px;width:100%" onclick="backToMatkul()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-            Kembali ke Matkul
-          </button>
-        </div>
-
-      </div>
-
-      <!-- RIGHT: Nala AI Chat -->
-      <div class="ujian-right">
-        <div class="ujian-ai-hdr">
-          <div class="ujian-ai-ava">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-          </div>
-          <div>
-            <div class="ujian-ai-name">Nala AI</div>
-            <div class="ujian-ai-status">Siap membantu</div>
-          </div>
-        </div>
-        <div class="ujian-ai-msgs" id="ujian-ai-msgs">
-          <div class="ujian-ai-bubble">
-            <div class="ujian-ai-label">Nala AI</div>
-            Halo! 👋 Tambahkan mata kuliah dan upload PPT, aku akan otomatis buat soal latihan dari materinya. Kamu juga bisa tanya aku tentang soal yang lagi dikerjain!
-          </div>
-        </div>
-        <div class="ujian-ai-input-wrap">
-          <div class="ujian-ai-input-row">
-            <textarea class="ujian-ai-ta" id="ujian-ai-ta" placeholder="Tanya Nala tentang soal..." rows="1" onkeydown="ujianAiKey(event)" oninput="autoResize(this)"></textarea>
-            <button class="ujian-ai-send" onclick="sendUjianAi()">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>
-            </button>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- end ujian-bento -->
-  </div><!-- end ujian-wrap -->
-</div>
-
-<!-- MODAL TAMBAH MATKUL -->
 <div class="modal-overlay" id="modal-matkul">
   <div class="modal-box">
     <div class="modal-title">Tambah Mata Kuliah</div>
@@ -3519,7 +3576,7 @@ async function initApp() {
       };
       applyProfileFromSupabase(p);
     } else {
-      // Tidak ada di Supabase, fallback ke localStorage
+    // Tidak ada di Supabase, fallback ke localStorage
       applyProfile();
     }
   } catch(err) {

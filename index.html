@@ -761,7 +761,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
     flex-direction:column;
   }
 
-  /* ── BERANDA DESKTOP — Clean Dashboard ── */
+  /* ── BERANDA DESKTOP — Clean Dashboard (redesigned) ── */
   #s-beranda{
     padding:0;
     background:var(--bg);
@@ -778,7 +778,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
     display:block;
     flex:1;
     overflow-y:auto;
-    padding:24px 28px 28px;
+    padding:28px 32px 40px;
   }
 
   /* Hide the mobile greeting wave icon + center text on desktop */
@@ -786,21 +786,36 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
     display:none;
   }
 
-  /* Desktop tile dashboard grid */
+  /* Outer dashboard wrapper — vertical stack of rows */
   .desktop-dashboard{
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    grid-template-rows:auto;
-    gap:16px;
+    display:flex;
+    flex-direction:column;
+    gap:22px;
     align-content:start;
   }
+
+  /* Main(left)+Sidebar(right) two-column body */
+  .dd-body{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 336px;
+    gap:22px;
+    align-items:start;
+  }
+  .dd-main{display:flex;flex-direction:column;gap:18px;min-width:0;}
+  .dd-side{display:flex;flex-direction:column;gap:18px;}
+
+  /* Row of 4 equal stat cards */
+  .dd-stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+
+  /* Split row: Analisis (wider) + Pomodoro (narrower) */
+  .dd-split-row{display:grid;grid-template-columns:1.3fr 1fr;gap:18px;align-items:stretch;}
 
   /* ── TILE BASE ── */
   .dt{
     background:var(--card);
     border:1px solid var(--border);
-    border-radius:var(--r2);
-    padding:18px;
+    border-radius:var(--r3);
+    padding:20px;
     cursor:pointer;
     transition:all .2s;
     overflow:hidden;
@@ -809,10 +824,10 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   .dt:hover{
     border-color:var(--border2);
     transform:translateY(-2px);
-    box-shadow:0 8px 24px rgba(0,0,0,.3);
+    box-shadow:0 10px 28px rgba(0,0,0,.32);
   }
 
-  /* Tile sizes */
+  /* Legacy span helpers (harmless outside a grid, kept for compatibility) */
   .dt-wide{grid-column:span 2;}
   .dt-full{grid-column:span 4;}
   .dt-tall{grid-row:span 2;}
@@ -823,7 +838,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
     display:flex;align-items:center;gap:10px;margin-bottom:14px;
   }
   .dt-ico{
-    width:36px;height:36px;border-radius:10px;
+    width:38px;height:38px;border-radius:11px;
     display:flex;align-items:center;justify-content:center;flex-shrink:0;
   }
   .dt-ico.o{background:var(--orange-dim);color:var(--orange);}
@@ -833,7 +848,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   .dt-title{font-size:12px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;}
 
   /* Stat number inside tile */
-  .dt-stat{font-size:42px;font-weight:800;line-height:1;letter-spacing:-2px;}
+  .dt-stat{font-size:38px;font-weight:800;line-height:1;letter-spacing:-1.5px;}
   .dt-stat.o{color:var(--orange);}
   .dt-stat.g{color:var(--green);}
   .dt-stat.b{color:var(--blue);}
@@ -842,85 +857,88 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 
   /* AI Banner tile */
   .dt-ai{
-    background:linear-gradient(135deg,rgba(249,115,22,.12),rgba(234,88,12,.06));
-    border-color:rgba(249,115,22,.3);
-    display:flex;align-items:center;gap:14px;
-    padding:18px 20px;
+    background:var(--card);
+    border-color:rgba(249,115,22,.28);
+    display:flex;align-items:center;gap:16px;
+    padding:20px 24px;
   }
-  .dt-ai:hover{border-color:rgba(249,115,22,.55);}
+  .dt-ai:hover{border-color:rgba(249,115,22,.5);}
   .dt-ai-ico{
-    width:48px;height:48px;border-radius:14px;flex-shrink:0;
-    background:rgba(249,115,22,.18);
+    width:44px;height:44px;border-radius:13px;flex-shrink:0;
+    background:rgba(249,115,22,.15);
     display:flex;align-items:center;justify-content:center;color:var(--orange);
   }
-  .dt-ai-label{font-size:10px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px;}
-  .dt-ai-msg{font-size:13px;color:var(--t1);line-height:1.5;}
+  .dt-ai-label{font-size:11px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px;}
+  .dt-ai-msg{font-size:14px;color:var(--t1);line-height:1.5;font-weight:600;}
   .dt-ai-dot{
-    width:8px;height:8px;border-radius:50%;background:var(--green);
+    width:9px;height:9px;border-radius:50%;background:var(--green);
     flex-shrink:0;margin-left:auto;
     animation:pulse-dot 2s ease infinite;
   }
 
   /* Timer tile */
   .dt-timer-display{
-    font-size:48px;font-weight:800;letter-spacing:-2px;
-    color:var(--t1);margin:6px 0 10px;
+    font-size:52px;font-weight:800;letter-spacing:-2px;
+    color:var(--t1);margin:10px 0 16px;
     font-variant-numeric:tabular-nums;text-align:center;
   }
-  .dt-timer-tabs{display:flex;gap:5px;justify-content:center;margin-bottom:12px;flex-wrap:wrap;}
+  .dt-timer-tabs{display:flex;gap:6px;justify-content:center;margin-bottom:18px;flex-wrap:wrap;}
   .dt-timer-tab{
-    padding:4px 12px;border-radius:var(--r4);border:1px solid var(--border);
-    background:transparent;color:var(--t3);font-size:10px;font-weight:700;cursor:pointer;transition:all .2s;
+    padding:6px 14px;border-radius:var(--r4);border:1px solid var(--border);
+    background:transparent;color:var(--t3);font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;
   }
   .dt-timer-tab.on{background:var(--orange-dim);border-color:rgba(249,115,22,.4);color:var(--orange);}
-  .dt-timer-btns{display:flex;gap:10px;justify-content:center;}
+  .dt-timer-btns{display:flex;gap:14px;justify-content:center;align-items:center;}
   .dt-timer-btn{
-    width:40px;height:40px;border-radius:50%;border:1px solid var(--border);
+    width:44px;height:44px;border-radius:50%;border:1px solid var(--border);
     background:var(--card2);cursor:pointer;color:var(--t2);
     display:flex;align-items:center;justify-content:center;transition:all .2s;
   }
   .dt-timer-btn.main{
-    width:52px;height:52px;
+    width:60px;height:60px;
     background:linear-gradient(135deg,var(--orange),var(--orange2));
     border:none;color:#fff;
-    box-shadow:0 4px 14px rgba(249,115,22,.35);
+    box-shadow:0 6px 18px rgba(249,115,22,.4);
   }
   .dt-timer-btn:hover{background:var(--card2);color:var(--t1);}
-  .dt-sessions{font-size:11px;color:var(--t3);text-align:center;margin-top:8px;}
+  .dt-sessions{font-size:12px;color:var(--t3);text-align:center;margin-top:14px;}
 
   /* Quick create tile */
-  .dt-qbtns{display:flex;flex-wrap:wrap;gap:7px;}
+  .dt-qbtns{display:flex;flex-wrap:wrap;gap:9px;}
   .dt-qbtn{
-    display:flex;align-items:center;gap:6px;
-    padding:7px 12px;border-radius:8px;
-    border:1px solid var(--border);background:transparent;
-    color:var(--t2);font-size:11px;font-weight:600;
+    display:flex;align-items:center;gap:7px;
+    padding:9px 16px;border-radius:10px;
+    border:1px solid var(--border);background:var(--bg2);
+    color:var(--t1);font-size:12.5px;font-weight:600;
     cursor:pointer;transition:all .2s;
   }
   .dt-qbtn svg{color:var(--orange);}
-  .dt-qbtn:hover{background:var(--card2);border-color:var(--border2);color:var(--t1);}
+  .dt-qbtn:hover{background:var(--card2);border-color:var(--border2);transform:translateY(-1px);}
 
   /* Calendar tile */
-  .dt-cal .cal-days{gap:3px;}
-  .dt-cal .cal-day{font-size:10px;border-radius:5px;}
+  .dd-side .dt-cal{padding:20px;}
+  .dd-side .dt-cal .cal-days{gap:6px;}
+  .dd-side .dt-cal .cal-day-label{font-size:11px;}
+  .dd-side .dt-cal .cal-day{font-size:12px;border-radius:8px;padding:8px 0;font-weight:600;}
+  .dd-side .dt-cal .cal-day.today{border-width:2px;font-weight:800;}
 
   /* Notes tile */
   .dt-notes .tcard{
-    padding:10px 12px;margin-bottom:7px;
+    padding:12px 13px;margin-bottom:8px;background:var(--bg2);
   }
+  .dt-notes .tcard:last-of-type{margin-bottom:0;}
   .dt-notes .tcard-name{font-size:13px;}
-  .dt-notes .tcard-sub{font-size:10px;}
+  .dt-notes .tcard-sub{font-size:10.5px;}
 
   /* AI Analysis tile */
-  .dt-analysis .ai-row{padding:7px 0;}
-  .dt-analysis .ai-row-label{font-size:11px;}
-  .dt-analysis .ai-row-val{font-size:12px;}
+  .dt-analysis .ai-row{padding:9px 0;}
+  .dt-analysis .ai-row-label{font-size:12px;}
+  .dt-analysis .ai-row-val{font-size:13px;}
 
   /* Desktop greeting bar replaces mobile greeting */
   .desktop-greet{
     display:flex;align-items:center;justify-content:space-between;
-    margin-bottom:20px;
-    grid-column:1 / -1;
+    margin-bottom:2px;
   }
   .desktop-greet-left{display:flex;align-items:center;gap:14px;}
   .desktop-greet-ava{
@@ -933,6 +951,19 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   .desktop-greet-name{font-size:24px;font-weight:800;letter-spacing:-.4px;}
   .desktop-greet-date{font-size:12px;color:var(--t2);margin-top:3px;}
   .desktop-greet-right{display:flex;align-items:center;gap:10px;}
+
+  /* Section title used inside the right sidebar (Catatan Kamu etc.) */
+  .dd-side-title{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 2px;
+  }
+  .dd-side-title h3{font-size:16px;font-weight:800;color:var(--t1);}
+  .dd-side-title a{font-size:12px;color:var(--orange);font-weight:600;text-decoration:none;cursor:pointer;}
+
+  @media(max-width:1280px){
+    .dd-body{grid-template-columns:1fr;}
+    .dd-side{grid-row:1;}
+  }
 
   /* ── OTHER SCREENS DESKTOP — full switch, no page scroll ── */
   #s-ai-chat{
@@ -2488,209 +2519,202 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
         </div>
 
         <!-- Tile 1: Nala AI banner (full width) -->
-        <div class="dt dt-full dt-ai" onclick="showScreen('ai-chat')" style="padding:20px 24px;">
-          <div class="dt-ai-ico" style="width:52px;height:52px;border-radius:16px;">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+        <div class="dt dt-full dt-ai" onclick="showScreen('ai-chat')">
+          <div class="dt-ai-ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
           </div>
           <div style="flex:1">
-            <div class="dt-ai-label" style="font-size:11px;margin-bottom:5px">Nala AI — Rekomendasi Hari Ini</div>
-            <div class="dt-ai-msg" id="zae-msg-dt" style="font-size:14px;font-weight:600">Menganalisis pola belajarmu...</div>
+            <div class="dt-ai-label">Nala AI — Rekomendasi Hari Ini</div>
+            <div class="dt-ai-msg" id="zae-msg-dt">Menganalisis pola belajarmu...</div>
           </div>
           <div style="display:flex;align-items:center;gap:12px;flex-shrink:0">
-            <div style="font-size:11px;color:var(--orange);font-weight:700;display:flex;align-items:center;gap:5px">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-              Mulai Chat
-            </div>
             <div class="dt-ai-dot"></div>
           </div>
         </div>
 
-        <!-- Tile 2: Kartu Hari Ini -->
-        <div class="dt" onclick="showScreen('ujian')" style="position:relative;overflow:hidden;">
-          <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:var(--orange-dim);border-radius:0 14px 0 80px;opacity:.6"></div>
-          <div class="dt-hdr">
-            <div class="dt-ico o">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            </div>
-            <span class="dt-title">Kartu Hari Ini</span>
-          </div>
-          <div class="dt-stat o" style="font-size:52px;margin:4px 0">0</div>
-          <div class="dt-sub">kartu selesai hari ini</div>
-          <div class="xp-bar" style="margin-top:12px"><div class="xp-fill" style="width:3%"></div></div>
-          <div style="font-size:10px;color:var(--t3);margin-top:6px">Target: 10 kartu / hari</div>
-        </div>
+        <!-- Row: 4 equal stat cards -->
+        <div class="dd-body">
+          <div class="dd-main">
 
-        <!-- Tile 3: Streak -->
-        <div class="dt" style="position:relative;overflow:hidden;">
-          <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:var(--green-dim);border-radius:0 14px 0 80px;opacity:.6"></div>
-          <div class="dt-hdr">
-            <div class="dt-ico g">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-            </div>
-            <span class="dt-title">Streak Belajar</span>
-          </div>
-          <div class="dt-stat g" style="font-size:52px;margin:4px 0">0</div>
-          <div class="dt-sub">hari berturut-turut</div>
-          <div style="margin-top:12px;display:flex;align-items:center;gap:6px">
-            <div style="font-size:10px;color:var(--t3)">Terbaik: <span style="color:var(--green);font-weight:700">0 hari</span></div>
-          </div>
-        </div>
+            <div class="dd-stats-row">
+              <!-- Tile 2: Kartu Hari Ini -->
+              <div class="dt" onclick="showScreen('ujian')">
+                <div class="dt-hdr">
+                  <div class="dt-ico o">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </div>
+                  <span class="dt-title">Kartu Hari Ini</span>
+                </div>
+                <div class="dt-stat o">0</div>
+                <div class="dt-sub">Selesai!</div>
+              </div>
 
-        <!-- Tile 4: Timer (2x2 tall) -->
-        <div class="dt dt-2x2" style="text-align:center">
-          <div class="dt-hdr" style="justify-content:center;margin-bottom:8px">
-            <div class="dt-ico o">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
-            <span class="dt-title">Pomodoro Timer</span>
-          </div>
-          <div class="dt-timer-tabs">
-            <button class="dt-timer-tab on" onclick="setTimerMode('focus',this);syncTimerTabs(this,'focus')">Fokus</button>
-            <button class="dt-timer-tab" onclick="setTimerMode('short',this);syncTimerTabs(this,'short')">Istirahat</button>
-            <button class="dt-timer-tab" onclick="setTimerMode('long',this);syncTimerTabs(this,'long')">Panjang</button>
-          </div>
-          <div class="dt-timer-display" id="dt-timer-display">25:00</div>
-          <div class="dt-timer-btns">
-            <button class="dt-timer-btn" onclick="resetTimer()" title="Reset">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.95"/></svg>
-            </button>
-            <button class="dt-timer-btn main" id="dt-timer-main-btn" onclick="toggleTimer()">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" id="dt-timer-ico"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            </button>
-            <button class="dt-timer-btn" onclick="showToast('Notifikasi timer aktif!')">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-            </button>
-          </div>
-          <div class="dt-sessions" id="dt-timer-sessions">Sesi 0 / 4 selesai hari ini</div>
-        </div>
+              <!-- Tile 3: Streak -->
+              <div class="dt">
+                <div class="dt-hdr">
+                  <div class="dt-ico g">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                  </div>
+                  <span class="dt-title">Streak</span>
+                </div>
+                <div class="dt-stat g">0 hari</div>
+                <div class="dt-sub">Terbaik: 0</div>
+              </div>
 
-        <!-- Tile 5: Level -->
-        <div class="dt" onclick="showScreen('peringkat')" style="position:relative;overflow:hidden;">
-          <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:var(--purple-dim);border-radius:0 14px 0 80px;opacity:.6"></div>
-          <div class="dt-hdr">
-            <div class="dt-ico p">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
-            </div>
-            <span class="dt-title">Level Kamu</span>
-          </div>
-          <div class="dt-stat p" style="font-size:38px;margin:4px 0" id="dt-level-val">Lvl 1</div>
-          <div class="dt-sub" id="dt-xp-sub">0 XP terkumpul</div>
-          <div class="xp-bar" style="margin-top:12px"><div class="xp-fill" id="dt-xp-fill" style="width:3%"></div></div>
-          <div style="font-size:10px;color:var(--t3);margin-top:6px" id="dt-level-need">Butuh 100 XP ke Level 2</div>
-        </div>
+              <!-- Tile 5: Level -->
+              <div class="dt" onclick="showScreen('peringkat')">
+                <div class="dt-hdr">
+                  <div class="dt-ico p">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+                  </div>
+                  <span class="dt-title">Level</span>
+                </div>
+                <div class="dt-stat p" id="dt-level-val">Lvl 1</div>
+                <div class="dt-sub" id="dt-xp-sub">0 XP</div>
+                <div class="xp-bar" style="margin-top:10px"><div class="xp-fill" id="dt-xp-fill" style="width:3%"></div></div>
+                <div style="font-size:10px;color:var(--t3);margin-top:6px" id="dt-level-need">Butuh 100 XP ke Level 2</div>
+              </div>
 
-        <!-- Tile 6: Peringkat -->
-        <div class="dt" onclick="showScreen('peringkat')" style="position:relative;overflow:hidden;">
-          <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:var(--blue-dim);border-radius:0 14px 0 80px;opacity:.6"></div>
-          <div class="dt-hdr">
-            <div class="dt-ico b">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+              <!-- Tile 6: Peringkat -->
+              <div class="dt" onclick="showScreen('peringkat')">
+                <div class="dt-hdr">
+                  <div class="dt-ico b">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+                  </div>
+                  <span class="dt-title">Peringkat</span>
+                </div>
+                <div class="dt-stat b" id="dt-rank-val">Top 59%</div>
+                <div class="dt-sub" id="dt-rank-change">Terus kejar!</div>
+              </div>
             </div>
-            <span class="dt-title">Peringkat Global</span>
-          </div>
-          <div class="dt-stat b" style="font-size:38px;margin:4px 0" id="dt-rank-val">Top 59%</div>
-          <div class="dt-sub">dari semua pengguna</div>
-          <div style="margin-top:12px;font-size:10px;color:var(--t3)" id="dt-rank-change">Naik <span style="color:var(--blue);font-weight:700">2 peringkat</span> minggu ini</div>
-        </div>
 
-        <!-- Section divider: Alat & Aktivitas -->
-        <div style="grid-column:1 / -1;display:flex;align-items:center;gap:12px;margin-top:4px">
-          <div style="font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.7px;white-space:nowrap">Alat &amp; Aktivitas</div>
-          <div style="flex:1;height:1px;background:var(--border)"></div>
-        </div>
+            <!-- Tile 8: Quick Create -->
+            <div class="dt">
+              <div class="dt-title" style="margin-bottom:12px">Buat Baru</div>
+              <div class="dt-qbtns">
+                <button class="dt-qbtn" onclick="showToast('Unggah file materi')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                  Unggah File
+                </button>
+                <button class="dt-qbtn" onclick="showToast('Masukkan link YouTube')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                  YouTube
+                </button>
+                <button class="dt-qbtn" onclick="showToast('Rekam audio pembelajaran')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                  Audio
+                </button>
+                <button class="dt-qbtn" onclick="showScreen('ai-chat')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  Tulis Catatan
+                </button>
+                <button class="dt-qbtn" onclick="openPlagiarism()">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  Cek Plagiarisme
+                </button>
+                <button class="dt-qbtn" onclick="showScreen('ujian')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  Mulai Ujian
+                </button>
+              </div>
+            </div>
 
-        <!-- Tile 7: Kalender Streak (wide) -->
-        <div class="dt dt-wide dt-cal">
-          <div class="dt-hdr">
-            <div class="dt-ico o">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            </div>
-            <span class="dt-title">Streak Belajar — Juni 2026</span>
-            <span class="chip chip-o" style="margin-left:auto;font-size:10px">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-              0 Hari
-            </span>
-          </div>
-          <div class="cal-days" id="cal-days-dt"></div>
-        </div>
+            <!-- Split row: Analisis Nala AI + Pomodoro -->
+            <div class="dd-split-row">
 
-        <!-- Tile 8: Quick Create -->
-        <div class="dt dt-wide">
-          <div class="dt-hdr">
-            <div class="dt-ico g">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            </div>
-            <span class="dt-title">Buat Baru</span>
-          </div>
-          <div class="dt-qbtns">
-            <button class="dt-qbtn" onclick="showToast('Unggah file materi')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-              Unggah File
-            </button>
-            <button class="dt-qbtn" onclick="showToast('Masukkan link YouTube')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-              YouTube
-            </button>
-            <button class="dt-qbtn" onclick="showToast('Rekam audio pembelajaran')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
-              Audio
-            </button>
-            <button class="dt-qbtn" onclick="showScreen('ai-chat')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-              Tulis Catatan
-            </button>
-            <button class="dt-qbtn" onclick="openPlagiarism()">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-              Cek Plagiarisme
-            </button>
-            <button class="dt-qbtn" onclick="showScreen('ujian')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-              Mulai Ujian
-            </button>
-          </div>
-        </div>
+              <!-- Tile 9: Analisis Nala AI -->
+              <div class="dt dt-analysis">
+                <div class="dt-hdr">
+                  <div class="dt-ico o">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                  </div>
+                  <span class="dt-title">Analisis Nala AI</span>
+                  <span style="font-size:10px;color:var(--t3);margin-left:auto">Diperbarui hari ini</span>
+                </div>
+                <div class="ai-row"><div class="ai-row-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>&nbsp;Waktu Belajar Optimal</div><div class="ai-row-val g">19.00 – 21.00</div></div>
+                <div class="ai-row"><div class="ai-row-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>&nbsp;Kapasitas Belajar</div><div class="ai-row-val o">Sedang (65%)</div></div>
+                <div class="ai-row"><div class="ai-row-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>&nbsp;Materi Perlu Diulang</div><div class="ai-row-val b">Manajemen Data Bab 3</div></div>
+                <div class="ai-row"><div class="ai-row-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>&nbsp;Risiko Lupa</div><div class="ai-row-val r">Tinggi pada Analisis Data</div></div>
+                <div class="ai-row"><div class="ai-row-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>&nbsp;Target Minggu Ini</div><div class="ai-row-val g">3 / 5 tercapai</div></div>
+              </div>
 
-        <!-- Section divider: Catatan & Insight -->
-        <div style="grid-column:1 / -1;display:flex;align-items:center;gap:12px;margin-top:4px">
-          <div style="font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.7px;white-space:nowrap">Catatan &amp; Insight</div>
-          <div style="flex:1;height:1px;background:var(--border)"></div>
-        </div>
+              <!-- Tile 4: Timer -->
+              <div class="dt" style="text-align:center">
+                <div class="dt-hdr" style="justify-content:center">
+                  <div class="dt-ico o">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  </div>
+                  <span class="dt-title">Sesi Belajar — Pomodoro</span>
+                </div>
+                <div class="dt-timer-tabs">
+                  <button class="dt-timer-tab on" onclick="setTimerMode('focus',this);syncTimerTabs(this,'focus')">Fokus</button>
+                  <button class="dt-timer-tab" onclick="setTimerMode('short',this);syncTimerTabs(this,'short')">Istirahat Pendek</button>
+                  <button class="dt-timer-tab" onclick="setTimerMode('long',this);syncTimerTabs(this,'long')">Istirahat Panjang</button>
+                </div>
+                <div class="dt-timer-display" id="dt-timer-display">25:00</div>
+                <div class="dt-timer-btns">
+                  <button class="dt-timer-btn" onclick="resetTimer()" title="Reset">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.95"/></svg>
+                  </button>
+                  <button class="dt-timer-btn main" id="dt-timer-main-btn" onclick="toggleTimer()">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" id="dt-timer-ico"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  </button>
+                  <button class="dt-timer-btn" onclick="showToast('Notifikasi timer aktif!')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                  </button>
+                </div>
+                <div class="dt-sessions" id="dt-timer-sessions">Sesi 0 / 4 selesai hari ini</div>
+              </div>
 
-        <!-- Tile 9: Analisis Nala AI -->
-        <div class="dt dt-wide dt-analysis">
-          <div class="dt-hdr">
-            <div class="dt-ico o">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-            </div>
-            <span class="dt-title">Analisis Nala AI</span>
-            <span style="font-size:10px;color:var(--t3);margin-left:auto">Diperbarui hari ini</span>
-          </div>
-          <div class="ai-row"><div class="ai-row-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>&nbsp;Waktu Optimal</div><div class="ai-row-val g">19.00 – 21.00</div></div>
-          <div class="ai-row"><div class="ai-row-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>&nbsp;Fokus Minggu Ini</div><div class="ai-row-val o">Manajemen Data</div></div>
-          <div class="ai-row"><div class="ai-row-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>&nbsp;Kemajuan</div><div class="ai-row-val g">+12% dari minggu lalu</div></div>
-          <div class="ai-row"><div class="ai-row-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>&nbsp;Materi Perlu Diulang</div><div class="ai-row-val r">Regresi Linear</div></div>
-        </div>
+            </div><!-- end .dd-split-row -->
 
-        <!-- Tile 10: Catatan Terakhir -->
-        <div class="dt dt-wide dt-notes">
-          <div class="dt-hdr">
-            <div class="dt-ico b">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div><!-- end .dd-main -->
+
+          <div class="dd-side">
+
+            <!-- Tile 10: Catatan Terakhir -->
+            <div class="dt dt-notes">
+              <div class="dd-side-title" style="margin-bottom:12px">
+                <h3>Catatan Kamu</h3>
+                <a>Lihat Semua</a>
+              </div>
+              <div class="tcard" onclick="openTopic('statistika')">
+                <div class="tcard-ico" style="background:var(--blue-dim);color:var(--blue)">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                </div>
+                <div class="tcard-info">
+                  <div class="tcard-name">Catatan Manajemen Data, Analisi...</div>
+                  <div class="tcard-sub">Statistika • STA1111-9-Manajemen Data... • 3 hari lalu</div>
+                </div>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </div>
+              <div class="tcard" onclick="openTopic('fisika')">
+                <div class="tcard-ico" style="background:var(--blue-dim);color:var(--blue)">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                </div>
+                <div class="tcard-info">
+                  <div class="tcard-name">Catatan Fisika, Atom...</div>
+                  <div class="tcard-sub">Fisika • FIS1211-9-Atom ... • 2 hari lalu</div>
+                </div>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </div>
             </div>
-            <span class="dt-title">Catatan Terakhir</span>
-            <a style="font-size:11px;color:var(--orange);font-weight:600;text-decoration:none;cursor:pointer;margin-left:auto">Lihat Semua</a>
-          </div>
-          <div class="tcard" onclick="openTopic('statistika')" style="margin-bottom:0">
-            <div class="tcard-ico" style="background:var(--blue-dim);color:var(--blue)">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+
+            <!-- Tile 7: Kalender Streak -->
+            <div class="dt dt-cal">
+              <div class="dt-hdr">
+                <span class="dt-title" style="text-transform:none;font-size:15px;font-weight:800;color:var(--t1);letter-spacing:0">Juni 2026 — Streak Belajar</span>
+                <span class="chip chip-o" style="margin-left:auto;font-size:10px">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                  0 Hari
+                </span>
+              </div>
+              <div class="cal-days" id="cal-days-dt"></div>
             </div>
-            <div class="tcard-info">
-              <div class="tcard-name">Catatan Manajemen Data, Analisi...</div>
-              <div class="tcard-sub">Statistika • STA1111-9-Manajemen Data... • 3 hari lalu</div>
-            </div>
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          </div>
-        </div>
+
+          </div><!-- end .dd-side -->
+
+        </div><!-- end .dd-body -->
 
       </div><!-- end .desktop-dashboard -->
       </div><!-- end .beranda-scroll -->

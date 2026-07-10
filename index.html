@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Nalarku.ai — Belajar Lebih Cerdas</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="splash">
+  <div class="splash-ico">
+    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+  </div>
+  <div class="splash-name">Nalarku<span>.ai</span></div>
+  <div class="splash-tagline">Belajar lebih cerdas dengan Nala AI</div>
+  <div class="splash-bar"><div class="splash-fill"></div></div>
+</div>
+
+<div id="pg-onboard" class="page">
+  <div class="ob-shell">
+    <div class="ob-left">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:56px">
+        <div class="login-brand-icon" style="width:46px;height:46px;border-radius:14px">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div class="login-brand-name">Nalarku<span>.ai</span></div>
+      </div>
+
+      <div class="ob-tag" id="ob-left-tag">
+        <span id="ob-left-tag-icon">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </span>
+        <span id="ob-left-tag-text">Perkenalan</span>
+      </div>
+      <div class="ob-title">Yuk kenalan dulu sama<br>Nalarku</div>
+      <div class="ob-sub">Beberapa pertanyaan singkat biar kami bisa nyesuain pengalaman belajar sesuai kebutuhan kamu.</div>
+
+      <div class="ob-progress-wrap">
+        <div class="ob-progress-bars" id="ob-prog">
+          <div class="ob-step active" id="op1"></div>
+          <div class="ob-step" id="op2"></div>
+          <div class="ob-step" id="op3"></div>
+          <div class="ob-step" id="op4"></div>
+        </div>
+        <div class="ob-progress-labels">
+          <span class="active" id="opl1">Profil</span>
+          <span id="opl2">Institusi</span>
+          <span id="opl3">Minat</span>
+          <span id="opl4">Selesai</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ob-right">
+      <div class="ob-box">
+    <div class="ob-screen show" id="ob-s1">
+      <div class="ob-header">
+        <div class="ob-title">Siapa nama panggilanmu?</div>
+        <div class="ob-sub" id="ob-stepnum">Langkah 1 dari 4</div>
+      </div>
+      <div class="ob-field">
+        <div class="ob-field-label-row">
+          <label>Nama Panggilan</label>
+          <span class="ob-count" id="ob-nick-count">0/24</span>
+        </div>
+        <div class="ob-field-wrap">
+          <div class="ob-field-ico">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <input class="ob-input" id="ob-nickname" type="text" maxlength="24" placeholder="contoh: Budi, Rani, dll." oninput="updateGreeting(); charCount(this,'ob-nick-count',24)">
+        </div>
+      </div>
+      <div class="ob-field">
+        <label>Umur</label>
+        <div class="ob-field-wrap">
+          <div class="ob-field-ico">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <input class="ob-input" id="ob-age" type="number" min="7" max="70" placeholder="Usiamu sekarang" style="appearance:none">
+        </div>
+      </div>
+      <div class="ob-field">
+        <label>Jenis Kelamin</label>
+        <div class="ob-chips" id="ob-gender-chips">
+          <button class="ob-chip" onclick="selectChip('ob-gender-chips',this,'gender')">Laki-laki</button>
+          <button class="ob-chip" onclick="selectChip('ob-gender-chips',this,'gender')">Perempuan</button>
+          <button class="ob-chip" onclick="selectChip('ob-gender-chips',this,'gender')">Lainnya</button>
+        </div>
+      </div>
+      <div class="ob-footer">
+        <button class="ob-btn-next" onclick="obNext(1)">
+          Lanjut
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="ob-screen" id="ob-s2">
+      <div class="ob-header">
+        <div class="ob-title">Dari mana kamu berasal?</div>
+        <div class="ob-sub">Langkah 2 dari 4</div>
+      </div>
+      <div class="ob-field">
+        <label>Jenjang Pendidikan</label>
+        <div class="ob-chips" id="ob-level-chips">
+          <button class="ob-chip" onclick="selectChip('ob-level-chips',this,'level')">SMP</button>
+          <button class="ob-chip" onclick="selectChip('ob-level-chips',this,'level')">SMA/SMK</button>
+          <button class="ob-chip" onclick="selectChip('ob-level-chips',this,'level')">Kuliah</button>
+          <button class="ob-chip" onclick="selectChip('ob-level-chips',this,'level')">Umum</button>
+        </div>
+      </div>
+      <div class="ob-field">
+        <label>Nama Sekolah / Universitas</label>
+        <div class="ob-field-wrap">
+          <div class="ob-field-ico">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          </div>
+          <input class="ob-input" id="ob-school" type="text" placeholder="Nama institusi pendidikanmu">
+        </div>
+      </div>
+      <div class="ob-field">
+        <div class="ob-field-label-row">
+          <label>Kota</label>
+          <span class="ob-count" id="ob-city-count">0/24</span>
+        </div>
+        <div class="ob-field-wrap">
+          <div class="ob-field-ico">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <input class="ob-input" id="ob-city" type="text" maxlength="24" placeholder="Kota tempat tinggalmu" oninput="charCount(this,'ob-city-count',24)">
+        </div>
+      </div>
+      <div class="ob-footer">
+        <button class="ob-btn-next" onclick="obNext(2)">
+          Lanjut
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="ob-screen" id="ob-s3">
+      <div class="ob-header">
+        <div class="ob-title">Gimana cara belajarmu yang paling nyaman?</div>
+        <div class="ob-sub">Langkah 3 dari 4</div>
+      </div>
+      <div class="ob-field">
+        <label>Gaya Belajar Utama</label>
+        <div class="ob-chips" id="ob-style-chips">
+          <button class="ob-chip" onclick="selectChip('ob-style-chips',this,'styles')">Visual (Gambar/Video)</button>
+          <button class="ob-chip" onclick="selectChip('ob-style-chips',this,'styles')">Auditori (Suara)</button>
+          <button class="ob-chip" onclick="selectChip('ob-style-chips',this,'styles')">Kinestetik (Praktik)</button>
+        </div>
+      </div>
+      <div class="ob-field">
+        <label>Waktu Belajar Terbaik</label>
+        <div class="ob-chips" id="ob-time-chips">
+          <button class="ob-chip" onclick="selectChip('ob-time-chips',this,'time')">Pagi Hari</button>
+          <button class="ob-chip" onclick="selectChip('ob-time-chips',this,'time')">Siang/Sore</button>
+          <button class="ob-chip" onclick="selectChip('ob-time-chips',this,'time')">Malam Hari</button>
+        </div>
+      </div>
+      <div class="ob-field">
+        <label>Durasi Belajar per Sesi</label>
+        <div class="ob-chips" id="ob-dur-chips">
+          <button class="ob-chip" onclick="selectChip('ob-dur-chips',this,'dur')">15 Menit</button>
+          <button class="ob-chip" onclick="selectChip('ob-dur-chips',this,'dur')">30 Menit</button>
+          <button class="ob-chip" onclick="selectChip('ob-dur-chips',this,'dur')">1 Jam+</button>
+        </div>
+      </div>
+      <div class="ob-footer">
+        <button class="ob-btn-next" onclick="obNext(3)">
+          Lanjut
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="ob-screen" id="ob-s4">
+      <div class="ob-header">
+        <div class="ob-title">Satu langkah lagi, siap belajar?</div>
+        <div class="ob-sub">Langkah 4 dari 4</div>
+      </div>
+      <div class="ob-field">
+        <label>Pilih Avatar</label>
+        <div class="ob-avatar-row" id="ob-avatars">
+          <div class="ob-avatar-opt sel" data-val="🦊" onclick="pickAvatar(this)">🦊</div>
+          <div class="ob-avatar-opt" data-val="🐼" onclick="pickAvatar(this)">🐼</div>
+          <div class="ob-avatar-opt" data-val="🐨" onclick="pickAvatar(this)">🐨</div>
+          <div class="ob-avatar-opt" data-val="🦁" onclick="pickAvatar(this)">🦁</div>
+        </div>
+      </div>
+      <div class="ob-field">
+        <label>Target Belajar Harian</label>
+        <div class="ob-chips" id="ob-target-chips">
+          <button class="ob-chip" onclick="selectChip('ob-target-chips',this,'dailyTarget')">15 Menit</button>
+          <button class="ob-chip" onclick="selectChip('ob-target-chips',this,'dailyTarget')">30 Menit</button>
+          <button class="ob-chip" onclick="selectChip('ob-target-chips',this,'dailyTarget')">1 Jam</button>
+        </div>
+      </div>
+      <div class="ob-field">
+        <label>Apa motivasimu belajar?</label>
+        <textarea class="ob-input no-ico" id="ob-motivation" style="padding:12px;resize:none;min-height:90px;line-height:1.5" placeholder="Tuliskan alasanmu di sini..."></textarea>
+      </div>
+      <div class="ob-footer">
+        <button class="ob-btn-next" onclick="finishOnboard()">
+          Lanjut
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="ob-screen" id="ob-s5">
+      <div class="ob-welcome">
+        <div class="ob-welcome-ava" id="ob-welcome-ava" style="background:linear-gradient(135deg,#a855f7,#6366f1)">M</div>
+        <h2 id="ob-welcome-title">Selamat datang!</h2>
+        <p id="ob-welcome-sub">Profil kamu sudah siap. Nala AI akan mempelajari pola belajarmu dari sekarang.</p>
+        <div id="ob-summary"></div>
+        <button class="ob-btn-next" style="margin-top:20px;max-width:300px;margin-left:auto;margin-right:auto" onclick="goToDashboard()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Masuk ke Dashboard
+        </button>
+      </div>
+    </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="pg-plagiarism" class="page">
+  <div class="plag-header">
+    <div class="plag-back" onclick="closePlagiarism()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </div>
+    <div>
+      <div class="plag-title">Cek Plagiarisme</div>
+      <div class="plag-sub">Powered by Nala AI</div>
+    </div>
+  </div>
+  <div class="plag-content">
+    <div class="plag-zae">
+      <div class="plag-zae-ico">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+      </div>
+      <div>
+        <div style="font-size:10px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px">Nala AI — Cek Plagiarisme</div>
+        <div style="font-size:12px;color:var(--t2)">Analisis kemiripan teks dengan sumber internet, jurnal ilmiah, dan database akademik.</div>
+      </div>
+    </div>
+
+    <div id="plag-form">
+      <div class="plag-input-wrap">
+        <div class="plag-input-label">Teks yang Akan Dicek</div>
+        <textarea class="plag-ta" id="plag-ta" placeholder="Tempelkan atau ketik teks yang ingin kamu cek plagiarismenya di sini..." oninput="updateWordCount()"></textarea>
+        <div class="plag-meta">
+          <span class="plag-count" id="plag-wc">0 kata · 0 karakter</span>
+          <button class="plag-clear" onclick="clearPlagText()">Hapus Teks</button>
+        </div>
+      </div>
+
+      <div class="plag-options">
+        <div class="plag-opt-title">Opsi Pemeriksaan</div>
+        <div class="plag-check-row">
+          <div class="plag-check-left">
+            <div class="plag-check-ico" style="background:var(--blue-dim);color:var(--blue)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            Pencarian Internet
+          </div>
+          <button class="toggle on" id="tog-web" onclick="this.classList.toggle('on')"></button>
+        </div>
+        <div class="plag-check-row">
+          <div class="plag-check-left">
+            <div class="plag-check-ico" style="background:var(--purple-dim);color:var(--purple)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            Jurnal & Publikasi Ilmiah
+          </div>
+          <button class="toggle on" id="tog-journal" onclick="this.classList.toggle('on')"></button>
+        </div>
+        <div class="plag-check-row">
+          <div class="plag-check-left">
+            <div class="plag-check-ico" style="background:var(--green-dim);color:var(--green)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            Database Tugas Mahasiswa
+          </div>
+          <button class="toggle" id="tog-db" onclick="this.classList.toggle('on')"></button>
+        </div>
+        <div class="plag-check-row">
+          <div class="plag-check-left">
+            <div class="plag-check-ico" style="background:var(--orange-dim);color:var(--orange)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+            </div>
+            Deteksi Teks AI (ChatGPT, dll)
+          </div>
+          <button class="toggle on" id="tog-ai" onclick="this.classList.toggle('on')"></button>
+        </div>
+      </div>
+
+      <button class="plag-btn" id="plag-btn" onclick="runPlagCheck()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Mulai Analisis Plagiarisme
+      </button>
+    </div>
+
+    <div class="plag-loading" id="plag-loading">
+      <div class="plag-spinner"></div>
+      <div class="plag-load-msg">Nala AI sedang menganalisis teksmu...</div>
+      <div class="plag-load-steps">
+        <div class="plag-load-step active-s" id="pls-1">
+          <svg class="plag-step-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Memindai internet...
+        </div>
+        <div class="plag-load-step" id="pls-2">
+          <svg class="plag-step-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Memeriksa jurnal ilmiah...
+        </div>
+        <div class="plag-load-step" id="pls-3">
+          <svg class="plag-step-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+          Mendeteksi teks AI...
+        </div>
+        <div class="plag-load-step" id="pls-4">
+          <svg class="plag-step-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          Menghitung skor akhir...
+        </div>
+      </div>
+    </div>
+
+    <div class="plag-result" id="plag-result">
+      <div class="plag-score-ring">
+        <div class="plag-ring-wrap">
+          <svg class="plag-ring-svg" width="130" height="130" viewBox="0 0 130 130">
+            <circle class="plag-ring-track" cx="65" cy="65" r="54"/>
+            <circle class="plag-ring-fill" id="plag-ring-fill" cx="65" cy="65" r="54"
+              stroke-dasharray="339.3" stroke-dashoffset="339.3"/>
+          </svg>
+          <div class="plag-ring-text">
+            <div class="plag-pct" id="plag-pct-txt">0%</div>
+            <div class="plag-pct-lbl">Kemiripan</div>
+          </div>
+        </div>
+        <div class="plag-verdict" id="plag-verdict">Orisinal</div>
+      </div>
+
+      <div class="plag-breakdown">
+        <div class="plag-bd-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Rincian Sumber
+        </div>
+        <div id="plag-bd-rows"></div>
+      </div>
+
+      <div class="plag-highlights" id="plag-hl-section">
+        <div class="plag-hl-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Bagian yang Terdeteksi Mirip
+        </div>
+        <div id="plag-hl-items"></div>
+      </div>
+
+      <div class="plag-ai-rec">
+        <div class="plag-ai-rec-label">Nala AI — Rekomendasi</div>
+        <div class="plag-ai-rec-txt" id="plag-ai-rec-txt"></div>
+      </div>
+
+      <button class="plag-retry" onclick="resetPlag()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.95"/></svg>
+        Cek Teks Lain
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="pg-login" class="page">
+  <div class="login-shell">
+    <div class="login-left">
+      <div class="login-brand">
+        <div class="login-brand-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div class="login-brand-name">Nalarku<span>.ai</span></div>
+      </div>
+
+      <div class="feature-pills">
+        <div class="f-pill">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          Belajar Adaptif
+        </div>
+        <div class="f-pill">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/></svg>
+          AI Analisis
+        </div>
+        <div class="f-pill">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Gamifikasi
+        </div>
+        <div class="f-pill">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Komunitas
+        </div>
+      </div>
+
+      <div class="login-hero">
+        <h1>Selamat Datang di<br>Nalarku.ai</h1>
+        <p>Platform belajar cerdas yang memahami kamu kapan belajar, apa yang perlu diulang, dan bagaimana cara terbaik untukmu.</p>
+      </div>
+
+      <div class="login-stats">
+        <div>
+          <div class="login-stat-num">12rb+</div>
+          <div class="login-stat-label">Siswa aktif</div>
+        </div>
+        <div>
+          <div class="login-stat-num">98%</div>
+          <div class="login-stat-label">Naik nilai ujian</div>
+        </div>
+        <div>
+          <div class="login-stat-num">4.9/5</div>
+          <div class="login-stat-label">Rating pengguna</div>
+        </div>
+      </div>
+
+      <div class="login-testimonial">
+        <p>"Nalarku bantu aku tau bagian mana yang harus diulang sebelum ujian. Ga buang waktu belajar yang udah aku kuasai."</p>
+        <div class="login-testimonial-user">
+          <div class="login-testimonial-avatar"></div>
+          <div>
+            <div class="login-testimonial-name">Agung Knalpot Racing</div>
+            <div class="login-testimonial-role">Siswa Kelas 12</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="login-right">
+      <div class="login-box">
+        <div class="login-tabs">
+          <button class="login-tab active" onclick="setTab('masuk')">Masuk</button>
+          <button class="login-tab" onclick="setTab('daftar')">Daftar</button>
+        </div>
+
+        <div id="form-masuk">
+          <div class="field">
+            <label>Email</label>
+            <div class="field-wrap">
+              <div class="field-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <input type="email" placeholder="nama@email.com" id="email-in" value="muhammad@nalarku.ai">
+            </div>
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <div class="field-wrap">
+              <div class="field-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              </div>
+              <input type="password" placeholder="••••••••" id="pass-in" value="12345678">
+              <button class="field-eye" onclick="togglePass()" id="eye-btn">
+                <svg id="eye-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="login-remember-row">
+            <label class="login-remember"><input type="checkbox"> Ingat saya</label>
+            <div class="login-forgot" style="margin-bottom:0"><a href="#">Lupa password?</a></div>
+          </div>
+          <button class="btn-login" onclick="doLogin()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+            Masuk Sekarang
+          </button>
+        </div>
+
+        <div id="form-daftar" style="display:none">
+          <div class="field">
+            <label>Nama Lengkap</label>
+            <div class="field-wrap">
+              <div class="field-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              <input type="text" placeholder="Nama kamu">
+            </div>
+          </div>
+          <div class="field">
+            <label>Email</label>
+            <div class="field-wrap">
+              <div class="field-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <input type="email" placeholder="nama@email.com">
+            </div>
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <div class="field-wrap">
+              <div class="field-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              </div>
+              <input type="password" placeholder="Min. 8 karakter">
+            </div>
+          </div>
+          <button class="btn-login" onclick="doLogin()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+            Buat Akun Gratis
+          </button>
+        </div>
+
+        <div class="login-divider">atau lanjutkan dengan</div>
+        <button class="btn-google" onclick="doLogin()">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Lanjutkan dengan Google
+        </button>
+        <div class="login-footer">
+          Sudah punya akun? <a href="#" onclick="setTab('masuk')">Masuk di sini</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="pg-app" class="page">
+
+  <nav class="topbar">
+    <div class="topbar-brand">
+      <div class="topbar-brand-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </div>
+      <div class="topbar-brand-name">nalarku<span>.ai</span></div>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-btn" onclick="showScreen('beranda')" title="Notifikasi">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      </div>
+      <div class="user-ava" onclick="showScreen('profil')">M</div>
+    </div>
+  </nav>
+
+  <div class="app-content">
+
+    <div id="s-beranda" class="ascreen on">
+      <div class="greeting mobile-only">
+        <div class="greeting-wave">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="greeting-name">Halo, Muhammad!</div>
+        <div class="greeting-date" id="gdate"></div>
+      </div>
+
+      <div class="beranda-scroll">
+      <div class="desktop-dashboard" id="desktop-dashboard">
+
+        <div class="desktop-greet">
+          <div class="desktop-greet-left">
+            <div class="desktop-greet-ava">M</div>
+            <div>
+              <div class="desktop-greet-name">Halo, Muhammad! 👋</div>
+              <div class="desktop-greet-date" id="gdate-desktop"></div>
+            </div>
+          </div>
+          <div class="desktop-greet-right">
+          </div>
+        </div>
+
+        <div class="dt dt-full dt-ai" onclick="showScreen('ai-chat')">
+          <div class="dt-ai-ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div style="flex:1">
+            <div class="dt-ai-label">Nala AI — Rekomendasi Hari Ini</div>
+            <div class="dt-ai-msg" id="zae-msg-dt">Menganalisis pola belajarmu...</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;flex-shrink:0">
+            <div class="dt-ai-dot"></div>
+          </div>
+        </div>
+
+        <div class="dd-body">
+          <div class="dd-main">
+
+            <div class="dd-stats-row">
+              <div class="dt" onclick="showScreen('ujian')">
+                <div class="dt-hdr">
+                  <div class="dt-ico o">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </div>
+                  <span class="dt-title">Kartu Hari Ini</span>
+                </div>
+                <div class="dt-stat o">0</div>
+                <div class="dt-sub">Selesai!</div>
+              </div>
+
+              <div class="dt">
+                <div class="dt-hdr">
+                  <div class="dt-ico g">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                  </div>
+                  <span class="dt-title">Streak</span>
+                </div>
+                <div class="dt-stat g">0 hari</div>
+                <div class="dt-sub">Terbaik: 0</div>
+              </div>
+
+              <div class="dt" onclick="showScreen('peringkat')">
+                <div class="dt-hdr">
+                  <div class="dt-ico p">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+                  </div>
+                  <span class="dt-title">Level</span>
+                </div>
+                <div class="dt-stat p" id="dt-level-val">Lvl 1</div>
+                <div class="dt-sub" id="dt-xp-sub">0 XP</div>
+                <div class="xp-bar" style="margin-top:10px"><div class="xp-fill" id="dt-xp-fill" style="width:3%"></div></div>
+                <div style="font-size:10px;color:var(--t3);margin-top:6px" id="dt-level-need">Butuh 100 XP ke Level 2</div>
+              </div>
+
+              <div class="dt" onclick="showScreen('peringkat')">
+                <div class="dt-hdr">
+                  <div class="dt-ico b">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+                  </div>
+                  <span class="dt-title">Peringkat</span>
+                </div>
+                <div class="dt-stat b" id="dt-rank-val">Top 59%</div>
+                <div class="dt-sub" id="dt-rank-change">Terus kejar!</div>
+              </div>
+            </div>
+
+            <div class="dt">
+              <div class="dt-title" style="margin-bottom:12px">Buat Baru</div>
+              <div class="dt-qbtns">
+                <button class="dt-qbtn" onclick="showToast('Unggah file materi')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                  Unggah File
+                </button>
+                <button class="dt-qbtn" onclick="showToast('Masukkan link YouTube')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                  YouTube
+                </button>
+                <button class="dt-qbtn" onclick="showToast('Rekam audio pembelajaran')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                  Audio
+                </button>
+                <button class="dt-qbtn" onclick="showScreen('ai-chat')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  Tulis Catatan
+                </button>
+                <button class="dt-qbtn" onclick="openPlagiarism()">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  Cek Plagiarisme
+                </button>
+                <button class="dt-qbtn" onclick="showScreen('ujian')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  Mulai Ujian
+                </button>
+              </div>
+            </div>
+
+            <div class="dd-split-row">
+
+              <div class="dt dt-analysis">
+                <div class="dt-hdr">
+                  <div class="dt-ico o">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                  </div>
+                  <span class="dt-title">Analisis Nala AI</span>
+                  <span style="font-size:10px;color:var(--t3);margin-left:auto">Diperbarui hari ini</span>
+                </div>
+                <div class="ai-row"><div class="ai-row-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>&nbsp;Waktu Belajar Optimal</div><div class="ai-row-val g">19.00 – 21.00</div></div>
+                <div class="ai-row"><div class="ai-row-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>&nbsp;Kapasitas Belajar</div><div class="ai-row-val o">Sedang (65%)</div></div>
+                <div class="ai-row"><div class="ai-row-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>&nbsp;Materi Perlu Diulang</div><div class="ai-row-val b">Manajemen Data Bab 3</div></div>
+                <div class="ai-row"><div class="ai-row-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>&nbsp;Risiko Lupa</div><div class="ai-row-val r">Tinggi pada Analisis Data</div></div>
+                <div class="ai-row"><div class="ai-row-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>&nbsp;Target Minggu Ini</div><div class="ai-row-val g">3 / 5 tercapai</div></div>
+              </div>
+
+              <div class="dt" style="text-align:center">
+                <div class="dt-hdr" style="justify-content:center">
+                  <div class="dt-ico o">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  </div>
+                  <span class="dt-title">Sesi Belajar — Pomodoro</span>
+                </div>
+                <div class="dt-timer-tabs">
+                  <button class="dt-timer-tab on" onclick="setTimerMode('focus',this);syncTimerTabs(this,'focus')">Fokus</button>
+                  <button class="dt-timer-tab" onclick="setTimerMode('short',this);syncTimerTabs(this,'short')">Istirahat Pendek</button>
+                  <button class="dt-timer-tab" onclick="setTimerMode('long',this);syncTimerTabs(this,'long')">Istirahat Panjang</button>
+                </div>
+                <div class="dt-timer-display" id="dt-timer-display">25:00</div>
+                <div class="dt-timer-btns">
+                  <button class="dt-timer-btn" onclick="resetTimer()" title="Reset">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.95"/></svg>
+                  </button>
+                  <button class="dt-timer-btn main" id="dt-timer-main-btn" onclick="toggleTimer()">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" id="dt-timer-ico"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  </button>
+                  <button class="dt-timer-btn" onclick="showToast('Notifikasi timer aktif!')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                  </button>
+                </div>
+                <div class="dt-sessions" id="dt-timer-sessions">Sesi 0 / 4 selesai hari ini</div>
+              </div>
+
+            </div></div><div class="dd-side">
+
+            <div class="dt dt-notes">
+              <div class="dd-side-title" style="margin-bottom:12px">
+                <h3>Catatan Kamu</h3>
+                <a>Lihat Semua</a>
+              </div>
+              <div class="tcard" onclick="openTopic('statistika')">
+                <div class="tcard-ico" style="background:var(--blue-dim);color:var(--blue)">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                </div>
+                <div class="tcard-info">
+                  <div class="tcard-name">Catatan Manajemen Data, Analisi...</div>
+                  <div class="tcard-sub">Statistika • STA1111-9-Manajemen Data... • 3 hari lalu</div>
+                </div>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </div>
+              <div class="tcard" onclick="openTopic('fisika')">
+                <div class="tcard-ico" style="background:var(--blue-dim);color:var(--blue)">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                </div>
+                <div class="tcard-info">
+                  <div class="tcard-name">Catatan Fisika, Atom...</div>
+                  <div class="tcard-sub">Fisika • FIS1211-9-Atom ... • 2 hari lalu</div>
+                </div>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </div>
+            </div>
+
+            <div class="dt dt-cal">
+              <div class="dt-hdr">
+                <span class="dt-title" style="text-transform:none;font-size:15px;font-weight:800;color:var(--t1);letter-spacing:0">Juni 2026 — Streak Belajar</span>
+                <span class="chip chip-o" style="margin-left:auto;font-size:10px">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                  0 Hari
+                </span>
+              </div>
+              <div class="cal-days" id="cal-days-dt"></div>
+            </div>
+
+          </div></div></div></div><div class="mobile-only">
+      <div class="zae-banner" onclick="showScreen('ai-chat')">
+        <div class="zae-ico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+        </div>
+        <div style="flex:1">
+          <div class="zae-label">Nala AI — Rekomendasi Hari Ini</div>
+          <div class="zae-msg" id="zae-msg">Menganalisis pola belajarmu...</div>
+        </div>
+        <div class="zae-dot"></div>
+      </div>
+
+      <div class="stat-grid">
+        <div class="scard" onclick="showScreen('ujian')">
+          <div class="scard-ico o">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <div class="scard-label">Kartu Hari Ini</div>
+          <div class="scard-val o" id="dash-cards-val">0</div>
+          <div class="scard-sub">Selesai!</div>
+        </div>
+        <div class="scard">
+          <div class="scard-ico g">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <div class="scard-label">Streak</div>
+          <div class="scard-val g" id="dash-streak-val">0 hari</div>
+          <div class="scard-sub">Terbaik: 0</div>
+        </div>
+        <div class="scard" onclick="showScreen('peringkat')">
+          <div class="scard-ico p">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+          </div>
+          <div class="scard-label">Level</div>
+          <div class="scard-val" id="dash-level-val">Lvl 1</div>
+          <div class="scard-sub" id="dash-xp-sub">0 XP</div>
+          <div class="xp-bar"><div class="xp-fill" id="dash-xp-fill" style="width:3%"></div></div>
+        </div>
+        <div class="scard" onclick="showScreen('peringkat')">
+          <div class="scard-ico b">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+          </div>
+          <div class="scard-label">Peringkat</div>
+          <div class="scard-val" style="font-size:20px" id="dash-rank-val">Top 59%</div>
+          <div class="scard-sub" id="dash-rank-sub">Terus kejar!</div>
+        </div>
+      </div>
+
+      <div class="timer-widget" id="timer-widget">
+        <div class="timer-title">Sesi Belajar — Pomodoro</div>
+        <div class="timer-mode-tabs">
+          <button class="timer-tab on" onclick="setTimerMode('focus',this)">Fokus</button>
+          <button class="timer-tab" onclick="setTimerMode('short',this)">Istirahat Pendek</button>
+          <button class="timer-tab" onclick="setTimerMode('long',this)">Istirahat Panjang</button>
+        </div>
+        <div class="timer-display" id="timer-display">25:00</div>
+        <div class="timer-btns">
+          <button class="timer-btn" onclick="resetTimer()" title="Reset">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.95"/></svg>
+          </button>
+          <button class="timer-btn main" id="timer-main-btn" onclick="toggleTimer()">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" id="timer-ico"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </button>
+          <button class="timer-btn" onclick="showToast('Notifikasi timer aktif!')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </button>
+        </div>
+        <div class="timer-sessions" id="timer-sessions">Sesi 0 / 4 selesai hari ini</div>
+      </div>
+
+      <div class="qcreate">
+        <div class="qlabel">Buat baru</div>
+        <div class="qbtns">
+          <button class="qbtn" onclick="showToast('Unggah file materi')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Unggah File
+          </button>
+          <button class="qbtn" onclick="showToast('Masukkan link YouTube')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+            YouTube
+          </button>
+          <button class="qbtn" onclick="showToast('Rekam audio pembelajaran')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+            Audio
+          </button>
+          <button class="qbtn" onclick="showScreen('ai-chat')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Tulis Catatan
+          </button>
+          <button class="qbtn" onclick="openPlagiarism()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            Cek Plagiarisme
+          </button>
+        </div>
+      </div>
+
+      <div class="streak-cal">
+        <div class="cal-header">
+          <div class="cal-month">Juni 2026 — Streak Belajar</div>
+          <span class="chip chip-o">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            0 Hari
+          </span>
+        </div>
+        <div class="cal-days" id="cal-days"></div>
+      </div>
+
+      <div style="margin:14px 0">
+        <div class="stitle">
+          <h2>Catatan Kamu</h2>
+          <a>Lihat Semua</a>
+        </div>
+        <div class="tcard" onclick="openTopic('statistika')">
+          <div class="tcard-ico" style="background:var(--blue-dim);color:var(--blue)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <div class="tcard-info">
+            <div class="tcard-name">Catatan Manajemen Data, Analisi...</div>
+            <div class="tcard-sub">Statistika • STA1111-9-Manajemen Data... • 3 hari lalu</div>
+          </div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+      </div>
+
+      <div class="ai-analysis">
+        <div class="ai-analysis-hdr">
+          <div class="ai-analysis-ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </div>
+          <div>
+            <div class="ai-analysis-title">Analisis Nala AI</div>
+            <div class="ai-analysis-sub">Diperbarui hari ini</div>
+          </div>
+        </div>
+        <div class="ai-row">
+          <div class="ai-row-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Waktu Belajar Optimal
+          </div>
+          <div class="ai-row-val g">19.00 – 21.00</div>
+        </div>
+        <div class="ai-row">
+          <div class="ai-row-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            Kapasitas Belajar
+          </div>
+          <div class="ai-row-val o">Sedang (65%)</div>
+        </div>
+        <div class="ai-row">
+          <div class="ai-row-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            Materi Perlu Diulang
+          </div>
+          <div class="ai-row-val b">Manajemen Data Bab 3</div>
+        </div>
+        <div class="ai-row">
+          <div class="ai-row-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Risiko Lupa
+          </div>
+          <div class="ai-row-val r">Tinggi pada Analisis Data</div>
+        </div>
+        <div class="ai-row">
+          <div class="ai-row-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Target Minggu Ini
+          </div>
+          <div class="ai-row-val g">3 / 5 tercapai</div>
+        </div>
+      </div>
+      </div></div>
+
+    <div id="s-ai-chat" class="ascreen">
+      <div class="chat-wrap">
+        <div class="chat-hdr">
+          <div class="chat-hdr-left">
+            <div class="chat-avatar" style="border-radius: 50%;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <div>
+              <div style="display:flex;align-items:center;gap:6px;">
+                <div class="chat-name">Nala AI</div>
+              </div>
+              <div class="chat-status" style="margin-top: 2px;">Aktif sekarang</div>
+            </div>
+          </div>
+          <div class="chat-hdr-btns">
+            <div class="chat-hdr-btn" onclick="showScreen('beranda')" title="Beranda">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div class="chat-hdr-btn" onclick="clearChat()" title="Reset chat">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.95"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-msgs" id="chat-msgs">
+          <div class="cmsg ai">
+            <div class="cmsg-ava ai" style="border-radius: 50%;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <div class="cmsg-body">
+              <div class="cmsg-bubble">Halo Muhammad! Aku Nala AI, asisten belajar pintarmu di Nalarku.ai.<br><br>Aku sudah menganalisis pola belajarmu dan siap membantu kamu belajar lebih efektif. Mau mulai dari mana hari ini?</div>
+              <div class="cmsg-time">11:29</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-bottom">
+          <div class="chat-suggestions">
+            <button class="sug-btn" onclick="quickAsk('Kapan waktu terbaik aku belajar hari ini?')">Kapan harus belajar?</button>
+            <button class="sug-btn" onclick="quickAsk('Buat ringkasan singkat tentang Analisis Data Bab 3 agar aku bisa me-review dengan cepat.')">Ringkasan materi</button>
+            <button class="sug-btn" onclick="quickAsk('Apa yang perlu aku ulang sekarang berdasarkan analisismu?')">Apa yang perlu diulang?</button>
+            <button class="sug-btn" onclick="quickAsk('Buat soal latihan dari materi yang aku pelajari')">Buat soal latihan</button>
+          </div>
+          <div class="chat-input-row">
+            <div class="chat-action-ico" title="Tambah Lampiran">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+            <textarea class="chat-ta" id="chat-ta" placeholder="Ketik pesan untuk Nala AI..." rows="1" onkeydown="chatKey(event)" oninput="autoResize(this)"></textarea>
+            <div class="chat-action-ico" title="Pesan Suara">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+            </div>
+            <button class="chat-send" onclick="sendMsg()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="s-ujian" class="ascreen">
+      <div class="ujian-wrap">
+
+        <div class="ujian-header">
+          <div>
+            <div class="ujian-title">Latihan & Ujian</div>
+            <div style="font-size:12px;color:var(--t2);margin-top:4px">Powered by Nala AI</div>
+          </div>
+          <button class="btn-add-matkul" onclick="openAddMatkul()" title="Tambah Matkul">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+        </div>
+
+        <div class="ujian-bento">
+
+          <div class="ujian-left" style="display: flex; flex-direction: column;">
+            
+            <div class="matkul-empty" id="matkul-empty" style="margin: auto;">
+              <div class="matkul-empty-ico">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              </div>
+              <div class="matkul-empty-title">Belum ada matkul</div>
+              <div class="matkul-empty-sub" style="max-width: 300px; text-align: center; margin: 8px auto 24px;">Tekan tombol + di atas untuk menambahkan mata kuliah dan upload PPT materi kamu.</div>
+              <button class="btn-matkul-action primary" onclick="openAddMatkul()">
+                + Tambah Matkul
+              </button>
+            </div>
+
+            <div id="matkul-list" style="display:none">
+              <div id="matkul-cards"></div>
+            </div>
+
+            <div class="quiz-panel" id="quiz-panel">
+              <div class="quiz-page-hdr" style="display:none">
+                <button class="quiz-back-btn" onclick="backToMatkul()" title="Kembali">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <div>
+                  <div class="quiz-page-title" id="quiz-matkul-label">Matkul</div>
+                  <div class="quiz-page-code" id="quiz-matkul-kode">—</div>
+                </div>
+              </div>
+              <div style="margin-bottom:14px">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px;gap:10px">
+                  <div>
+                    <div class="quiz-soal-title" id="quiz-soal-title">Soal 1</div>
+                    <div class="quiz-soal-sub">Direkomendasikan Nala AI</div>
+                  </div>
+                  <span class="chip chip-o" id="quiz-badge">Benar 0/5</span>
+                </div>
+                <div class="quiz-pbar"><div class="quiz-pfill" id="quiz-pf" style="width:20%"></div></div>
+              </div>
+              <div class="quiz-loading" id="quiz-loading">
+                <div class="quiz-spinner"></div>
+                <div class="quiz-load-txt">Nala AI sedang membuat soal dari PPT kamu...</div>
+              </div>
+              <div id="quiz-area"></div>
+              <div class="zae-tip">
+                <div class="zae-tip-hdr">
+                  <div class="zae-tip-ico">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+                  </div>
+                  <div style="font-weight:800;font-size:14px">Tips Nala AI</div>
+                </div>
+                <div class="zae-tip-txt" id="zae-tip-txt">Bacalah pertanyaan dengan teliti sebelum memilih jawaban.</div>
+              </div>
+              <button class="btn-sec" style="margin-top:10px;width:100%" onclick="backToMatkul()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                Kembali ke Matkul
+              </button>
+            </div>
+          </div>
+
+          <div class="ujian-right">
+            <div class="ujian-ai-hdr" style="padding: 24px 20px;">
+              <div class="ujian-ai-ava" style="border-radius: 12px; width: 44px; height: 44px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </div>
+              <div>
+                <div class="ujian-ai-name" style="font-size: 15px;">Nala AI</div>
+                <div class="ujian-ai-status" style="font-size: 12px;">Siap membantu</div>
+              </div>
+            </div>
+            
+            <div class="ujian-ai-msgs" id="ujian-ai-msgs">
+              <div class="ujian-ai-bubble" style="border-radius: 12px; border: 1px solid var(--border); background: transparent;">
+                <div class="ujian-ai-label">NALA AI</div>
+                Halo! 👋 Tambahkan mata kuliah dan upload PPT, aku akan otomatis buat soal latihan dari materinya. Kamu juga bisa tanya aku tentang soal yang lagi dikerjain!
+              </div>
+            </div>
+
+            <div style="padding: 0 16px 8px;">
+               <div class="chat-suggestions" style="padding-top:0;">
+                  <button class="sug-btn" onclick="quickAsk('Kapan harus belajar?')">Kapan harus belajar?</button>
+                  <button class="sug-btn" onclick="quickAsk('Ringkasan materi')">Ringkasan materi</button>
+               </div>
+            </div>
+
+            <div class="ujian-ai-input-wrap" style="padding: 0 16px 24px; border-top: none;">
+              <div class="ujian-ai-input-row">
+                <div class="chat-action-ico" title="Tambah Lampiran">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </div>
+                <textarea class="ujian-ai-ta" id="ujian-ai-ta" placeholder="Tanya Nala AI" rows="1" onkeydown="ujianAiKey(event)" oninput="autoResize(this)"></textarea>
+                <div class="chat-action-ico" title="Pesan Suara">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                </div>
+                <button class="ujian-ai-send" onclick="sendUjianAi()" style="border-radius: 50%;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+<div class="modal-overlay" id="modal-matkul">
+  <div class="modal-box">
+    <div class="modal-title">Tambah Mata Kuliah</div>
+    <div class="modal-sub">Masukkan nama matkul dan upload file PPT untuk membuat soal otomatis.</div>
+    <div class="modal-field">
+      <label class="modal-label">Nama Mata Kuliah</label>
+      <input class="modal-input" id="modal-matkul-name" type="text" placeholder="contoh: Statistika, Kalkulus, Pemograman Web...">
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">Kode Matkul (opsional)</label>
+      <input class="modal-input" id="modal-matkul-kode" type="text" placeholder="contoh: STA1111, MAT2112...">
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">Upload PPT / PPTX</label>
+      <div class="ppt-upload-area" id="ppt-drop-area" onclick="document.getElementById('ppt-file-input').click()" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dropFile(event)">
+        <div class="ppt-upload-ico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        </div>
+        <div class="ppt-upload-title">Klik atau drag PPT ke sini</div>
+        <div class="ppt-upload-sub">Mendukung .ppt dan .pptx</div>
+      </div>
+      <input type="file" id="ppt-file-input" accept=".ppt,.pptx,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation" style="display:none" onchange="handlePptFile(this)">
+      <div id="ppt-selected" style="display:none" class="ppt-file-name">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span class="ppt-file-label" id="ppt-file-label">file.pptx</span>
+        <button class="ppt-file-remove" onclick="removePpt(event)">×</button>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="modal-cancel" onclick="closeAddMatkul()">Batal</button>
+      <button class="modal-submit" onclick="submitMatkul()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Simpan & Buat Soal
+      </button>
+    </div>
+  </div>
+</div>
+
+    <div id="s-peringkat" class="ascreen">
+      <div class="lb-page-header">
+        <div class="lb-page-ico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9-6.3 3.9 1.7-7L2 9.2l7.1-.6z"/></svg>
+        </div>
+        <div>
+          <div class="lb-page-title">Peringkat</div>
+          <div class="lb-page-sub">Lihat peringkat dan progres belajarmu dibandingkan mahasiswa lainnya</div>
+        </div>
+      </div>
+
+      <div class="lb-grid">
+        <div class="lb-main">
+
+          <div class="lb-zae-card">
+            <div class="lb-zae-ico">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+            </div>
+            <div>
+              <div class="lb-zae-label">Analisis Nala AI <div class="lb-zae-dot"></div></div>
+              <div class="lb-zae-msg" id="lb-zae-insight">Kamu naik <strong>2 peringkat</strong> minggu ini! Performa di modul <strong>Algoritma Lanjut</strong> sangat baik. Pertahankan momentum untuk masuk ke Top 3.</div>
+            </div>
+          </div>
+
+          <div class="lb-tabs">
+            <div class="lb-tab active" id="lb-tab-leaderboard" onclick="switchLbTab(this,'leaderboard')">Leaderboard</div>
+            <div class="lb-tab" onclick="switchLbTab(this,'kampus')">Kampus</div>
+            <div class="lb-tab" onclick="switchLbTab(this,'kelas')">Kelas / Prodi</div>
+          </div>
+
+          <div class="lb-card">
+            <div class="lb-card-controls">
+              <div class="lb-period">
+                <span>Periode:</span>
+                <select class="lb-period-select" onchange="showToast('Filter periode segera hadir')">
+                  <option>Minggu Ini</option>
+                </select>
+              </div>
+              <div class="lb-filter-chips">
+                <button class="lb-fchip active" onclick="setLbFilter(this)">Semua</button>
+                <button class="lb-fchip" onclick="setLbFilter(this)">XP</button>
+                <button class="lb-fchip" onclick="setLbFilter(this)">Latihan</button>
+                <button class="lb-fchip" onclick="setLbFilter(this)">Ujian</button>
+                <button class="lb-fchip" onclick="setLbFilter(this)">Streak</button>
+              </div>
+              <div class="lb-updated" onclick="loadLeaderboard(getStudentId())" title="Refresh sekarang">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.95"/></svg>
+                <span id="lb-updated-txt">Diperbarui: baru saja</span>
+              </div>
+            </div>
+
+            <div class="lb-podium" id="lb-podium">
+              </div>
+            <div class="lb-podium-base"></div>
+
+            <div class="lb-list-cols">
+              <span>#</span><span>Mahasiswa</span><span>XP</span><span>Progress</span>
+            </div>
+            <div class="lb-list-title">Peringkat Lainnya</div>
+            <div id="lb-list"></div>
+          </div>
+
+        </div>
+
+        <div class="lb-side">
+          <div class="lb-side-card">
+            <div class="lb-side-title">Ringkasanmu</div>
+            <div class="lb-summary-row">
+              <div class="lb-summary-badge">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+              </div>
+              <div>
+                <div class="lb-summary-lbl">Peringkatmu</div>
+                <div class="lb-summary-val" id="lb-my-rank">—</div>
+                <div class="lb-summary-sub" id="lb-my-total">Memuat data...</div>
+              </div>
+            </div>
+            <div class="lb-percentile-lbl">Persentil</div>
+            <div class="lb-percentile-title" id="lb-my-pct">—</div>
+            <div class="lb-percentile-bar"><div class="lb-percentile-fill" id="lb-pct-fill" style="width:0%"></div></div>
+            <div class="lb-percentile-ends"><span>#1</span><span id="lb-pct-end">—</span></div>
+          </div>
+
+          <!-- TODO: DUMMY SEMENTARA — belum ada endpoint XP harian asli, ganti kalau sumber data sudah ada -->
+          <div class="lb-side-card">
+            <div class="lb-side-title">Statistik Minggu Ini</div>
+            <div class="lb-chart-wrap">
+              <svg id="lb-week-chart" width="100%" height="90" viewBox="0 0 280 90" preserveAspectRatio="none">
+                <polyline id="lb-week-line" fill="none" stroke="var(--orange)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points=""/>
+                <circle id="lb-week-dot" r="4.5" fill="var(--orange)" stroke="var(--bg)" stroke-width="2"/>
+              </svg>
+              <div class="lb-chart-days">
+                <span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span><span>Min</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="s-profil" class="ascreen">
+      <div class="prof-page-header">
+        <div class="prof-page-title">Profil Pengguna</div>
+        <div class="prof-page-sub">Kelola informasi dan preferensi akun Anda</div>
+      </div>
+      <div class="prof-hdr">
+        <div class="prof-ava">M</div>
+        <div class="prof-name">Muhammad</div>
+        <div class="prof-email">muhammad@Nalarku.ai</div>
+        <div class="prof-badge" id="prof-level-badge">Level 1 — Pemula</div>
+      </div>
+      <div class="prof-stats">
+        <div class="prof-scard"><div class="prof-sval" id="prof-kartu-val">0</div><div class="prof-slbl">Kartu</div></div>
+        <div class="prof-scard"><div class="prof-sval" id="prof-streak-val">0</div><div class="prof-slbl">Streak</div></div>
+        <div class="prof-scard"><div class="prof-sval" id="prof-xp-val">0</div><div class="prof-slbl">XP</div></div>
+      </div>
+
+      <div class="prof-grid">
+        <div class="prof-main">
+          <div class="ai-analysis" style="margin-bottom:14px">
+            <div class="ai-analysis-hdr">
+              <div class="ai-analysis-ico">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              </div>
+              <div>
+                <div class="ai-analysis-title">Profil Belajar Nala AI</div>
+                <div class="ai-analysis-sub">Analisis gaya belajar kamu</div>
+              </div>
+            </div>
+            <div class="ai-row"><div class="ai-row-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Gaya Belajar</div><div class="ai-row-val b">Visual + Membaca</div></div>
+            <div class="ai-row"><div class="ai-row-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Waktu Terbaik</div><div class="ai-row-val g">Malam (19–21 WIB)</div></div>
+            <div class="ai-row"><div class="ai-row-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Kemajuan Minggu Ini</div><div class="ai-row-val o">+12% dari minggu lalu</div></div>
+          </div>
+        </div>
+
+        <div class="prof-side">
+          <div class="prof-item" onclick="showToast('Pengaturan notifikasi')">
+            <div class="prof-item-ico" style="background:var(--orange-dim);color:var(--orange)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            </div>
+            <div class="prof-item-txt"><div class="prof-item-name">Notifikasi Nala AI</div><div class="prof-item-sub">Pengingat belajar otomatis</div></div>
+            <svg class="prof-item-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+          <div class="prof-item" onclick="showToast('Preferensi belajar disimpan!')">
+            <div class="prof-item-ico" style="background:var(--blue-dim);color:var(--blue)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
+            </div>
+            <div class="prof-item-txt"><div class="prof-item-name">Preferensi Belajar</div><div class="prof-item-sub">Waktu, durasi, dan target</div></div>
+            <svg class="prof-item-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+          <div class="prof-item" onclick="doLogout()">
+            <div class="prof-item-ico" style="background:var(--red-dim);color:var(--red)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            </div>
+            <div class="prof-item-txt"><div class="prof-item-name">Keluar</div><div class="prof-item-sub">Logout dari akun</div></div>
+            <svg class="prof-item-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div><nav class="bnav">
+    <div style="padding:4px 20px 12px;font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.7px">Menu Utama</div>
+    <div class="bnav-item on" id="bn-beranda" onclick="showScreen('beranda')">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span class="bnav-label">Beranda</span>
+    </div>
+    <div class="bnav-item" id="bn-ai-chat" onclick="showScreen('ai-chat')">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <span class="bnav-label">Nala AI</span>
+    </div>
+    <div class="bnav-item" id="bn-ujian" onclick="showScreen('ujian')">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      <span class="bnav-label">Ujian</span>
+    </div>
+    <div class="bnav-item" id="bn-peringkat" onclick="showScreen('peringkat')">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+      <span class="bnav-label">Peringkat</span>
+    </div>
+    <div style="margin:12px 10px;height:1px;background:var(--border)"></div>
+    <div style="padding:0 20px 8px;font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.7px">Akun</div>
+    <div class="bnav-item" id="bn-profil" onclick="showScreen('profil')">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span class="bnav-label">Profil</span>
+    </div>
+    <div class="bnav-profile" id="bnav-profile" onclick="showScreen('profil')">
+      <div class="bnav-profile-ava" id="bnav-profile-ava">M</div>
+      <div>
+        <div class="bnav-profile-name" id="bnav-profile-name">Muhammad</div>
+        <div class="bnav-profile-sub">Profil Saya</div>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

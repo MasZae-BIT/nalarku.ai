@@ -1066,36 +1066,40 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 ═══════════════════════════════ */
 .quiz-top{padding:14px 0 10px;}
 .quiz-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
-.quiz-pbar{height:4px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden;}
+.quiz-pbar{height:6px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden;}
 .quiz-pfill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--orange),#fbbf24);transition:width .4s;}
 .qcard{
-  background:var(--card);border:1px solid var(--border);
+  background:var(--card2);border:1px solid var(--border2);
   border-radius:var(--r3);padding:20px 18px;margin:12px 0;
+  box-shadow:0 4px 16px rgba(0,0,0,.25);
 }
-.qnum{font-size:10px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;}
-.qtxt{font-size:15px;font-weight:600;line-height:1.6;color:var(--t1);}
-.qopts{display:flex;flex-direction:column;gap:9px;margin-top:18px;}
+.qnum{font-size:11px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;}
+.qtxt{font-size:16.5px;font-weight:700;line-height:1.55;color:var(--t1);}
+.qopts{display:flex;flex-direction:column;gap:11px;margin-top:18px;}
 .qopt{
-  padding:12px 15px;border-radius:var(--r1);
-  border:1px solid var(--border);background:transparent;
-  color:var(--t1);font-size:13px;font-weight:500;
+  padding:14px 16px;border-radius:var(--r1);
+  border:1.5px solid var(--border2);background:var(--card);
+  color:var(--t1);font-size:14.5px;font-weight:600;
   cursor:pointer;text-align:left;transition:all .2s;
-  display:flex;align-items:center;gap:11px;
+  display:flex;align-items:center;gap:13px;
+  box-shadow:0 1px 3px rgba(0,0,0,.15);
 }
 .qopt:hover{border-color:var(--orange);background:var(--orange-dim);}
 .qopt.correct{border-color:var(--green);background:var(--green-dim);color:var(--green);}
 .qopt.wrong{border-color:var(--red);background:var(--red-dim);color:var(--red);}
+.qopt:disabled{cursor:default;opacity:1;}
 .qopt-letter{
-  width:24px;height:24px;border-radius:6px;flex-shrink:0;
-  background:var(--bg2);display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:700;color:var(--t3);transition:all .2s;
+  width:28px;height:28px;border-radius:7px;flex-shrink:0;
+  background:var(--bg);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12.5px;font-weight:800;color:var(--t1);transition:all .2s;
 }
-.qopt.correct .qopt-letter{background:var(--green);color:#fff;}
-.qopt.wrong .qopt-letter{background:var(--red);color:#fff;}
+.qopt.correct .qopt-letter{background:var(--green);color:#fff;border-color:var(--green);}
+.qopt.wrong .qopt-letter{background:var(--red);color:#fff;border-color:var(--red);}
 .qexp{
   background:var(--blue-dim);border:1px solid rgba(59,130,246,.25);
   border-radius:var(--r1);padding:12px 14px;margin-top:12px;
-  font-size:13px;color:#93c5fd;line-height:1.6;display:none;
+  font-size:13.5px;color:#93c5fd;line-height:1.6;display:none;
 }
 .quiz-footer{display:flex;gap:10px;margin-top:12px;}
 .btn-pri{
@@ -1118,6 +1122,18 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .zae-tip-hdr{display:flex;align-items:center;gap:9px;margin-bottom:10px;}
 .zae-tip-ico{width:34px;height:34px;border-radius:10px;background:var(--orange-dim);display:flex;align-items:center;justify-content:center;color:var(--orange);}
 .zae-tip-txt{font-size:13px;color:var(--t2);line-height:1.6;}
+
+/* ── Perbaikan tampilan ujian di layar ponsel: pilihan jawaban lebih jelas ── */
+@media(max-width:600px){
+  .qcard{padding:18px 16px;border-radius:16px;}
+  .qtxt{font-size:16px;}
+  .qopts{gap:10px;}
+  .qopt{padding:14px;font-size:14px;gap:12px;}
+  .qopt-letter{width:26px;height:26px;font-size:12px;}
+  .quiz-page-title{font-size:17px;}
+  .quiz-soal-title{font-size:15px;}
+  .chip{font-size:11.5px;padding:5px 11px;}
+}
 
 /* ── Quiz page header: back button + course name/code ── */
 .quiz-page-hdr{display:flex;align-items:center;gap:14px;margin-bottom:16px;}

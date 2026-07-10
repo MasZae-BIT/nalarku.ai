@@ -1354,6 +1354,11 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   .ob-left{padding:40px 24px 8px;max-width:100%;}
   .ob-right{border-left:none;padding:24px;}
 }
+#pg-onboard.onboard-final .ob-left{display:none;}
+#pg-onboard.onboard-final .ob-shell{grid-template-columns:1fr;}
+#pg-onboard.onboard-final .ob-right{
+  border-left:none;min-height:100vh;width:100%;
+}
 .ob-header{margin-bottom:24px;}
 .ob-tag{
   display:inline-flex;align-items:center;gap:6px;
@@ -3766,6 +3771,7 @@ function finishOnboard() {
   updateObProgress(5);
   document.querySelectorAll('.ob-screen').forEach(s => s.classList.remove('show'));
   document.getElementById('ob-s5').classList.add('show');
+  document.getElementById('pg-onboard').classList.add('onboard-final');
 }
 
 function goToDashboard() {
@@ -3818,6 +3824,7 @@ function doLogin() {
         initApp();
       } else {
         // Jika belum, masuk Onboarding (Loading -> Pertanyaan)
+        document.getElementById('pg-onboard').classList.remove('onboard-final');
         showPage('pg-onboard');
       }
     }, 350);

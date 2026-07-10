@@ -1354,11 +1354,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   .ob-left{padding:40px 24px 8px;max-width:100%;}
   .ob-right{border-left:none;padding:24px;}
 }
-#pg-onboard.onboard-final .ob-left{display:none;}
-#pg-onboard.onboard-final .ob-shell{grid-template-columns:1fr;}
-#pg-onboard.onboard-final .ob-right{
-  border-left:none;min-height:100vh;width:100%;
-}
 .ob-header{margin-bottom:24px;}
 .ob-tag{
   display:inline-flex;align-items:center;gap:6px;
@@ -3233,7 +3228,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
             </div>
 
             <div class="quiz-panel" id="quiz-panel">
-              <div class="quiz-page-hdr">
+              <div class="quiz-page-hdr" style="display:none">
                 <button class="quiz-back-btn" onclick="backToMatkul()" title="Kembali">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
                 </button>
@@ -3771,7 +3766,6 @@ function finishOnboard() {
   updateObProgress(5);
   document.querySelectorAll('.ob-screen').forEach(s => s.classList.remove('show'));
   document.getElementById('ob-s5').classList.add('show');
-  document.getElementById('pg-onboard').classList.add('onboard-final');
 }
 
 function goToDashboard() {
@@ -3824,7 +3818,6 @@ function doLogin() {
         initApp();
       } else {
         // Jika belum, masuk Onboarding (Loading -> Pertanyaan)
-        document.getElementById('pg-onboard').classList.remove('onboard-final');
         showPage('pg-onboard');
       }
     }, 350);
@@ -4420,14 +4413,17 @@ function renderMatkulList() {
   const list = document.getElementById('matkul-list');
   const empty = document.getElementById('matkul-empty');
   const cards = document.getElementById('matkul-cards');
+  const quizIsOpen = document.getElementById('quiz-panel').classList.contains('show');
 
   if (matkulList.length === 0) {
-    empty.style.display = 'flex';
+    empty.style.display = quizIsOpen ? 'none' : 'flex';
     list.style.display = 'none';
     return;
   }
   empty.style.display = 'none';
-  list.style.display = 'block';
+  // Kalau lagi mengerjakan soal (quiz-panel aktif), kartu matkul tetap disembunyikan
+  // supaya tidak nongol bareng tampilan soal.
+  list.style.display = quizIsOpen ? 'none' : 'block';
 
   cards.innerHTML = matkulList.map(m => `
     <div class="matkul-card ${activeMatkul === m.id ? 'active' : ''}" id="mk-${m.id}">

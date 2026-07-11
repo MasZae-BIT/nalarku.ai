@@ -2,11 +2,11 @@
 // Ganti ke Production URL saat sudah siap deploy
 const IS_TEST_MODE  = false; // ubah ke false saat production
 const N8N_CHAT_URL  = IS_TEST_MODE
-  ? 'https://nalarku.app.n8n.cloud/webhook/chatbot'
-  : 'https://nalarku.app.n8n.cloud/webhook/chatbot';
+  ? 'https://nalarku.app.n8n.cloud/webhook-test/nalarku-tutor'
+  : 'https://nalarku.app.n8n.cloud/webhook-test/nalarku-tutor';
 const N8N_PLAG_URL  = IS_TEST_MODE
-  ? 'https://nalarku.app.n8n.cloud/webhook/chatbot'
-  : 'https://nalarku.app.n8n.cloud/webhook/chatbot';
+  ? 'https://nalarku.app.n8n.cloud/webhook-test/nalarku-tutor'
+  : 'https://nalarku.app.n8n.cloud/webhook-test/nalarku-tutor';
 
 // ── SUPABASE via N8N URLs ──
 const N8N_SAVE_PROFILE_URL   = 'https://nalarku.app.n8n.cloud/webhook/student-onboarding';

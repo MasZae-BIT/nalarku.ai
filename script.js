@@ -12,9 +12,6 @@ const N8N_PLAG_URL  = IS_TEST_MODE
 const N8N_SAVE_PROFILE_URL   = 'https://nalarku.app.n8n.cloud/webhook/student-onboarding';
 const N8N_GET_PROFILE_URL    = 'https://nalarku.app.n8n.cloud/webhook/student-profile';
 const N8N_UPDATE_STATS_URL   = 'https://nalarku.app.n8n.cloud/webhook/student-update';
-// ⚠️ BARU, BELUM ADA DI N8N TEMEN KAMU — perlu dibikinin workflow-nya:
-// Terima: {} (gak perlu body) atau {student_id}
-// Balikin JSON: { leaderboard: [{student_id, nickname, xp}, ...] } urut XP DESC, sekalian semua student (n8n/Supabase yang sort)
 const N8N_LEADERBOARD_URL    = 'https://nalarku.app.n8n.cloud/webhook/student-leaderboard';
 
 // ── UUID Generator ──

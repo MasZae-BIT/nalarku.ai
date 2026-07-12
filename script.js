@@ -35,16 +35,18 @@ function getStudentId() {
 
 // Helper: panggil n8n dan ambil teks balasan AI
 async function callN8N(url, payload) {
+  console.log("=== Payload sebelum fetch ===");
+  console.log(payload);
+
   const res = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   });
+
   const data = await res.json();
-  // n8n mengembalikan { output: "..." } dari node AI Agent
   return data.output ?? data.text ?? data.message ?? JSON.stringify(data);
 }
-
 // ── SPLASH ──
 setTimeout(() => {
   const s = document.getElementById('splash');

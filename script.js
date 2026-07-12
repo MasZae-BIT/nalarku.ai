@@ -1016,12 +1016,13 @@ async function sendUjianAi() {
     const matkul = matkulList.find(m => m.id === activeMatkul);
     const ctx = matkul ? `Matkul: ${matkul.name}. Soal ke-${curQ+1}: ${currentQS[curQ]?.q || ''}` : '';
     const reply = await callN8N(N8N_CHAT_URL, {
-  student_id: studentId,
-  message: txt,
-  course_subject: matkul?.name || "",
-  userContext: {
-    context: 'ujian',
-    matkul: ctx
+      message: txt,
+      student_id: getStudentID(),
+      history: chatHist.slice(-10),
+      course_subject: matkul?.name || "",
+      userContext: {
+        context: 'ujian',
+        matkul: ctx
   }
 });
     document.getElementById('ujian-typing')?.remove();

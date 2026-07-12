@@ -1388,6 +1388,7 @@ async function sendMsg(){
     // Kirim ke n8n webhook — format bebas, n8n yang proses
     const reply = await callN8N(N8N_CHAT_URL, {
       message: txt,
+      student_id: getStudentId(),
       history: chatHist.slice(-10), // kirim 10 pesan terakhir sebagai konteks
       userContext: {
         name: nick,

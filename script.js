@@ -40,9 +40,8 @@ async function callN8N(url, payload) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   });
-  const data = await res.json();
-  // n8n mengembalikan { output: "..." } dari node AI Agent
-  return data.output ?? data.text ?? data.message ?? JSON.stringify(data);
+  const text = await res.text();   // ← ganti res.json() jadi res.text()
+  return text;
 }
 
 // ── SPLASH ──

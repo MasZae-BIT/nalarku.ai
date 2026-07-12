@@ -35,6 +35,8 @@ function getStudentId() {
 
 // Helper: panggil n8n dan ambil teks balasan AI
 async function callN8N(url, payload) {
+  alert("CALL N8N DIPANGGIL");
+
   console.log("=== Payload sebelum fetch ===");
   console.log(payload);
 

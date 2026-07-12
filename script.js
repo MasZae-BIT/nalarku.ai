@@ -35,20 +35,16 @@ function getStudentId() {
 
 // Helper: panggil n8n dan ambil teks balasan AI
 async function callN8N(url, payload) {
-  alert("CALL N8N DIPANGGIL");
-
-  console.log("=== Payload sebelum fetch ===");
-  console.log(payload);
-
   const res = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   });
-
   const data = await res.json();
+  // n8n mengembalikan { output: "..." } dari node AI Agent
   return data.output ?? data.text ?? data.message ?? JSON.stringify(data);
 }
+
 // ── SPLASH ──
 setTimeout(() => {
   const s = document.getElementById('splash');
@@ -1390,35 +1386,19 @@ async function sendMsg(){
   const goal = p.goal || 'belajar lebih baik';
   try{
     // Kirim ke n8n webhook — format bebas, n8n yang proses
-    console.log("Student ID:", getStudentId());
-
-console.log("Payload:", {
-  message: txt,
-  student_id: getStudentId(),
-  history: chatHist.slice(-10),
-  userContext: {
-    name: userProfile.name,
-    school: userProfile.school,
-    goal: userProfile.goal,
-    level: userProfile.level,
-    subjects: userProfile.subjects,
-    bestStudyTime: userProfile.bestStudyTime
-  }
-});
-
-const reply = await callN8N(N8N_CHAT_URL, {
-  message: txt,
-  student_id: getStudentId(),
-  history: chatHist.slice(-10),
-  userContext: {
-    name: userProfile.name,
-    school: userProfile.school,
-    goal: userProfile.goal,
-    level: userProfile.level,
-    subjects: userProfile.subjects,
-    bestStudyTime: userProfile.bestStudyTime
-  }
-});
+    const reply = await callN8N(N8N_CHAT_URL, {
+      message: txt,
+      student_id: getStudentId(),
+      history: chatHist.slice(-10), // kirim 10 pesan terakhir sebagai konteks
+      userContext: {
+        name: nick,
+        school: school,
+        goal: goal,
+        level: 'Level 1',
+        subjects: 'Statistika dan Manajemen Data',
+        bestStudyTime: '19.00-21.00'
+      }
+    });
     document.getElementById('typing-el')?.remove();
     chatHist.push({role:'assistant', content: reply});
     addBubble('ai', reply.replace(/\n/g,'<br>'));

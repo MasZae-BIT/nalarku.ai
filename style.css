@@ -1169,6 +1169,16 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
    PROFIL
 ═══════════════════════════════ */
 .prof-hdr{text-align:center;padding:18px 0 12px;}
+.prof-hdr{position:relative;overflow:hidden;}
+.prof-hdr::before{
+  content:'';
+  position:absolute;
+  top:-70%;left:-15%;
+  width:130%;height:150%;
+  background:radial-gradient(ellipse at 50% 0%, rgba(99,102,241,.10), transparent 62%);
+  border-radius:50%;
+  pointer-events:none;
+}
 .prof-ava{
   width:80px;height:80px;border-radius:50%;margin:0 auto 12px;
   background:linear-gradient(135deg,#a855f7,#6366f1);

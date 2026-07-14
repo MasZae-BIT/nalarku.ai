@@ -17,8 +17,8 @@ const N8N_LEADERBOARD_URL    = 'https://nalarku.app.n8n.cloud/webhook/student-le
 // ── UPLOAD PPT -> GOOGLE DRIVE via N8N ──
 // Ganti "upload-ppt" sesuai path Webhook node di workflow n8n kamu
 const N8N_UPLOAD_PPT_URL = IS_TEST_MODE
-  ? 'https://nalarku.app.n8n.cloud/webhook/Upload-File'
-  : 'https://nalarku.app.n8n.cloud/webhook/Upload-File';
+  ? 'https://nalarku.app.n8n.cloud/webhook-test/f612659b-492d-4a4e-a4b7-267638b36e0c'
+  : 'https://nalarku.app.n8n.cloud/webhook/f612659b-492d-4a4e-a4b7-267638b36e0c';
 
 // ── UUID Generator ──
 function generateUUID() {
@@ -560,7 +560,7 @@ function showScreen(name) {
   }
 
   // Realtime peringkat: polling jalan cuma pas screen Peringkat aktif
-  if (name === 'peringkat') { startLBPolling(); loadWeeklyXPChart(getStudentId()); }
+  if (name === 'peringkat') { startLBPolling(); renderLbWeekChart(); }
   else stopLBPolling();
 }
 
@@ -759,13 +759,14 @@ async function submitMatkul() {
   }
   const kode = document.getElementById('modal-matkul-kode').value.trim();
   const colors = ['#f97316','#3b82f6','#a855f7','#22c55e','#ec4899','#eab308'];
+  const selectedPptFile = pptFile; // simpan referensi SEBELUM modal ditutup (closeAddMatkul mereset pptFile)
   const matkul = {
     id: Date.now(),
     name,
     kode,
     color: colors[matkulList.length % colors.length],
-    hasPpt: !!pptFile,
-    pptName: pptFile ? pptFile.name : null,
+    hasPpt: !!selectedPptFile,
+    pptName: selectedPptFile ? selectedPptFile.name : null,
     questions: [],
     generated: false
   };
@@ -773,12 +774,12 @@ async function submitMatkul() {
   closeAddMatkul();
 
   // If PPT uploaded, generate questions
-  if (pptFile) {
+  if (selectedPptFile) {
     matkulList.push(matkul);
     saveMatkul();
     renderMatkulList();
     openMatkul(matkul.id, true); // open with loading state
-    await generateQuestionsFromPpt(matkul.id, pptFile);
+    await generateQuestionsFromPpt(matkul.id, selectedPptFile);
   } else {
     matkulList.push(matkul);
     saveMatkul();
@@ -1296,68 +1297,17 @@ function setLbFilter(el){
   if (el.textContent.trim() !== 'Semua') showToast('Filter ' + el.textContent.trim() + ' segera hadir');
 }
 
-// ── STATISTIK XP MINGGU INI (dihitung dari selisih XP asli, disimpan di localStorage) ──
-// Tiap kali profil kebaca dari Supabase, kita bandingin XP sekarang vs XP terakhir yang kesimpen.
-// Kalau naik, selisihnya dicatet ke tanggal hari ini. Ini BUKAN karangan — sumbernya XP asli dari Supabase,
-// cuma histori-nya kesimpen lokal di browser ini aja (belum sinkron lintas device).
-function trackDailyXPGain(xp) {
-  if (typeof xp !== 'number' || isNaN(xp)) return;
-  const todayKey = new Date().toISOString().slice(0, 10);
-  const store = JSON.parse(localStorage.getItem('nk_xp_daily') || '{}');
-  const hasLast = localStorage.getItem('nk_xp_last') !== null;
-  const lastXP = hasLast ? Number(localStorage.getItem('nk_xp_last')) : xp;
-  const diff = xp - lastXP;
-  if (hasLast && diff > 0) {
-    store[todayKey] = (store[todayKey] || 0) + diff;
-  }
-  localStorage.setItem('nk_xp_last', String(xp));
-  // Buang data lebih dari 14 hari biar localStorage gak numpuk
-  const cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 14);
-  Object.keys(store).forEach(k => { if (new Date(k) < cutoff) delete store[k]; });
-  localStorage.setItem('nk_xp_daily', JSON.stringify(store));
-}
-
-function getWeeklyXPFromHistory() {
-  const store = JSON.parse(localStorage.getItem('nk_xp_daily') || '{}');
-  const now = new Date();
-  const dow = (now.getDay() + 6) % 7; // 0 = Senin
-  const monday = new Date(now); monday.setDate(now.getDate() - dow);
-  const week = [];
-  for (let i = 0; i < 7; i++) {
-    const d = new Date(monday); d.setDate(monday.getDate() + i);
-    const key = d.toISOString().slice(0, 10);
-    week.push(store[key] || 0);
-  }
-  return week;
-}
-
-function loadWeeklyXPChart() {
-  const wrap = document.querySelector('.lb-chart-wrap');
-  const oldMsg = document.getElementById('lb-chart-empty');
-  if (oldMsg) oldMsg.remove();
-
-  const week = getWeeklyXPFromHistory();
-  renderLbWeekChart(week);
-
-  if (week.every(v => v === 0) && wrap) {
-    const msg = document.createElement('div');
-    msg.id = 'lb-chart-empty';
-    msg.style.cssText = 'text-align:center;padding:8px 4px 0;color:var(--t3);font-size:11px';
-    msg.textContent = 'Belum ada aktivitas XP tercatat minggu ini.';
-    wrap.appendChild(msg);
-  }
-}
-
-// week = array 7 angka (Sen..Min)
-function renderLbWeekChart(week){
-  const daily = week || [0,0,0,0,0,0,0];
+// TODO: DUMMY SEMENTARA — nilai XP harian di bawah ini karangan/placeholder, belum diambil dari data asli.
+// Ganti array ini (atau sambungkan ke endpoint XP-per-hari) begitu sumber datanya sudah ada.
+function renderLbWeekChart(){
+  const dummyDaily = [20, 45, 38, 55, 48, 62, 90]; // Sen..Min, skala 0-100 (karangan)
   const line = document.getElementById('lb-week-line');
   const dot = document.getElementById('lb-week-dot');
   if (!line) return;
   const w = 280, h = 90, pad = 6;
-  const stepX = (w - pad*2) / (daily.length - 1);
-  const max = Math.max(...daily), min = Math.min(...daily);
-  const pts = daily.map((v,i) => {
+  const stepX = (w - pad*2) / (dummyDaily.length - 1);
+  const max = Math.max(...dummyDaily), min = Math.min(...dummyDaily);
+  const pts = dummyDaily.map((v,i) => {
     const x = pad + i*stepX;
     const y = h - pad - ((v - min) / (max - min || 1)) * (h - pad*2);
     return [x,y];

@@ -276,6 +276,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 }
 .bnav-item.on{color:var(--orange);}
 .bnav-label{font-size:10px;font-weight:600;}
+.bnav-desktop-only{display:none;}
 
 /* ── SCREENS (within app) ── */
 .ascreen{display:none;}
@@ -752,6 +753,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
     font-size:13px;
     font-weight:600;
   }
+  .bnav-desktop-only{display:block;}
 
   /* ── MAIN CONTENT AREA ── */
   .app-content{
@@ -1268,7 +1270,8 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   }
   .prof-ava{margin:0;flex-shrink:0;}
   .prof-info{align-items:flex-start;}
-  .prof-name-row{justify-content:flex-start;}
+  .prof-name-row{justify-content:flex-start;flex-wrap:nowrap;}
+  .prof-badge{order:-1;}
   .prof-stats{margin-top:16px;}
   .prof-grid{
     display:grid;grid-template-columns:minmax(0,1fr) 320px;

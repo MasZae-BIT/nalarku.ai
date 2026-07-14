@@ -2,10 +2,10 @@
 // Ganti ke Production URL saat sudah siap deploy
 const IS_TEST_MODE  = false; // ubah ke false saat production
 const N8N_CHAT_URL  = IS_TEST_MODE
-  ? 'https://nalarku.app.n8n.cloud/webhook/nalarku-tutor'
+  ? 'https://nalarku.app.n8n.cloud/webhook-test/nalarku-tutor'
   : 'https://nalarku.app.n8n.cloud/webhook/nalarku-tutor';
 const N8N_PLAG_URL  = IS_TEST_MODE
-  ? 'https://nalarku.app.n8n.cloud/webhook/nalarku-tutor'
+  ? 'https://nalarku.app.n8n.cloud/webhook-test/nalarku-tutor'
   : 'https://nalarku.app.n8n.cloud/webhook/nalarku-tutor';
 
 // ── SUPABASE via N8N URLs ──
@@ -13,6 +13,12 @@ const N8N_SAVE_PROFILE_URL   = 'https://nalarku.app.n8n.cloud/webhook/student-on
 const N8N_GET_PROFILE_URL    = 'https://nalarku.app.n8n.cloud/webhook/student-profile';
 const N8N_UPDATE_STATS_URL   = 'https://nalarku.app.n8n.cloud/webhook/student-update';
 const N8N_LEADERBOARD_URL    = 'https://nalarku.app.n8n.cloud/webhook/student-leaderboard';
+
+// ── UPLOAD PPT -> GOOGLE DRIVE via N8N ──
+// Ganti "upload-ppt" sesuai path Webhook node di workflow n8n kamu
+const N8N_UPLOAD_PPT_URL = IS_TEST_MODE
+  ? 'https://nalarku.app.n8n.cloud/webhook-test/upload-ppt'
+  : 'https://nalarku.app.n8n.cloud/webhook/upload-ppt';
 
 // ── UUID Generator ──
 function generateUUID() {
@@ -792,63 +798,29 @@ async function generateQuestionsFromPpt(matkulId, file) {
   addUjianAiMsg(`Sedang membaca PPT <strong>${file.name}</strong> dan membuat soal dari materinya... ✨`);
 
   try {
-    // Convert file to base64
-    const base64 = await new Promise((res, rej) => {
-      const r = new FileReader();
-      r.onload = () => res(r.result.split(',')[1]);
-      r.onerror = rej;
-      r.readAsDataURL(file);
+    // Kirim nama matkul, kode, dan file PPT ke n8n.
+    // Workflow n8n yang menangani: buat folder Google Drive sesuai nama matkul,
+    // upload file PPT ke folder itu, lalu generate soal dari isi PPT.
+    const formData = new FormData();
+    formData.append('matkul_id', matkulId);
+    formData.append('matkul_name', matkul.name);
+    formData.append('matkul_kode', matkul.kode || '');
+    formData.append('file', file, file.name);
+
+    const response = await fetch(N8N_UPLOAD_PPT_URL, {
+      method: 'POST',
+      body: formData
+      // Jangan set Content-Type manual — browser otomatis set multipart/form-data + boundary yang benar.
     });
 
-    // Call Anthropic API directly
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 2000,
-        messages: [{
-          role: 'user',
-          content: [
-            {
-              type: 'document',
-              source: {
-                type: 'base64',
-                media_type: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-                data: base64
-              }
-            },
-            {
-              type: 'text',
-              text: `Kamu adalah AI pengajar Indonesia. Buat 5 soal pilihan ganda dari presentasi ini untuk mahasiswa. 
-              
-              Respond ONLY with valid JSON, no markdown, no explanation:
-              {
-                "matkul_summary": "ringkasan singkat materi dalam 1 kalimat",
-                "questions": [
-                  {
-                    "q": "pertanyaan",
-                    "opts": ["A", "B", "C", "D"],
-                    "ans": 0,
-                    "exp": "penjelasan singkat jawaban benar"
-                  }
-                ]
-              }
-              
-              ans adalah index (0-3) dari jawaban benar. Buat soal yang relevan, beragam tingkat kesulitan, dalam Bahasa Indonesia.`
-            }
-          ]
-        }]
-      })
-    });
+    if (!response.ok) throw new Error(`n8n merespon status ${response.status}`);
 
     const data = await response.json();
-    const text = data.content?.[0]?.text || '';
-    const clean = text.replace(/```json|```/g, '').trim();
-    const parsed = JSON.parse(clean);
-
-    matkul.questions = parsed.questions || [];
-    matkul.summary = parsed.matkul_summary || '';
+    // Workflow n8n diharapkan me-respond JSON:
+    // { "matkul_summary": "...", "questions": [...], "drive_folder_url": "..." }
+    matkul.questions = data.questions || [];
+    matkul.summary = data.matkul_summary || '';
+    matkul.driveFolderUrl = data.drive_folder_url || null;
     matkul.generated = true;
     saveMatkul();
 
@@ -857,12 +829,13 @@ async function generateQuestionsFromPpt(matkulId, file) {
     renderQ(0);
 
   } catch(e) {
+    console.error('Upload/generate PPT gagal:', e);
     document.getElementById('quiz-loading').classList.remove('show');
-    // Fallback to default questions
+    // Fallback ke soal default kalau n8n gagal / belum di-setup
     matkul.questions = getDefaultQuestions();
     matkul.generated = true;
     saveMatkul();
-    addUjianAiMsg('Tidak bisa membaca PPT secara langsung, menggunakan soal latihan default. Pastikan kamu login untuk fitur AI penuh.');
+    addUjianAiMsg('Gagal memproses PPT lewat server, menggunakan soal latihan default. Coba lagi nanti.');
     renderQ(0);
   }
 }

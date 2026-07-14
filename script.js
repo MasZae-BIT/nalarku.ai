@@ -17,8 +17,8 @@ const N8N_LEADERBOARD_URL    = 'https://nalarku.app.n8n.cloud/webhook/student-le
 // ── UPLOAD PPT -> GOOGLE DRIVE via N8N ──
 // Ganti "upload-ppt" sesuai path Webhook node di workflow n8n kamu
 const N8N_UPLOAD_PPT_URL = IS_TEST_MODE
-  ? 'https://nalarku.app.n8n.cloud/webhook-test/upload-ppt'
-  : 'https://nalarku.app.n8n.cloud/webhook/upload-ppt';
+  ? 'https://nalarku.app.n8n.cloud/webhook/f612659b-492d-4a4e-a4b7-267638b36e0c'
+  : 'https://nalarku.app.n8n.cloud/webhook/f612659b-492d-4a4e-a4b7-267638b36e0c';
 
 // ── UUID Generator ──
 function generateUUID() {

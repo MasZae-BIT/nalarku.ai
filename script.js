@@ -23,6 +23,25 @@ function generateUUID() {
   });
 }
 
+// ── TEMA (Terang / Gelap) ──
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('nk_theme', theme);
+  const sw = document.getElementById('tog-theme');
+  const lbl = document.getElementById('tog-theme-label');
+  if (sw) sw.classList.toggle('on', theme === 'light');
+  if (lbl) lbl.textContent = theme === 'light' ? 'Mode terang aktif' : 'Mode gelap aktif';
+}
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+  applyTheme(current === 'light' ? 'dark' : 'light');
+}
+// Terapkan tema tersimpan sedini mungkin biar ga ada flash warna salah
+applyTheme(localStorage.getItem('nk_theme') || 'dark');
+document.addEventListener('DOMContentLoaded', () => {
+  applyTheme(document.documentElement.getAttribute('data-theme') || 'dark');
+});
+
 // ── Get or Create Student ID ──
 function getStudentId() {
   let sid = localStorage.getItem('nk_student_id');

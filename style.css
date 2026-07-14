@@ -35,6 +35,8 @@
   --t3: #9a9da3;
   --border: rgba(28,43,50,0.1);
   --border2: rgba(28,43,50,0.16);
+  --orange-dim: rgba(23,71,93,0.08);
+  --orange-glow: rgba(23,71,93,0.16);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html{scroll-behavior:smooth;}

@@ -1268,8 +1268,11 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   .prof-stats{margin-top:16px;}
   .prof-grid{
     display:grid;grid-template-columns:minmax(0,1fr) 320px;
-    gap:20px;align-items:start;margin-top:14px;
+    gap:20px;align-items:stretch;margin-top:14px;
   }
+  .prof-main{display:flex;flex-direction:column;}
+  .prof-main .ai-analysis{flex:1;display:flex;flex-direction:column;margin-bottom:0 !important;}
+  .prof-side{height:100%;}
   .prof-side .prof-item{margin-bottom:0;}
 }
 

@@ -24,6 +24,18 @@
   --border2: rgba(255,255,255,0.13);
   --r1: 8px; --r2: 14px; --r3: 20px; --r4: 999px;
 }
+:root[data-theme="light"]{
+  --bg: #f7f5ef;
+  --bg2: #ffffff;
+  --bg3: #f1efe6;
+  --card: #ffffff;
+  --card2: #faf8f2;
+  --t1: #1c2b32;
+  --t2: #6b6f76;
+  --t3: #9a9da3;
+  --border: rgba(28,43,50,0.1);
+  --border2: rgba(28,43,50,0.16);
+}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html{scroll-behavior:smooth;}
 body{

@@ -1298,6 +1298,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 }
 @keyframes scl{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
 .splash-ico-img{width:74%;height:74%;object-fit:contain;}
+.brand-icon-img{width:74%;height:74%;object-fit:contain;}
 .splash-name{font-size:26px;font-weight:800;}
 .splash-name span{color:var(--orange);}
 .splash-tagline{font-size:12px;color:var(--t2);}

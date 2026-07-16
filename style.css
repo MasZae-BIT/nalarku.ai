@@ -2260,3 +2260,262 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   font-size: 14px;
   border-radius: 12px;
 }
+
+/* =========================================================================
+   PREMIUM GLASS REDESIGN — v3
+   Lapisan penyempurnaan visual (tanpa mengubah struktur/kelas/fungsi JS).
+   Fokus: iOS-style frosted glass, kedalaman (elevation) yang konsisten,
+   motion yang lebih halus, dan detail kecil yang bikin terasa "dibuat
+   dengan tangan" bukan default AI.
+========================================================================= */
+
+:root{
+  --ease: cubic-bezier(.22,1,.36,1);
+  --ease-out: cubic-bezier(.16,1,.3,1);
+  --ease-spring: cubic-bezier(.34,1.56,.64,1);
+
+  --glass: rgba(24,27,46,.58);
+  --glass-strong: rgba(19,21,36,.82);
+  --glass-soft: rgba(30,33,54,.42);
+  --glass-border: rgba(255,255,255,.075);
+  --glass-hi: rgba(255,255,255,.14);
+
+  --shadow-xs: 0 1px 2px rgba(0,0,0,.22);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,.22), 0 1px 0 rgba(255,255,255,.03) inset;
+  --shadow-md: 0 10px 30px rgba(0,0,0,.30), 0 1px 0 rgba(255,255,255,.045) inset;
+  --shadow-lg: 0 20px 50px rgba(0,0,0,.38), 0 1px 0 rgba(255,255,255,.05) inset;
+  --shadow-hover: 0 16px 36px rgba(0,0,0,.34), 0 1px 0 rgba(255,255,255,.06) inset;
+  --ring-orange: 0 0 0 3px rgba(var(--orange-rgb),.16);
+}
+:root[data-theme="light"]{
+  --glass: rgba(255,255,255,.62);
+  --glass-strong: rgba(255,255,255,.86);
+  --glass-soft: rgba(255,255,255,.4);
+  --glass-border: rgba(28,43,50,.075);
+  --glass-hi: rgba(255,255,255,.9);
+
+  --shadow-xs: 0 1px 2px rgba(28,43,50,.06);
+  --shadow-sm: 0 2px 8px rgba(28,43,50,.06), 0 1px 0 rgba(255,255,255,.6) inset;
+  --shadow-md: 0 10px 28px rgba(28,43,50,.09), 0 1px 0 rgba(255,255,255,.7) inset;
+  --shadow-lg: 0 20px 46px rgba(28,43,50,.12), 0 1px 0 rgba(255,255,255,.7) inset;
+  --shadow-hover: 0 16px 34px rgba(28,43,50,.12), 0 1px 0 rgba(255,255,255,.75) inset;
+  --ring-orange: 0 0 0 3px rgba(var(--orange-rgb),.14);
+}
+
+/* ── ambient depth di background, sangat halus ── */
+body{
+  background:
+    radial-gradient(1100px 560px at 8% -8%, rgba(var(--orange-rgb),.055), transparent 60%),
+    radial-gradient(900px 480px at 104% 4%, rgba(168,85,247,.045), transparent 55%),
+    var(--bg);
+  background-attachment:fixed;
+}
+::selection{background:rgba(var(--orange-rgb),.32);color:var(--t1);}
+:focus-visible{outline:2px solid rgba(var(--orange-rgb),.55);outline-offset:2px;}
+
+/* ── scrollbar global, tipis & senyap ── */
+*{scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+*::-webkit-scrollbar{width:5px;height:5px;}
+*::-webkit-scrollbar-track{background:transparent;}
+*::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px;}
+*::-webkit-scrollbar-thumb:hover{background:var(--t3);}
+
+/* =========================================================================
+   TOPBAR & NAVIGASI — kaca sungguhan (frosted, bukan sekadar blur)
+========================================================================= */
+.topbar{
+  background:var(--glass);
+  -webkit-backdrop-filter:saturate(180%) blur(22px);
+  backdrop-filter:saturate(180%) blur(22px);
+  border-bottom-color:var(--glass-border);
+  box-shadow:0 1px 0 var(--glass-hi) inset, 0 10px 30px rgba(0,0,0,.16);
+}
+.bnav{
+  background:var(--glass-strong);
+  -webkit-backdrop-filter:saturate(180%) blur(24px);
+  backdrop-filter:saturate(180%) blur(24px);
+  border-top-color:var(--glass-border);
+  box-shadow:0 -1px 0 var(--glass-hi) inset, 0 -14px 30px rgba(0,0,0,.16);
+  padding-bottom:calc(20px + env(safe-area-inset-bottom));
+}
+@media(min-width:1024px){
+  .bnav{
+    border-right-color:var(--glass-border);
+    box-shadow:1px 0 0 var(--glass-hi) inset, 14px 0 30px rgba(0,0,0,.12);
+    padding-bottom:20px;
+  }
+}
+.bnav-item{
+  transition:color .25s var(--ease), background .25s var(--ease), transform .2s var(--ease);
+  border-radius:12px;
+}
+.bnav-item:active{transform:scale(.94);}
+.bnav-item.on{
+  box-shadow:0 1px 0 rgba(255,255,255,.05) inset;
+}
+@media(min-width:1024px){
+  .bnav-item.on{
+    background:linear-gradient(135deg,rgba(var(--orange-rgb),.14),rgba(var(--orange-rgb),.05));
+    -webkit-backdrop-filter:blur(8px);
+    backdrop-filter:blur(8px);
+  }
+}
+.topbar-brand-icon,.login-brand-icon,.chat-avatar,.desktop-greet-ava,.user-ava,.prof-ava{
+  box-shadow:0 4px 14px rgba(var(--orange-rgb),.28), 0 1px 0 rgba(255,255,255,.18) inset;
+}
+.topbar-btn,.chat-hdr-btn{
+  background:var(--glass-soft);
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+  transition:all .25s var(--ease);
+}
+.topbar-btn:hover,.chat-hdr-btn:hover{transform:translateY(-1px);box-shadow:var(--shadow-xs);}
+.topbar-btn:active,.chat-hdr-btn:active{transform:translateY(0) scale(.95);}
+
+/* =========================================================================
+   KARTU — permukaan kaca konsisten di semua tile/kartu
+========================================================================= */
+.scard,.note-card,.ai-analysis,.timer-widget,.streak-cal,.qcreate,
+.dt,.qcard,.ppt-file-name,.login-testimonial{
+  background:var(--glass-soft);
+  -webkit-backdrop-filter:blur(20px) saturate(140%);
+  backdrop-filter:blur(20px) saturate(140%);
+  border-color:var(--glass-border);
+  box-shadow:var(--shadow-sm);
+  transition:transform .4s var(--ease-out), box-shadow .4s var(--ease-out), border-color .3s var(--ease), background .3s var(--ease);
+}
+.scard:hover,.note-card:hover,.dt:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--shadow-hover);
+  background:var(--glass);
+}
+.scard:active,.note-card:active,.dt:active{transform:translateY(-1px) scale(.995);}
+
+.zae-banner{
+  background:linear-gradient(135deg,rgba(var(--orange-rgb),.12),rgba(var(--orange2-rgb),.04)),var(--glass-soft);
+  -webkit-backdrop-filter:blur(20px) saturate(150%);
+  backdrop-filter:blur(20px) saturate(150%);
+  box-shadow:var(--shadow-sm);
+  transition:all .35s var(--ease);
+}
+.zae-banner:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover);}
+
+.dt-ai{
+  background:linear-gradient(135deg,rgba(var(--orange-rgb),.12),rgba(var(--orange2-rgb),.04)),var(--glass-soft);
+  -webkit-backdrop-filter:blur(20px) saturate(150%);
+  backdrop-filter:blur(20px) saturate(150%);
+}
+
+.qcard{box-shadow:var(--shadow-md);}
+
+/* modal & popover kaca */
+.modal-overlay{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);}
+.modal-box{
+  background:var(--glass-strong);
+  -webkit-backdrop-filter:blur(28px) saturate(160%);
+  backdrop-filter:blur(28px) saturate(160%);
+  box-shadow:var(--shadow-lg);
+  border-color:var(--glass-border);
+}
+
+/* onboarding kotak kanan */
+.ob-box{
+  background:var(--glass-soft);
+  -webkit-backdrop-filter:blur(18px) saturate(140%);
+  backdrop-filter:blur(18px) saturate(140%);
+}
+
+/* =========================================================================
+   TOMBOL — sedikit "sheen", transisi pegas ringan
+========================================================================= */
+.btn-login,.modal-submit,.ob-btn-next,.btn-matkul-action.primary,.chat-send,.ujian-ai-send{
+  position:relative;overflow:hidden;
+  box-shadow:0 6px 20px rgba(var(--orange-rgb),.3), 0 1px 0 rgba(255,255,255,.22) inset;
+  transition:transform .25s var(--ease-spring), box-shadow .25s var(--ease), opacity .2s var(--ease);
+}
+.btn-login:hover,.modal-submit:hover,.ob-btn-next:hover,.btn-matkul-action.primary:hover{
+  transform:translateY(-1px);
+  box-shadow:0 10px 26px rgba(var(--orange-rgb),.38), 0 1px 0 rgba(255,255,255,.25) inset;
+}
+.btn-login:active,.modal-submit:active,.ob-btn-next:active,.btn-matkul-action.primary:active{
+  transform:translateY(0) scale(.98);
+}
+.timer-btn.main,.dt-timer-btn.main{
+  box-shadow:0 8px 22px rgba(var(--orange-rgb),.35), 0 1px 0 rgba(255,255,255,.25) inset;
+  transition:transform .25s var(--ease-spring), box-shadow .25s var(--ease);
+}
+.timer-btn.main:hover,.dt-timer-btn.main:hover{transform:scale(1.06);}
+.timer-btn.main:active,.dt-timer-btn.main:active{transform:scale(.96);}
+.timer-btn,.dt-timer-btn,.qbtn,.dt-qbtn,.sug-btn,.chat-action-ico{
+  transition:all .25s var(--ease);
+}
+.timer-btn:hover,.dt-timer-btn:hover{transform:translateY(-1px);}
+.qbtn:hover,.dt-qbtn:hover{transform:translateY(-1px);box-shadow:var(--shadow-xs);}
+
+.btn-google{
+  background:var(--glass-soft);
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+  transition:all .25s var(--ease);
+}
+.btn-google:hover{transform:translateY(-1px);box-shadow:var(--shadow-xs);}
+
+/* =========================================================================
+   INPUT — fokus lebih lembut, ring bukan garis tajam
+========================================================================= */
+.field input,.ob-input,.modal-input,.chat-ta,.ujian-ai-ta{
+  transition:border-color .25s var(--ease), box-shadow .25s var(--ease), background .25s var(--ease);
+}
+.field input:focus{box-shadow:var(--ring-orange);}
+.chat-input-wrap:focus-within,.chat-input-row:focus-within{
+  box-shadow:var(--ring-orange);
+}
+.ob-input:focus{border-color:var(--orange);box-shadow:var(--ring-orange);}
+
+/* Chips & opsi kuis — kaca tipis, transisi halus */
+.ob-chip,.qopt,.timer-tab,.dt-timer-tab{
+  transition:all .25s var(--ease);
+}
+.ob-chip:hover{transform:translateY(-1px);}
+.ob-chip.sel{
+  background:linear-gradient(135deg,rgba(var(--orange-rgb),.22),rgba(var(--orange-rgb),.1));
+  box-shadow:0 1px 0 rgba(255,255,255,.06) inset;
+}
+.qopt{-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);}
+.qopt:hover{transform:translateX(2px);}
+
+/* Toggle switch — lebih halus */
+.toggle{transition:background .3s var(--ease);}
+.toggle::after{transition:transform .3s var(--ease-spring);}
+
+/* Avatar chat & pesan */
+.cmsg-bubble{
+  -webkit-backdrop-filter:blur(6px);
+  backdrop-filter:blur(6px);
+}
+.cmsg.ai .cmsg-bubble{box-shadow:var(--shadow-xs);}
+
+/* =========================================================================
+   MOBILE — pastikan target sentuh nyaman & spacing rapi
+========================================================================= */
+@media(max-width:1023px){
+  .app-content{padding-top:76px;}
+  .bnav-item{min-height:48px;justify-content:center;}
+  .stat-grid{gap:10px;}
+  .scard{padding:16px 14px;}
+  .qcard{padding:18px 16px;}
+}
+
+/* =========================================================================
+   DESKTOP — kedalaman lebih jelas di layar besar
+========================================================================= */
+@media(min-width:1024px){
+  .dt{box-shadow:var(--shadow-sm);}
+  .dt:hover{box-shadow:var(--shadow-hover);}
+  .chat-wrap{background:var(--bg);}
+}
+
+/* Hormati preferensi pengguna yang mengurangi gerak */
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
+}

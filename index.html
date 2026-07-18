@@ -543,7 +543,7 @@
     <div id="s-beranda" class="ascreen on">
       <div class="greeting mobile-only">
         <div class="greeting-wave">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 12.5V7a2 2 0 0 0-4 0"/><path d="M14 8V6a2 2 0 0 0-4 0v2"/><path d="M10 8.5V5a2 2 0 0 0-4 0v9"/><path d="M6 11.5V13c0 5 3 8 7 8s7-3 7-8v-2.5"/></svg>
         </div>
         <div class="greeting-name">Halo, Muhammad!</div>
         <div class="greeting-date" id="gdate"></div>
@@ -1230,24 +1230,60 @@
     </div>
 
     <div id="s-profil" class="ascreen">
-      <div class="prof-page-header">
-        <div class="prof-page-title">Profil Pengguna</div>
-        <div class="prof-page-sub">Kelola informasi dan preferensi akun Anda</div>
-      </div>
-      <div class="prof-hdr">
-        <div class="prof-ava">M</div>
-        <div class="prof-info">
-          <div class="prof-name-row">
-            <div class="prof-name">Muhammad</div>
-            <div class="prof-badge" id="prof-level-badge">Level 1 — Pemula</div>
+      <div class="pf-hero">
+        <div class="pf-hero-top">
+          <div class="prof-ava pf-hero-ava">M</div>
+          <div class="pf-hero-greet">
+            <div class="pf-hero-hi">Selamat datang kembali,</div>
+            <div class="prof-name pf-hero-name">Muhammad</div>
           </div>
-          <div class="prof-email">muhammad@Nalarku.ai</div>
+          <div class="prof-badge pf-hero-badge" id="prof-level-badge">Level 1</div>
+        </div>
+
+        <div class="pf-card">
+          <div class="pf-card-glow"></div>
+          <div class="pf-card-lbl">Total XP Kamu</div>
+          <div class="pf-card-val"><span id="prof-xp-val">0</span><span class="pf-card-unit">XP</span></div>
+          <div class="prof-email pf-card-email">muhammad@Nalarku.ai</div>
+
+          <div class="pf-actions">
+            <div class="pf-action" onclick="showScreen('ujian')">
+              <div class="pf-action-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div class="pf-action-lbl">Ujian</div>
+            </div>
+            <div class="pf-action" onclick="showToast('Pengaturan notifikasi')">
+              <div class="pf-action-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+              <div class="pf-action-lbl">Notifikasi</div>
+            </div>
+            <div class="pf-action" onclick="showToast('Preferensi belajar disimpan!')">
+              <div class="pf-action-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41M12 2v2M12 20v2M2 12h2M20 12h2"/></svg></div>
+              <div class="pf-action-lbl">Preferensi</div>
+            </div>
+            <div class="pf-action" onclick="doLogout()">
+              <div class="pf-action-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
+              <div class="pf-action-lbl">Keluar</div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="prof-stats">
-        <div class="prof-scard"><div class="prof-sval" id="prof-kartu-val">0</div><div class="prof-slbl">Kartu</div></div>
-        <div class="prof-scard"><div class="prof-sval" id="prof-streak-val">0</div><div class="prof-slbl">Streak</div></div>
-        <div class="prof-scard"><div class="prof-sval" id="prof-xp-val">0</div><div class="prof-slbl">XP</div></div>
+
+      <div class="pf-section-title">Pencapaian</div>
+      <div class="pf-highlights">
+        <div class="pf-hl">
+          <div class="pf-hl-ico" style="background:var(--orange-dim);color:var(--orange)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div class="pf-hl-val" id="prof-kartu-val">0</div>
+          <div class="pf-hl-lbl">Kartu</div>
+        </div>
+        <div class="pf-hl">
+          <div class="pf-hl-ico" style="background:var(--green-dim);color:var(--green)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div>
+          <div class="pf-hl-val" id="prof-streak-val">0</div>
+          <div class="pf-hl-lbl">Streak</div>
+        </div>
+        <div class="pf-hl">
+          <div class="pf-hl-ico" style="background:var(--purple-dim);color:var(--purple)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+          <div class="pf-hl-val" id="pf-rank-val">Top 100%</div>
+          <div class="pf-hl-lbl">Peringkat</div>
+        </div>
       </div>
 
       <div class="prof-grid">
@@ -1275,27 +1311,6 @@
             </div>
             <div class="prof-item-txt"><div class="prof-item-name">Tema Tampilan</div><div class="prof-item-sub" id="tog-theme-label">Mode gelap aktif</div></div>
             <button class="toggle" id="tog-theme" onclick="toggleTheme()"></button>
-          </div>
-          <div class="prof-item" onclick="showToast('Pengaturan notifikasi')">
-            <div class="prof-item-ico" style="background:var(--orange-dim);color:var(--orange)">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-            </div>
-            <div class="prof-item-txt"><div class="prof-item-name">Notifikasi Nala AI</div><div class="prof-item-sub">Pengingat belajar otomatis</div></div>
-            <svg class="prof-item-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          </div>
-          <div class="prof-item" onclick="showToast('Preferensi belajar disimpan!')">
-            <div class="prof-item-ico" style="background:var(--blue-dim);color:var(--blue)">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
-            </div>
-            <div class="prof-item-txt"><div class="prof-item-name">Preferensi Belajar</div><div class="prof-item-sub">Waktu, durasi, dan target</div></div>
-            <svg class="prof-item-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          </div>
-          <div class="prof-item" onclick="doLogout()">
-            <div class="prof-item-ico" style="background:var(--red-dim);color:var(--red)">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-            </div>
-            <div class="prof-item-txt"><div class="prof-item-name">Keluar</div><div class="prof-item-sub">Logout dari akun</div></div>
-            <svg class="prof-item-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
           </div>
         </div>
       </div>

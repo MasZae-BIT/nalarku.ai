@@ -466,6 +466,8 @@ async function loadLeaderboard(studentId) {
     if (setDash) setDash.textContent = `Top ${topPercent}%`;
     const setDt = document.getElementById('dt-rank-val');
     if (setDt) setDt.textContent = `Top ${topPercent}%`;
+    const setPf = document.getElementById('pf-rank-val');
+    if (setPf) setPf.textContent = `Top ${topPercent}%`;
 
     renderLeaderboardUI(sorted, studentId);
   } catch (e) {

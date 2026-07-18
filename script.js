@@ -523,7 +523,7 @@ function showScreen(name) {
 }
 
 let lbPollInterval = null;
-const LB_POLL_MS = 10000;
+const LB_POLL_MS = 45000;
 
 function startLBPolling() {
   stopLBPolling();

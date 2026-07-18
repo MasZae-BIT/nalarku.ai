@@ -58,7 +58,6 @@ body{
 }
 button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 
-/* ── MOBILE / DESKTOP VISIBILITY ── */
 .mobile-only{display:block;}
 .desktop-dashboard{display:none;}
 
@@ -68,17 +67,12 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   .beranda-scroll{display:block;}
 }
 
-/* ── ICONS (inline SVG system) ── */
 .ico{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
 .ico svg{display:block;}
 
-/* ── SCREENS ── */
 .page{display:none;min-height:100vh;}
 .page.show{display:flex;flex-direction:column;}
 
-/* ═══════════════════════════════
-   LOGIN PAGE
-═══════════════════════════════ */
 #pg-login{
   background:var(--bg);
   align-items:stretch;justify-content:stretch;
@@ -207,31 +201,27 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 }
 .f-pill svg{color:var(--orange);}
 
-/* ═══════════════════════════════
-   APP SHELL
-═══════════════════════════════ */
 #pg-app{background:var(--bg);}
 
-/* TOPBAR */
 .topbar{
   position:fixed;top:0;left:0;right:0;z-index:200;
   background:var(--topbar-bg);backdrop-filter:blur(14px);
   border-bottom:1px solid var(--border);
-  padding:13px 18px;
+  padding:9px 16px;
   display:flex;align-items:center;justify-content:space-between;
   width:100%;margin:0;
 }
 .topbar-brand{display:flex;align-items:center;gap:10px;}
 .topbar-brand-icon{
-  width:34px;height:34px;border-radius:10px;
+  width:30px;height:30px;border-radius:9px;
   background:linear-gradient(135deg,var(--orange),var(--orange2));
   display:flex;align-items:center;justify-content:center;
 }
-.topbar-brand-name{font-size:16px;font-weight:800;}
+.topbar-brand-name{font-size:15px;font-weight:800;}
 .topbar-brand-name span{color:var(--orange);}
-.topbar-right{display:flex;align-items:center;gap:10px;}
+.topbar-right{display:flex;align-items:center;gap:8px;}
 .topbar-btn{
-  width:34px;height:34px;border-radius:10px;
+  width:30px;height:30px;border-radius:9px;
   background:var(--card);border:1px solid var(--border);
   display:flex;align-items:center;justify-content:center;
   cursor:pointer;color:var(--t2);transition:all .2s;
@@ -254,14 +244,12 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 }
 .user-ava:hover{border-color:var(--orange);}
 
-/* CONTENT */
 .app-content{
-  padding:72px 16px 100px;
+  padding:64px 16px 100px;
   max-width:600px;margin:0 auto;
   width:100%;min-width:0;
 }
 
-/* BOTTOM NAV */
 .bnav{
   position:fixed;bottom:0;left:0;right:0;z-index:200;
   background:var(--bnav-bg);backdrop-filter:blur(14px);
@@ -278,16 +266,11 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .bnav-label{font-size:10px;font-weight:600;}
 .bnav-desktop-only{display:none;}
 
-/* ── SCREENS (within app) ── */
 .ascreen{display:none;}
 .ascreen.on{display:block;}
 
-/* beranda scroll container — hidden on mobile, shown on desktop */
 .beranda-scroll{display:none;}
 
-/* ═══════════════════════════════
-   BERANDA
-═══════════════════════════════ */
 .greeting{
   display:flex;align-items:center;gap:14px;
   padding:22px 0 16px;text-align:left;
@@ -302,7 +285,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .greeting-name{font-size:19px;font-weight:800;line-height:1.25;}
 .greeting-date{font-size:12px;color:var(--t2);margin-top:2px;}
 
-/* NALA AI BANNER */
 .zae-banner{
   background:linear-gradient(135deg,rgba(var(--orange-rgb),.1),rgba(var(--orange2-rgb),.05));
   border:1px solid rgba(var(--orange-rgb),.28);
@@ -326,7 +308,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 }
 @keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
 
-/* STAT CARDS */
 .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:14px 0;}
 .scard{
   background:var(--card);border:1px solid var(--border);
@@ -350,7 +331,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .xp-bar{height:3px;background:rgba(255,255,255,.07);border-radius:99px;margin-top:8px;overflow:hidden;}
 .xp-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--orange),#fbbf24);transition:width .8s ease;}
 
-/* QUICK CREATE */
 .qcreate{
   background:var(--card);border:1px solid var(--border);
   border-radius:var(--r2);padding:14px 16px;margin:14px 0;
@@ -367,7 +347,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .qbtn svg{color:var(--orange);}
 .qbtn:hover{background:var(--card2);border-color:var(--border2);color:var(--t1);}
 
-/* SECTION TITLE */
 .stitle{
   display:flex;align-items:center;justify-content:space-between;
   margin-bottom:12px;
@@ -375,7 +354,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .stitle h2{font-size:15px;font-weight:700;}
 .stitle a{font-size:12px;color:var(--orange);font-weight:600;text-decoration:none;cursor:pointer;}
 
-/* CATATAN CARDS */
 .note-card{
   background:var(--card);border:1px solid var(--border);
   border-radius:var(--r2);padding:15px 16px;margin-bottom:10px;
@@ -394,7 +372,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .note-source{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--t3);}
 .note-time{font-size:11px;color:var(--t3);margin-left:auto;}
 
-/* AI ANALYSIS */
 .ai-analysis{
   background:var(--card);border:1px solid var(--border);
   border-radius:var(--r3);padding:18px;margin:14px 0;
@@ -419,7 +396,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .ai-row-val.b{color:var(--blue);}
 .ai-row-val.r{color:var(--red);}
 
-/* STUDY TIMER WIDGET */
 .timer-widget{
   background:var(--card);border:1px solid var(--border);
   border-radius:var(--r3);padding:20px;margin:14px 0;
@@ -450,7 +426,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .timer-btn:hover{background:var(--card2);color:var(--t1);}
 .timer-sessions{font-size:11px;color:var(--t3);margin-top:12px;}
 
-/* STREAK CALENDAR */
 .streak-cal{
   background:var(--card);border:1px solid var(--border);
   border-radius:var(--r2);padding:16px;margin:14px 0;
@@ -469,11 +444,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .cal-day.today{border:1.5px solid var(--orange);color:var(--orange);}
 .cal-day.empty{background:var(--bg2);color:var(--t3);}
 
-/* ═══════════════════════════════
-   NALA AI CHAT — REDESIGN
-═══════════════════════════════ */
-
-/* Layout wrapper — full height on both mobile & desktop */
 .chat-wrap{
   display:flex;flex-direction:column;
   height:calc(100dvh - 56px - 68px);
@@ -484,7 +454,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   #s-ai-chat{padding-bottom:0;}
 }
 
-/* ── HEADER ── */
 .chat-hdr{
   padding:14px 0 12px;
   display:flex;align-items:center;justify-content:space-between;
@@ -493,7 +462,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 }
 .chat-hdr-left{display:flex;align-items:center;gap:12px;}
 
-/* Avatar dengan pulse ring */
 .chat-avatar{
   width:44px;height:44px;border-radius:14px;
   background:linear-gradient(135deg,var(--orange),var(--orange2));
@@ -538,7 +506,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 }
 .chat-hdr-btn:hover{background:var(--card2);color:var(--t1);border-color:var(--border2);}
 
-/* ── MESSAGES AREA ── */
 .chat-msgs{
   flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:12px;
   padding:16px 0 10px;
@@ -548,7 +515,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .chat-msgs::-webkit-scrollbar-track{background:transparent;}
 .chat-msgs::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
 
-/* Date divider */
 .chat-divider{
   display:flex;align-items:center;gap:10px;
   font-size:10px;color:var(--t3);font-weight:600;
@@ -558,12 +524,10 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   content:'';flex:1;height:1px;background:var(--border);
 }
 
-/* Message rows */
 .cmsg{display:flex;gap:10px;align-items:flex-end;animation:msg-in .25s ease;}
 .cmsg.u{flex-direction:row-reverse;}
 @keyframes msg-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-/* Avatars */
 .cmsg-ava{
   width:32px;height:32px;border-radius:50%;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
@@ -578,7 +542,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   color:#fff;
 }
 
-/* Bubbles */
 .cmsg-body{display:flex;flex-direction:column;max-width:78%;}
 .cmsg.u .cmsg-body{align-items:flex-end;}
 .cmsg-bubble{
@@ -600,17 +563,14 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .cmsg-time{font-size:10px;color:var(--t3);margin-top:4px;padding:0 4px;}
 .cmsg.u .cmsg-time{text-align:right;}
 
-/* Typing indicator */
 .typing{display:flex;gap:5px;align-items:center;padding:4px 2px;}
 .td{width:7px;height:7px;border-radius:50%;background:var(--orange);animation:tdot .9s ease infinite;}
 .td:nth-child(2){animation-delay:.18s;}
 .td:nth-child(3){animation-delay:.36s;}
 @keyframes tdot{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(-6px);opacity:1}}
 
-/* ── BOTTOM BAR ── */
 .chat-bottom{flex-shrink:0;padding-bottom:4px;}
 
-/* Suggestion chips */
 .chat-suggestions{
   display:flex;gap:7px;padding:10px 0 8px;
   overflow-x:auto;scrollbar-width:none;
@@ -626,7 +586,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 }
 .sug-btn:hover{border-color:var(--orange);color:var(--orange);background:var(--orange-dim);}
 
-/* Input row */
 .chat-input-wrap{
   background:var(--card);
   border:1.5px solid var(--border);
@@ -639,7 +598,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   border-color:rgba(var(--orange-rgb),.5);
   box-shadow:0 0 0 4px rgba(var(--orange-rgb),.08);
 }
-/* Keep old class name working */
+
 .chat-input-row{
   background:var(--card);border:1.5px solid var(--border);
   border-radius:18px;padding:10px 10px 10px 16px;
@@ -668,12 +627,8 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .chat-send:hover{transform:scale(1.07);box-shadow:0 5px 16px rgba(var(--orange-rgb),.4);}
 .chat-send:active{transform:scale(.96);}
 
-/* ═══════════════════════════════
-   DESKTOP FULLSCREEN LAYOUT
-═══════════════════════════════ */
 @media(min-width:1024px){
 
-  /* ── APP SHELL ── */
   #pg-app.show{
     display:grid;
     grid-template-rows:64px 1fr;
@@ -682,7 +637,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
     overflow:hidden;
   }
 
-  /* ── TOPBAR FULL WIDTH ACROSS TOP ── */
 .topbar{
     grid-column:1 / -1;
     grid-row:1;
@@ -702,9 +656,7 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
     border-bottom:1px solid var(--border);
     z-index:200;
   }
-  
 
-  /* ── LEFT SIDEBAR NAV ── */
   .bnav{
     grid-column:1;
     grid-row:2;
@@ -758,7 +710,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   }
   .bnav-desktop-only{display:block;}
 
-  /* ── MAIN CONTENT AREA ── */
   .app-content{
     grid-column:2;
     grid-row:2;
@@ -770,7 +721,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
     position:relative;
   }
 
-  /* All screens fill the content area, switch via JS — no scrolling on body */
   .ascreen{
     position:absolute;
     top:0; left:0; right:0; bottom:0;
@@ -782,11 +732,10 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
     flex-direction:column;
   }
 
-  /* ── BERANDA DESKTOP — Clean Dashboard (redesigned) ── */
   #s-beranda{
     padding:0;
     background:var(--bg);
-    display:none; /* overridden by .on */
+    display:none;
   }
   #s-beranda.on{
     display:flex;
@@ -794,7 +743,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
     overflow:hidden;
   }
 
-  /* Beranda inner scroll area */
   .beranda-scroll{
     display:block;
     flex:1;
@@ -802,12 +750,10 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
     padding:28px 32px 40px;
   }
 
-  /* Hide the mobile greeting wave icon + center text on desktop */
   #s-beranda .greeting{
     display:none;
   }
 
-  /* Outer dashboard wrapper — vertical stack of rows */
   .desktop-dashboard{
     display:flex;
     flex-direction:column;
@@ -815,7 +761,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
     align-content:start;
   }
 
-  /* Main(left)+Sidebar(right) two-column body */
   .dd-body{
     display:grid;
     grid-template-columns:minmax(0,1fr) 336px;
@@ -825,13 +770,10 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   .dd-main{display:flex;flex-direction:column;gap:18px;min-width:0;}
   .dd-side{display:flex;flex-direction:column;gap:18px;}
 
-  /* Row of 4 equal stat cards */
   .dd-stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
 
-  /* Split row: Analisis (wider) + Pomodoro (narrower) */
   .dd-split-row{display:grid;grid-template-columns:1.3fr 1fr;gap:18px;align-items:stretch;}
 
-  /* ── TILE BASE ── */
   .dt{
     background:var(--card);
     border:1px solid var(--border);
@@ -848,13 +790,11 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
     box-shadow:0 10px 28px rgba(0,0,0,.32);
   }
 
-  /* Legacy span helpers (harmless outside a grid, kept for compatibility) */
   .dt-wide{grid-column:span 2;}
   .dt-full{grid-column:span 4;}
   .dt-tall{grid-row:span 2;}
   .dt-2x2{grid-column:span 2;grid-row:span 2;}
 
-  /* Tile header */
   .dt-hdr{
     display:flex;align-items:center;gap:10px;margin-bottom:14px;
   }
@@ -868,7 +808,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   .dt-ico.p{background:var(--purple-dim);color:var(--purple);}
   .dt-title{font-size:12px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;}
 
-  /* Stat number inside tile */
   .dt-stat{font-size:38px;font-weight:800;line-height:1;letter-spacing:-1.5px;}
   .dt-stat.o{color:var(--orange);}
   .dt-stat.g{color:var(--green);}
@@ -876,7 +815,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   .dt-stat.p{color:var(--purple);}
   .dt-sub{font-size:12px;color:var(--t3);margin-top:4px;}
 
-  /* AI Banner tile */
   .dt-ai{
     background:var(--card);
     border-color:rgba(var(--orange-rgb),.28);
@@ -897,7 +835,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
     animation:pulse-dot 2s ease infinite;
   }
 
-  /* Timer tile */
   .dt-timer-display{
     font-size:52px;font-weight:800;letter-spacing:-2px;
     color:var(--t1);margin:10px 0 16px;
@@ -924,7 +861,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   .dt-timer-btn:hover{background:var(--card2);color:var(--t1);}
   .dt-sessions{font-size:12px;color:var(--t3);text-align:center;margin-top:14px;}
 
-  /* Quick create tile */
   .dt-qbtns{display:flex;flex-wrap:wrap;gap:9px;}
   .dt-qbtn{
     display:flex;align-items:center;gap:7px;
@@ -936,14 +872,12 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   .dt-qbtn svg{color:var(--orange);}
   .dt-qbtn:hover{background:var(--card2);border-color:var(--border2);transform:translateY(-1px);}
 
-  /* Calendar tile */
   .dd-side .dt-cal{padding:20px;}
   .dd-side .dt-cal .cal-days{gap:6px;}
   .dd-side .dt-cal .cal-day-label{font-size:11px;}
   .dd-side .dt-cal .cal-day{font-size:12px;border-radius:8px;padding:8px 0;font-weight:600;}
   .dd-side .dt-cal .cal-day.today{border-width:2px;font-weight:800;}
 
-  /* Notes tile */
   .dt-notes .tcard{
     padding:12px 13px;margin-bottom:8px;background:var(--bg2);
   }
@@ -951,12 +885,10 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   .dt-notes .tcard-name{font-size:13px;}
   .dt-notes .tcard-sub{font-size:10.5px;}
 
-  /* AI Analysis tile */
   .dt-analysis .ai-row{padding:9px 0;}
   .dt-analysis .ai-row-label{font-size:12px;}
   .dt-analysis .ai-row-val{font-size:13px;}
 
-  /* Desktop greeting bar replaces mobile greeting */
   .desktop-greet{
     display:flex;align-items:center;justify-content:space-between;
     margin-bottom:2px;
@@ -973,7 +905,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   .desktop-greet-date{font-size:12px;color:var(--t2);margin-top:3px;}
   .desktop-greet-right{display:flex;align-items:center;gap:10px;}
 
-  /* Section title used inside the right sidebar (Catatan Kamu etc.) */
   .dd-side-title{
     display:flex;align-items:center;justify-content:space-between;
     padding:0 2px;
@@ -986,7 +917,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
     .dd-side{grid-row:1;}
   }
 
-  /* ── OTHER SCREENS DESKTOP — full switch, no page scroll ── */
   #s-ai-chat{
     padding:0;
     display:none;
@@ -1032,7 +962,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
     overflow-y:auto;
   }
 
-  /* Chat screen desktop */
   .chat-wrap{
     flex:1;
     height:100%;
@@ -1051,7 +980,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   .chat-hdr{padding:20px 0 14px;}
   .cmsg-bubble{font-size:14px;}
 
-  /* Plagiarism desktop */
   #pg-plagiarism.show{
     display:grid;
     grid-template-rows:auto 1fr;
@@ -1062,7 +990,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   }
 }
 
-/* Desktop layout — sidebar feel */
 @media(min-width:768px) and (max-width:1023px){
   .app-content{padding:64px 24px 24px;}
   #s-ai-chat{
@@ -1082,9 +1009,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   .cmsg-bubble{font-size:14px;}
 }
 
-/* ═══════════════════════════════
-   UJIAN
-═══════════════════════════════ */
 .quiz-top{padding:14px 0 10px;}
 .quiz-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
 .quiz-pbar{height:6px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden;}
@@ -1144,7 +1068,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .zae-tip-ico{width:34px;height:34px;border-radius:10px;background:var(--orange-dim);display:flex;align-items:center;justify-content:center;color:var(--orange);}
 .zae-tip-txt{font-size:13px;color:var(--t2);line-height:1.6;}
 
-/* ── Perbaikan tampilan ujian di layar ponsel: pilihan jawaban lebih jelas ── */
 @media(max-width:600px){
   .qcard{padding:18px 16px;border-radius:16px;}
   .qtxt{font-size:16px;}
@@ -1156,7 +1079,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   .chip{font-size:11.5px;padding:5px 11px;}
 }
 
-/* ── Quiz page header: back button + course name/code ── */
 .quiz-page-hdr{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
 .quiz-back-btn{
   width:38px;height:38px;border-radius:10px;flex-shrink:0;
@@ -1170,9 +1092,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .quiz-soal-title{font-size:16px;font-weight:800;}
 .quiz-soal-sub{font-size:11.5px;color:var(--t2);margin-top:2px;}
 
-/* ═══════════════════════════════
-   PERINGKAT
-═══════════════════════════════ */
 .lb-item{
   background:var(--card);border:1px solid var(--border);
   border-radius:var(--r2);padding:13px 15px;
@@ -1194,9 +1113,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .lb-xp-txt{font-size:11px;color:var(--t2);}
 .lb-score{font-size:14px;font-weight:800;color:var(--orange);}
 
-/* ═══════════════════════════════
-   PROFIL
-═══════════════════════════════ */
 .prof-hdr{text-align:center;padding:18px 0 12px;}
 .prof-ava{
   width:80px;height:80px;border-radius:50%;margin:0 auto 12px;
@@ -1235,7 +1151,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .prof-item-sub{font-size:11px;color:var(--t2);}
 .prof-item-arr{color:var(--t3);}
 
-/* ── PROFILE HERO (balance-card style) ── */
 .pf-hero{padding-top:10px;}
 .pf-hero-top{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
 .pf-hero-ava{width:48px;height:48px;margin:0;flex-shrink:0;font-size:17px;border-width:2px;}
@@ -1290,7 +1205,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   .pf-actions{max-width:420px;}
 }
 
-/* ── Sidebar profile card (desktop) — tambahan baru, gak ganti menu asli ── */
 .bnav-profile{display:none;}
 @media(min-width:1024px){
   .bnav-profile{
@@ -1311,12 +1225,10 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   .bnav-profile-sub{font-size:10.5px;color:var(--t2);margin-top:1px;}
 }
 
-/* ── Profile page header (desktop) ── */
 .prof-page-header{padding:14px 0 4px;}
 .prof-page-title{font-size:20px;font-weight:800;}
 .prof-page-sub{font-size:12.5px;color:var(--t2);margin-top:3px;}
 
-/* ── Two-column grid: analysis card + settings/logout stack ── */
 .prof-grid{display:block;}
 .prof-side{display:flex;flex-direction:column;gap:8px;}
 
@@ -1341,14 +1253,12 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   .prof-side .prof-item{margin-bottom:0;}
 }
 
-/* ── CHIPS ── */
 .chip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;}
 .chip-o{background:var(--orange-dim);color:var(--orange);}
 .chip-g{background:var(--green-dim);color:var(--green);}
 .chip-b{background:var(--blue-dim);color:var(--blue);}
 .chip-p{background:var(--purple-dim);color:var(--purple);}
 
-/* TOPIC CARD */
 .tcard{
   background:var(--card);border:1px solid var(--border);border-radius:var(--r2);
   padding:14px 15px;display:flex;align-items:center;gap:12px;
@@ -1364,7 +1274,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .tbadge-done{background:var(--green-dim);color:var(--green);}
 .tbadge-prog{background:var(--blue-dim);color:var(--blue);}
 
-/* TOAST */
 .toast{
   position:fixed;top:80px;left:50%;transform:translateX(-50%);
   background:var(--green);color:#fff;padding:10px 18px;border-radius:10px;
@@ -1377,7 +1286,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 @keyframes tin{from{opacity:0;transform:translateX(-50%) translateY(-10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 @keyframes tout{from{opacity:1}to{opacity:0;visibility:hidden}}
 
-/* SPLASH */
 #splash{
   position:fixed;inset:0;z-index:9999;background:var(--bg);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
@@ -1398,9 +1306,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .splash-fill{height:100%;background:var(--orange);border-radius:99px;animation:sfill 2.2s ease forwards;}
 @keyframes sfill{from{width:0}to{width:100%}}
 
-/* ═══════════════════════════════
-   ONBOARDING FLOW
-═══════════════════════════════ */
 #pg-onboard{
   background:var(--bg);
   align-items:stretch;justify-content:stretch;
@@ -1557,9 +1462,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .ob-info-key{color:var(--t2);font-size:12px;}
 .ob-info-val{font-weight:700;color:var(--t1);font-size:13px;}
 
-/* ═══════════════════════════════
-   PODIUM LEADERBOARD
-═══════════════════════════════ */
 .lb-week-header{
   display:flex;align-items:center;justify-content:space-between;
   padding:14px 0 4px;
@@ -1585,7 +1487,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .lb-zae-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse-dot 2s ease infinite;}
 .lb-zae-msg{font-size:13px;color:var(--t1);line-height:1.5;}
 
-/* Podium */
 .lb-podium{
   display:flex;align-items:flex-end;justify-content:center;
   gap:8px;margin:20px 0 6px;padding:0 4px;
@@ -1665,7 +1566,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   background:rgba(255,255,255,.06);margin:0 0 16px;
 }
 
-/* Rest of list */
 .lb-list-title{
   font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;
   letter-spacing:.7px;margin:4px 0 10px;
@@ -1697,7 +1597,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   background:var(--orange-dim);color:var(--orange);flex-shrink:0;
 }
 
-/* ── Peringkat page header ── */
 .lb-page-header{display:flex;align-items:flex-start;gap:14px;padding:14px 0 4px;}
 .lb-page-ico{
   width:46px;height:46px;border-radius:14px;flex-shrink:0;
@@ -1707,7 +1606,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .lb-page-title{font-size:20px;font-weight:800;}
 .lb-page-sub{font-size:12.5px;color:var(--t2);margin-top:3px;line-height:1.5;}
 
-/* ── Tabs ── */
 .lb-tabs{display:flex;gap:8px;margin:16px 0 14px;overflow-x:auto;scrollbar-width:none;}
 .lb-tabs::-webkit-scrollbar{display:none;}
 .lb-tab{
@@ -1721,7 +1619,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 }
 .lb-tab:hover:not(.active){border-color:var(--border2);color:var(--t1);}
 
-/* ── Card wrapper for leaderboard ── */
 .lb-card{
   background:var(--card);border:1px solid var(--border);
   border-radius:var(--r3);padding:16px;
@@ -1755,7 +1652,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .lb-updated:hover{color:var(--t2);}
 .lb-updated svg{flex-shrink:0;}
 
-/* ── List column header ── */
 .lb-list-cols{
   display:grid;grid-template-columns:24px 1fr 70px 60px;
   gap:11px;padding:0 14px 8px;
@@ -1764,16 +1660,13 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 }
 .lb-list-cols span:nth-child(3),.lb-list-cols span:nth-child(4){text-align:right;}
 
-/* ── Row progress bar ── */
 .lb-row-progress{width:60px;height:5px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;flex-shrink:0;}
 .lb-row-progress-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--orange),#fbbf24);}
 
-/* ── Two-column layout: main + side ── */
 .lb-grid{display:block;}
 .lb-main{display:flex;flex-direction:column;}
 .lb-side{display:flex;flex-direction:column;gap:16px;margin-top:16px;}
 
-/* ── Right side summary card ── */
 .lb-side-card{
   background:var(--card);border:1px solid var(--border);
   border-radius:var(--r3);padding:18px;
@@ -1794,7 +1687,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .lb-percentile-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--orange),#fbbf24);transition:width .4s;}
 .lb-percentile-ends{display:flex;justify-content:space-between;font-size:10.5px;color:var(--t3);margin-top:6px;}
 
-/* ── Statistik mingguan chart (placeholder sementara — belum ada sumber data harian asli) ── */
 .lb-chart-wrap{margin-top:2px;}
 .lb-chart-days{display:flex;justify-content:space-between;margin-top:6px;font-size:10px;color:var(--t3);}
 
@@ -1803,9 +1695,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   .lb-side{margin-top:0;}
 }
 
-/* ═══════════════════════════════
-   PLAGIARISM CHECKER
-═══════════════════════════════ */
 #pg-plagiarism{
   background:var(--bg);min-height:100vh;
 }
@@ -1894,7 +1783,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .plag-btn:hover{opacity:.9;transform:translateY(-1px);}
 .plag-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
 
-/* RESULT */
 .plag-result{display:none;}
 .plag-score-ring{
   text-align:center;padding:24px 0;
@@ -1962,7 +1850,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 }
 .plag-retry:hover{background:var(--card);color:var(--t1);}
 
-/* loading overlay */
 .plag-loading{
   display:none;
   flex-direction:column;align-items:center;justify-content:center;
@@ -1986,10 +1873,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .plag-load-step.active-s{color:var(--orange);background:var(--orange-dim);}
 .plag-step-ico{width:18px;height:18px;flex-shrink:0;}
 
-/* ═══════════════════════════════
-   UJIAN — BENTO GRID REDESIGN
-═══════════════════════════════ */
-/* Matkul list sidebar */
 .ujian-wrap{
   display:flex;flex-direction:column;
   height:100%;overflow:hidden;
@@ -2012,7 +1895,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 }
 .btn-add-matkul:hover{transform:scale(1.08);}
 
-/* Bento grid: left=soal, right=nala ai */
 .ujian-bento{
   display:flex;flex-direction:column;
   flex:1;overflow:hidden;gap:0;
@@ -2021,7 +1903,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   .ujian-bento{flex-direction:row;}
 }
 
-/* LEFT PANEL — soal */
 .ujian-left{
   flex:1;overflow-y:auto;
   padding:16px 18px;
@@ -2031,7 +1912,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .ujian-left::-webkit-scrollbar{width:4px;}
 .ujian-left::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
 
-/* Matkul cards */
 .matkul-empty{
   text-align:center;padding:48px 20px;
   display:flex;flex-direction:column;align-items:center;gap:14px;
@@ -2073,7 +1953,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 }
 .btn-matkul-action.primary:hover{opacity:.88;}
 
-/* Upload PPT area */
 .ppt-upload-area{
   border:2px dashed var(--border2);border-radius:var(--r2);
   padding:24px;text-align:center;margin:12px 0;
@@ -2103,11 +1982,9 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   display:flex;align-items:center;justify-content:center;font-size:14px;
 }
 
-/* Soal area inside left panel */
 .quiz-panel{display:none;}
 .quiz-panel.show{display:block;}
 
-/* RIGHT PANEL — Nala AI */
 .ujian-right{
   width:100%;max-height:300px;overflow-y:auto;
   border-top:1px solid var(--border);
@@ -2176,7 +2053,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   display:flex;align-items:center;justify-content:center;
 }
 
-/* Modal tambah matkul */
 .modal-overlay{
   position:fixed;inset:0;z-index:500;
   background:rgba(0,0,0,.6);backdrop-filter:blur(4px);
@@ -2215,7 +2091,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   display:flex;align-items:center;justify-content:center;gap:7px;
 }
 
-/* Loading soal dari PPT */
 .quiz-loading{
   display:none;flex-direction:column;align-items:center;
   padding:32px 20px;text-align:center;gap:12px;
@@ -2228,18 +2103,12 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 }
 .quiz-load-txt{font-size:13px;color:var(--t2);}
 
-/* =========================================
-   REDESIGN OVERRIDES (Nala AI & Ujian)
-========================================= */
-
-/* Hapus border/background berlebih agar lebih clean */
-#s-ai-chat .chat-wrap, 
+#s-ai-chat .chat-wrap,
 .ujian-right {
   background: var(--bg);
   border: none !important;
 }
 
-/* Chat Header Redesign */
 .chat-hdr {
   border-bottom: 1px solid var(--border);
   padding: 16px 24px;
@@ -2253,7 +2122,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   background: var(--card);
 }
 
-/* Bubble Chat Redesign */
 .cmsg { margin-bottom: 8px; }
 .cmsg.ai .cmsg-bubble {
   background: var(--card);
@@ -2271,7 +2139,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 }
 .cmsg-ava.ai { border-radius: 50%; }
 
-/* Input Chat Area Redesign */
 .chat-bottom {
   padding: 16px 24px 24px;
 }
@@ -2301,7 +2168,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   box-shadow: none;
 }
 
-/* Latihan & Ujian Empty State Redesign */
 .ujian-header { padding: 24px; border-bottom: 1px solid var(--border); }
 .btn-add-matkul { border-radius: 10px; width: 40px; height: 40px; }
 .matkul-empty { padding: 80px 20px; }
@@ -2318,14 +2184,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   font-size: 14px;
   border-radius: 12px;
 }
-
-/* =========================================================================
-   PREMIUM GLASS REDESIGN — v3
-   Lapisan penyempurnaan visual (tanpa mengubah struktur/kelas/fungsi JS).
-   Fokus: iOS-style frosted glass, kedalaman (elevation) yang konsisten,
-   motion yang lebih halus, dan detail kecil yang bikin terasa "dibuat
-   dengan tangan" bukan default AI.
-========================================================================= */
 
 :root{
   --ease: cubic-bezier(.22,1,.36,1);
@@ -2360,7 +2218,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   --ring-orange: 0 0 0 3px rgba(var(--orange-rgb),.14);
 }
 
-/* ── ambient depth di background, sangat halus ── */
 body{
   background:
     radial-gradient(1100px 560px at 8% -8%, rgba(var(--orange-rgb),.055), transparent 60%),
@@ -2371,16 +2228,12 @@ body{
 ::selection{background:rgba(var(--orange-rgb),.32);color:var(--t1);}
 :focus-visible{outline:2px solid rgba(var(--orange-rgb),.55);outline-offset:2px;}
 
-/* ── scrollbar global, tipis & senyap ── */
 *{scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
 *::-webkit-scrollbar{width:5px;height:5px;}
 *::-webkit-scrollbar-track{background:transparent;}
 *::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px;}
 *::-webkit-scrollbar-thumb:hover{background:var(--t3);}
 
-/* =========================================================================
-   TOPBAR & NAVIGASI — kaca sungguhan (frosted, bukan sekadar blur)
-========================================================================= */
 .topbar{
   background:var(--glass);
   -webkit-backdrop-filter:saturate(180%) blur(22px);
@@ -2430,9 +2283,6 @@ body{
 .topbar-btn:hover,.chat-hdr-btn:hover{transform:translateY(-1px);box-shadow:var(--shadow-xs);}
 .topbar-btn:active,.chat-hdr-btn:active{transform:translateY(0) scale(.95);}
 
-/* =========================================================================
-   KARTU — permukaan kaca konsisten di semua tile/kartu
-========================================================================= */
 .scard,.note-card,.ai-analysis,.timer-widget,.streak-cal,.qcreate,
 .dt,.qcard,.ppt-file-name,.login-testimonial{
   background:var(--glass-soft);
@@ -2466,7 +2316,6 @@ body{
 
 .qcard{box-shadow:var(--shadow-md);}
 
-/* modal & popover kaca */
 .modal-overlay{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);}
 .modal-box{
   background:var(--glass-strong);
@@ -2476,16 +2325,12 @@ body{
   border-color:var(--glass-border);
 }
 
-/* onboarding kotak kanan */
 .ob-box{
   background:var(--glass-soft);
   -webkit-backdrop-filter:blur(18px) saturate(140%);
   backdrop-filter:blur(18px) saturate(140%);
 }
 
-/* =========================================================================
-   TOMBOL — sedikit "sheen", transisi pegas ringan
-========================================================================= */
 .btn-login,.modal-submit,.ob-btn-next,.btn-matkul-action.primary,.chat-send,.ujian-ai-send{
   position:relative;overflow:hidden;
   box-shadow:0 6px 20px rgba(var(--orange-rgb),.3), 0 1px 0 rgba(255,255,255,.22) inset;
@@ -2518,9 +2363,6 @@ body{
 }
 .btn-google:hover{transform:translateY(-1px);box-shadow:var(--shadow-xs);}
 
-/* =========================================================================
-   INPUT — fokus lebih lembut, ring bukan garis tajam
-========================================================================= */
 .field input,.ob-input,.modal-input,.chat-ta,.ujian-ai-ta{
   transition:border-color .25s var(--ease), box-shadow .25s var(--ease), background .25s var(--ease);
 }
@@ -2530,7 +2372,6 @@ body{
 }
 .ob-input:focus{border-color:var(--orange);box-shadow:var(--ring-orange);}
 
-/* Chips & opsi kuis — kaca tipis, transisi halus */
 .ob-chip,.qopt,.timer-tab,.dt-timer-tab{
   transition:all .25s var(--ease);
 }
@@ -2542,38 +2383,29 @@ body{
 .qopt{-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);}
 .qopt:hover{transform:translateX(2px);}
 
-/* Toggle switch — lebih halus */
 .toggle{transition:background .3s var(--ease);}
 .toggle::after{transition:transform .3s var(--ease-spring);}
 
-/* Avatar chat & pesan */
 .cmsg-bubble{
   -webkit-backdrop-filter:blur(6px);
   backdrop-filter:blur(6px);
 }
 .cmsg.ai .cmsg-bubble{box-shadow:var(--shadow-xs);}
 
-/* =========================================================================
-   MOBILE — pastikan target sentuh nyaman & spacing rapi
-========================================================================= */
 @media(max-width:1023px){
-  .app-content{padding-top:76px;}
+  .app-content{padding-top:64px;}
   .bnav-item{min-height:48px;justify-content:center;}
   .stat-grid{gap:10px;}
   .scard{padding:16px 14px;}
   .qcard{padding:18px 16px;}
 }
 
-/* =========================================================================
-   DESKTOP — kedalaman lebih jelas di layar besar
-========================================================================= */
 @media(min-width:1024px){
   .dt{box-shadow:var(--shadow-sm);}
   .dt:hover{box-shadow:var(--shadow-hover);}
   .chat-wrap{background:var(--bg);}
 }
 
-/* Hormati preferensi pengguna yang mengurangi gerak */
 @media (prefers-reduced-motion: reduce){
   *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
 }

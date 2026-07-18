@@ -367,7 +367,9 @@ function applyProfileFromSupabase(p) {
 
   // Update semua elemen UI
   const grName = document.querySelector('.greeting-name');
-  if (grName) grName.textContent = `Halo, ${nick}!`;
+  if (grName) grName.textContent = `${nick}!`;
+  const grAva = document.querySelector('.greeting-ava');
+  if (grAva) grAva.textContent = avatarChar;
   const dtName = document.querySelector('.desktop-greet-name');
   if (dtName) dtName.textContent = `Halo, ${nick}! 👋`;
   const dtAva = document.querySelector('.desktop-greet-ava');
@@ -491,7 +493,9 @@ function applyProfile() {
     if (ava) ava.textContent = avatarChar;
     // Update greeting name (mobile)
     const grName = document.querySelector('.greeting-name');
-    if (grName) grName.textContent = `Halo, ${nick}!`;
+    if (grName) grName.textContent = `${nick}!`;
+    const grAva = document.querySelector('.greeting-ava');
+    if (grAva) grAva.textContent = avatarChar;
     // Update desktop greeting name & avatar
     const dtName = document.querySelector('.desktop-greet-name');
     if (dtName) dtName.textContent = `Halo, ${nick}! 👋`;

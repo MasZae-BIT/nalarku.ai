@@ -1157,7 +1157,6 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
 .pf-hero-greet{flex:1;min-width:0;}
 .pf-hero-hi{font-size:12px;color:var(--t2);font-weight:600;}
 .pf-hero-name{font-size:17px;line-height:1.25;}
-.pf-hero-badge{flex-shrink:0;}
 
 .pf-card{
   position:relative;overflow:hidden;
@@ -1170,6 +1169,11 @@ button,input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;}
   background:rgba(255,255,255,.10);pointer-events:none;
 }
 .pf-card-lbl{position:relative;font-size:12px;color:rgba(255,255,255,.78);font-weight:600;}
+.pf-card-badge{
+  position:absolute;top:18px;right:18px;z-index:1;
+  background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.28);
+  color:#fff;
+}
 .pf-card-val{position:relative;margin-top:6px;display:flex;align-items:baseline;gap:6px;color:#fff;}
 .pf-card-val span:first-child{font-size:32px;font-weight:800;}
 .pf-card-unit{font-size:13px;font-weight:700;opacity:.85;}

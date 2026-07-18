@@ -1,19 +1,19 @@
 const IS_TEST_MODE  = false;
 const N8N_CHAT_URL  = IS_TEST_MODE
-  ? 'https://nalarku.app.n8n.cloud/webhook-test/nalarku-tutor'
-  : 'https://nalarku.app.n8n.cloud/webhook/nalarku-tutor';
+  ? 'https://claudegratisaii.app.n8n.cloud/webhook-test/nalarku-tutor'
+  : 'https://claudegratisaii.app.n8n.cloud/webhook/nalarku-tutor';
 const N8N_PLAG_URL  = IS_TEST_MODE
-  ? 'https://nalarku.app.n8n.cloud/webhook-test/nalarku-tutor'
-  : 'https://nalarku.app.n8n.cloud/webhook/nalarku-tutor';
+  ? 'https://claudegratisaii.app.n8n.cloud/webhook-test/nalarku-tutor'
+  : 'https://claudegratisaii.app.n8n.cloud/webhook/nalarku-tutor';
 
-const N8N_SAVE_PROFILE_URL   = 'https://nalarku.app.n8n.cloud/webhook/student-onboarding';
-const N8N_GET_PROFILE_URL    = 'https://nalarku.app.n8n.cloud/webhook/student-profile';
-const N8N_UPDATE_STATS_URL   = 'https://nalarku.app.n8n.cloud/webhook/student-update';
-const N8N_LEADERBOARD_URL    = 'https://nalarku.app.n8n.cloud/webhook/student-leaderboard';
+const N8N_SAVE_PROFILE_URL   = 'https://claudegratisaii.app.n8n.cloud/webhook/student-onboarding';
+const N8N_GET_PROFILE_URL    = 'https://claudegratisaii.app.n8n.cloud/webhook/student-profile';
+const N8N_UPDATE_STATS_URL   = 'https://claudegratisaii.app.n8n.cloud/webhook/student-update';
+const N8N_LEADERBOARD_URL    = 'https://claudegratisaii.app.n8n.cloud/webhook/student-leaderboard';
 
 const N8N_UPLOAD_PPT_URL = IS_TEST_MODE
-  ? 'https://nalarku.app.n8n.cloud/webhook-test/Upload-File'
-  : 'https://nalarku.app.n8n.cloud/webhook/Upload-File';
+  ? 'https://claudegratisaii.app.n8n.cloud/webhook-test/Upload-File'
+  : 'https://claudegratisaii.app.n8n.cloud/webhook/Upload-File';
 
 function generateUUID() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {

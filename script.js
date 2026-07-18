@@ -1,6 +1,4 @@
-// ── N8N WEBHOOK URLs ──
-// Ganti ke Production URL saat sudah siap deploy
-const IS_TEST_MODE  = false; // ubah ke false saat production
+const IS_TEST_MODE  = false;
 const N8N_CHAT_URL  = IS_TEST_MODE
   ? 'https://nalarku.app.n8n.cloud/webhook-test/nalarku-tutor'
   : 'https://nalarku.app.n8n.cloud/webhook/nalarku-tutor';
@@ -8,19 +6,15 @@ const N8N_PLAG_URL  = IS_TEST_MODE
   ? 'https://nalarku.app.n8n.cloud/webhook-test/nalarku-tutor'
   : 'https://nalarku.app.n8n.cloud/webhook/nalarku-tutor';
 
-// ── SUPABASE via N8N URLs ──
 const N8N_SAVE_PROFILE_URL   = 'https://nalarku.app.n8n.cloud/webhook/student-onboarding';
 const N8N_GET_PROFILE_URL    = 'https://nalarku.app.n8n.cloud/webhook/student-profile';
 const N8N_UPDATE_STATS_URL   = 'https://nalarku.app.n8n.cloud/webhook/student-update';
 const N8N_LEADERBOARD_URL    = 'https://nalarku.app.n8n.cloud/webhook/student-leaderboard';
 
-// ── UPLOAD PPT -> GOOGLE DRIVE via N8N ──
-// Ganti "upload-ppt" sesuai path Webhook node di workflow n8n kamu
 const N8N_UPLOAD_PPT_URL = IS_TEST_MODE
   ? 'https://nalarku.app.n8n.cloud/webhook-test/Upload-File'
   : 'https://nalarku.app.n8n.cloud/webhook/Upload-File';
 
-// ── UUID Generator ──
 function generateUUID() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
     const r = Math.random() * 16 | 0;
@@ -29,7 +23,6 @@ function generateUUID() {
   });
 }
 
-// ── TEMA (Terang / Gelap) ──
 function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
   localStorage.setItem('nk_theme', theme);
@@ -42,13 +35,11 @@ function toggleTheme() {
   const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
   applyTheme(current === 'light' ? 'dark' : 'light');
 }
-// Terapkan tema tersimpan sedini mungkin biar ga ada flash warna salah
 applyTheme(localStorage.getItem('nk_theme') || 'dark');
 document.addEventListener('DOMContentLoaded', () => {
   applyTheme(document.documentElement.getAttribute('data-theme') || 'dark');
 });
 
-// ── Get or Create Student ID ──
 function getStudentId() {
   let sid = localStorage.getItem('nk_student_id');
   if (!sid) {
@@ -58,7 +49,6 @@ function getStudentId() {
   return sid;
 }
 
-// Helper: panggil n8n dan ambil teks balasan AI
 async function callN8N(url, payload) {
   const res = await fetch(url, {
     method: 'POST',
@@ -74,13 +64,11 @@ async function callN8N(url, payload) {
   return text;
 }
 
-// ── SPLASH ──
 setTimeout(() => {
   const s = document.getElementById('splash');
   s.style.transition = 'opacity .35s'; s.style.opacity = '0';
   setTimeout(() => {
     s.style.display = 'none';
-    // Menampilkan halaman login terlebih dahulu sesuai permintaan (Loading -> Login)
     if (localStorage.getItem('nk_ob_done') && localStorage.getItem('nk_logged_in')) {
       showPage('pg-app');
       initApp();
@@ -90,16 +78,12 @@ setTimeout(() => {
   }, 350);
 }, 2400);
 
-// ── PAGE ──
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('show'));
   document.getElementById(id).classList.add('show');
   window.scrollTo(0,0);
 }
 
-// ═══════════════════════════════════════
-//   ONBOARDING
-// ═══════════════════════════════════════
 let obData = { nickname:'', age:'', gender:'', level:'', school:'', city:'', styles:[], time:'', dur:'', avatar:'M', goal:'', motivation:'' };
 let currentObStep = 1;
 
@@ -178,14 +162,12 @@ function pickAvatar(el) {
 }
 
 function updateGreeting() {
-  // no-op for now
 }
 
 function finishOnboard() {
   obData.motivation = document.getElementById('ob-motivation').value;
   obData.goal = [...document.querySelectorAll('#ob-goal-chips .ob-chip.sel')].map(c=>c.textContent.trim()).join('') || 'Tambah skill baru';
 
-  // Save ke Supabase via N8n
   const studentId = getStudentId();
   localStorage.setItem('nk_ob_done', '1');
 
@@ -218,7 +200,6 @@ function finishOnboard() {
     localStorage.setItem('nk_profile', JSON.stringify(obData));
   });
 
-  // Show welcome screen
   const welcomeAva = document.getElementById('ob-welcome-ava');
   welcomeAva.textContent = obData.avatar || obData.nickname[0]?.toUpperCase() || 'M';
   document.getElementById('ob-welcome-title').textContent = `Hai, ${obData.nickname || 'Kamu'}! 👋`;
@@ -257,7 +238,6 @@ function shakeEl(id) {
   setTimeout(() => { el.style.animation = ''; }, 10);
 }
 
-// ── LOGIN ──
 let activeTab = 'masuk';
 function setTab(t) {
   activeTab = t;
@@ -270,31 +250,26 @@ function togglePass() {
   inp.type = inp.type==='password' ? 'text' : 'password';
 }
 function doLogin() {
-  // Munculkan Splash kembali setelah klik login (Login -> Loading)
   const s = document.getElementById('splash');
   s.style.display = 'flex';
   s.style.opacity = '1';
   s.style.transition = 'none';
   
-  // Restart animasi bar oren
   const fill = document.querySelector('.splash-fill');
   fill.style.animation = 'none';
   void fill.offsetWidth;
   fill.style.animation = 'sfill 2.2s ease forwards';
 
-  // Lanjut setelah animasi loading
   setTimeout(() => {
     s.style.transition = 'opacity .35s';
     s.style.opacity = '0';
     setTimeout(() => {
       s.style.display = 'none';
       if (localStorage.getItem('nk_ob_done')) {
-        // Jika sudah pernah isi pertanyaan, langsung masuk Dashboard
         localStorage.setItem('nk_logged_in', '1');
         showPage('pg-app');
         initApp();
       } else {
-        // Jika belum, masuk Onboarding (Loading -> Pertanyaan)
         document.getElementById('pg-onboard').classList.remove('onboard-final');
         showPage('pg-onboard');
       }
@@ -307,7 +282,6 @@ function doLogout() {
   showPage('pg-login');
 }
 
-// ── APP INIT ──
 async function initApp() {
   showScreen('beranda');
   setDate();
@@ -315,7 +289,6 @@ async function initApp() {
   currentQS = QS;
   buildLB();
 
-  // Coba ambil profil dari Supabase dulu
   const studentId = getStudentId();
   try {
     const res = await fetch(N8N_GET_PROFILE_URL, {
@@ -326,7 +299,6 @@ async function initApp() {
     const data = await res.json();
 
     if (data.exists && data.profile) {
-      // Profil ditemukan di Supabase — sync ke localStorage
       const p = data.profile;
       const localProfile = {
         nickname: p.nickname || 'Mahasiswa',
@@ -341,7 +313,6 @@ async function initApp() {
       };
       localStorage.setItem('nk_profile', JSON.stringify(localProfile));
 
-      // Update stats dari Supabase
       window._supabaseStats = {
         xp: p.xp || 0,
         streak: p.streak || 0,
@@ -349,7 +320,6 @@ async function initApp() {
       };
       applyProfileFromSupabase(p);
     } else {
-    // Tidak ada di Supabase, fallback ke localStorage
       applyProfile();
     }
   } catch(err) {
@@ -365,7 +335,6 @@ function applyProfileFromSupabase(p) {
   const nick = p.nickname || 'Mahasiswa';
   const avatarChar = (p.avatar || nick[0] || 'M').toUpperCase();
 
-  // Update semua elemen UI
   const grName = document.querySelector('.greeting-name');
   if (grName) grName.textContent = `${nick}!`;
   const grAva = document.querySelector('.greeting-ava');
@@ -387,7 +356,6 @@ function applyProfileFromSupabase(p) {
   const bnpa = document.getElementById('bnav-profile-ava');
   if (bnpa) bnpa.textContent = avatarChar;
 
-  // Update stats XP, streak, cards
   const xp = p.xp || 0;
   const streak = p.streak || 0;
   const cards = p.cards_completed_today || 0;
@@ -399,18 +367,15 @@ function applyProfileFromSupabase(p) {
   set('prof-streak-val', streak);
   set('prof-xp-val', xp);
 
-  // Level dari XP (tiap 100 XP = 1 level — ganti kalau rumus kamu beda)
   renderLevelXP(xp);
 
   window._userProfile = p;
   window._studentXP = xp;
   console.log('Profile loaded from Supabase:', nick, '| XP:', xp, '| Streak:', streak);
 
-  // Ambil peringkat dari leaderboard setelah profil kebaca
   loadLeaderboard(getStudentId(), xp);
 }
 
-// ── LEVEL / XP ──
 function calcLevel(xp) {
   const level = Math.floor(xp / 100) + 1;
   const xpIntoLevel = xp % 100;
@@ -435,7 +400,6 @@ function renderLevelXP(xp) {
   set('prof-level-badge', `Level ${lvl.level}`);
 }
 
-// ── PERINGKAT / LEADERBOARD (dari n8n -> Supabase) ──
 async function loadLeaderboard(studentId) {
   try {
     const res = await fetch(N8N_LEADERBOARD_URL, {
@@ -448,7 +412,6 @@ async function loadLeaderboard(studentId) {
     const rows = data.leaderboard || [];
 
     if (!rows.length) {
-      // Beneran belum ada peserta ber-XP sama sekali -> ini BUKAN error, tampilin kosong
       const setDash = document.getElementById('dash-rank-val');
       if (setDash) setDash.textContent = '—';
       const setDt = document.getElementById('dt-rank-val');
@@ -457,7 +420,6 @@ async function loadLeaderboard(studentId) {
       return;
     }
 
-    // Sort ulang di client berdasarkan XP asli, biar rank selalu akurat
     const sorted = [...rows].sort((a, b) => (b.xp || 0) - (a.xp || 0));
     const total = sorted.length;
     const myIndex = sorted.findIndex(r => r.student_id === studentId);
@@ -485,27 +447,20 @@ function applyProfile() {
     const p = JSON.parse(localStorage.getItem('nk_profile') || '{}');
     const nick = p.nickname || 'Muhammad';
     const avatarChar = (p.avatar || nick[0] || 'M').toUpperCase();
-    // Update greeting
     const gn = document.getElementById('gdate');
     if (gn) gn.dataset.nick = nick;
-    // Update topbar avatar
     const ava = document.querySelector('.user-ava');
     if (ava) ava.textContent = avatarChar;
-    // Update greeting name (mobile)
     const grName = document.querySelector('.greeting-name');
     if (grName) grName.textContent = `${nick}!`;
     const grAva = document.querySelector('.greeting-ava');
     if (grAva) grAva.textContent = avatarChar;
-    // Update desktop greeting name & avatar
     const dtName = document.querySelector('.desktop-greet-name');
     if (dtName) dtName.textContent = `Halo, ${nick}! 👋`;
     const dtAva = document.querySelector('.desktop-greet-ava');
     if (dtAva) dtAva.textContent = avatarChar;
-    // Update chat initial
     document.querySelectorAll('.cmsg-ava.u').forEach(el => el.textContent = avatarChar);
-    // Update chat system prompt data
     window._userProfile = p;
-    // Update profile page
     const pn = document.querySelector('.prof-name');
     if (pn) pn.textContent = nick;
     const pe = document.querySelector('.prof-email');
@@ -517,9 +472,6 @@ function applyProfile() {
     const bnpa = document.getElementById('bnav-profile-ava');
     if (bnpa) bnpa.textContent = avatarChar;
 
-    // FIX: sebelumnya path fallback ini gak pernah manggil renderLevelXP/loadLeaderboard,
-    // jadi kalau profil belum ada di Supabase (user baru) atau webhook gagal,
-    // kartu Level/XP/Peringkat nyangkut di nilai hardcode ("Lvl 1", "Top 59%") selamanya.
     renderLevelXP(0);
     loadLeaderboard(getStudentId(), 0);
   } catch(e) {}
@@ -551,7 +503,6 @@ function setZaeRec() {
   }, 900);
 }
 
-// ── SCREEN ──
 function showScreen(name) {
   document.querySelectorAll('.ascreen').forEach(s => s.classList.remove('on'));
   document.querySelectorAll('.bnav-item').forEach(b => b.classList.remove('on'));
@@ -559,30 +510,26 @@ function showScreen(name) {
   if (screen) screen.classList.add('on');
   const bn = document.getElementById('bn-'+name);
   if (bn) bn.classList.add('on');
-  // On desktop, scroll the active screen to top
   if (window.innerWidth >= 1024) {
     if (screen) screen.scrollTop = 0;
-    // Also reset scroll for beranda's inner scroll container
     const berandaScroll = document.querySelector('.beranda-scroll');
     if (berandaScroll && name === 'beranda') berandaScroll.scrollTop = 0;
   } else {
     window.scrollTo(0,0);
   }
 
-  // Realtime peringkat: polling jalan cuma pas screen Peringkat aktif
   if (name === 'peringkat') { startLBPolling(); renderLbWeekChart(); }
   else stopLBPolling();
 }
 
-// ── PERINGKAT REALTIME (polling ke n8n tiap beberapa detik) ──
 let lbPollInterval = null;
-const LB_POLL_MS = 10000; // refresh tiap 10 detik selama halaman Peringkat dibuka
+const LB_POLL_MS = 10000;
 
 function startLBPolling() {
-  stopLBPolling(); // jaga-jaga biar gak dobel interval
-  loadLeaderboard(getStudentId()); // fetch langsung begitu screen dibuka, gak nunggu interval pertama
+  stopLBPolling();
+  loadLeaderboard(getStudentId());
   lbPollInterval = setInterval(() => {
-    if (document.hidden) return; // skip kalau tab lagi di-background, hemat request
+    if (document.hidden) return;
     loadLeaderboard(getStudentId());
   }, LB_POLL_MS);
 }
@@ -591,14 +538,12 @@ function stopLBPolling() {
   if (lbPollInterval) { clearInterval(lbPollInterval); lbPollInterval = null; }
 }
 
-// Kalau user balik ke tab ini sambil masih di halaman Peringkat, langsung refresh
 document.addEventListener('visibilitychange', () => {
   if (!document.hidden && document.getElementById('s-peringkat')?.classList.contains('on')) {
     loadLeaderboard(getStudentId());
   }
 });
 
-// ── STREAK CALENDAR ──
 function buildCal() {
   const dayLabels = ['M','S','S','R','K','J','S'];
   let html = dayLabels.map(d=>`<div class="cal-day-label">${d}</div>`).join('');
@@ -614,17 +559,14 @@ function buildCal() {
     html+=`<div class="cal-day ${cls}">${d}</div>`;
   }
   document.getElementById('cal-days').innerHTML = html;
-  // Also populate desktop calendar
   const dtCal = document.getElementById('cal-days-dt');
   if (dtCal) dtCal.innerHTML = html;
 }
 
-// ── TIMER ──
 let timerInt=null, timerSecs=25*60, timerRunning=false, timerSessions=0;
 const MODES = { focus:25*60, short:5*60, long:15*60 };
 
 function syncTimerTabs(el, mode) {
-  // Sync desktop timer tabs when mobile tabs change and vice versa
   document.querySelectorAll('.dt-timer-tab').forEach(t=>t.classList.remove('on'));
   document.querySelectorAll('.timer-tab').forEach(t=>t.classList.remove('on'));
   el.classList.add('on');
@@ -693,7 +635,6 @@ function updateTimerDisplay() {
   if (dtDisp) dtDisp.textContent=txt;
 }
 
-// ── MATKUL & QUIZ SYSTEM ──
 let matkulList = JSON.parse(localStorage.getItem('nk_matkul') || '[]');
 let activeMatkul = null;
 let pptFile = null;
@@ -769,7 +710,7 @@ async function submitMatkul() {
   }
   const kode = document.getElementById('modal-matkul-kode').value.trim();
   const colors = ['#f97316','#3b82f6','#a855f7','#22c55e','#ec4899','#eab308'];
-  const selectedPptFile = pptFile; // simpan referensi SEBELUM modal ditutup (closeAddMatkul mereset pptFile)
+  const selectedPptFile = pptFile;
   const matkul = {
     id: Date.now(),
     name,
@@ -783,12 +724,11 @@ async function submitMatkul() {
 
   closeAddMatkul();
 
-  // If PPT uploaded, generate questions
   if (selectedPptFile) {
     matkulList.push(matkul);
     saveMatkul();
     renderMatkulList();
-    openMatkul(matkul.id, true); // open with loading state
+    openMatkul(matkul.id, true);
     await generateQuestionsFromPpt(matkul.id, selectedPptFile);
   } else {
     matkulList.push(matkul);
@@ -803,15 +743,11 @@ async function generateQuestionsFromPpt(matkulId, file) {
   const matkul = matkulList.find(m => m.id === matkulId);
   if (!matkul) return;
 
-  // Show loading
   document.getElementById('quiz-loading').classList.add('show');
   document.getElementById('quiz-area').innerHTML = '';
   addUjianAiMsg(`Sedang membaca PPT <strong>${file.name}</strong> dan membuat soal dari materinya... ✨`);
 
   try {
-    // Kirim nama matkul, kode, dan file PPT ke n8n.
-    // Workflow n8n yang menangani: buat folder Google Drive sesuai nama matkul,
-    // upload file PPT ke folder itu, lalu generate soal dari isi PPT.
     const formData = new FormData();
     formData.append('matkul_id', matkulId);
     formData.append('matkul_name', matkul.name);
@@ -821,14 +757,11 @@ async function generateQuestionsFromPpt(matkulId, file) {
     const response = await fetch(N8N_UPLOAD_PPT_URL, {
       method: 'POST',
       body: formData
-      // Jangan set Content-Type manual — browser otomatis set multipart/form-data + boundary yang benar.
     });
 
     if (!response.ok) throw new Error(`n8n merespon status ${response.status}`);
 
     const data = await response.json();
-    // Workflow n8n diharapkan me-respond JSON:
-    // { "matkul_summary": "...", "questions": [...], "drive_folder_url": "..." }
     matkul.questions = data.questions || [];
     matkul.summary = data.matkul_summary || '';
     matkul.driveFolderUrl = data.drive_folder_url || null;
@@ -842,7 +775,6 @@ async function generateQuestionsFromPpt(matkulId, file) {
   } catch(e) {
     console.error('Upload/generate PPT gagal:', e);
     document.getElementById('quiz-loading').classList.remove('show');
-    // Fallback ke soal default kalau n8n gagal / belum di-setup
     matkul.questions = getDefaultQuestions();
     matkul.generated = true;
     saveMatkul();
@@ -873,8 +805,6 @@ function renderMatkulList() {
     return;
   }
   empty.style.display = 'none';
-  // Kalau lagi mengerjakan soal (quiz-panel aktif), kartu matkul tetap disembunyikan
-  // supaya tidak nongol bareng tampilan soal.
   list.style.display = quizIsOpen ? 'none' : 'block';
 
   cards.innerHTML = matkulList.map(m => `
@@ -924,8 +854,6 @@ function openMatkul(id, withLoading = false) {
 
   document.getElementById('quiz-loading').classList.remove('show');
   curQ = 0; score = 0; answered = false;
-  // Kalau soal dari PPT belum ke-generate (misal proses generate gagal/belum selesai),
-  // fallback ke soal demo dulu (sementara/fake) biar user tetap bisa langsung latihan.
   currentQS = matkul.questions.length > 0 ? matkul.questions : QS;
   renderQ(0);
   renderMatkulList();
@@ -969,7 +897,6 @@ function uploadPptForMatkul(id) {
   input.click();
 }
 
-// Ujian AI chat
 function addUjianAiMsg(html) {
   const msgs = document.getElementById('ujian-ai-msgs');
   const div = document.createElement('div');
@@ -999,7 +926,6 @@ async function sendUjianAi() {
   ta.value = ''; ta.style.height = 'auto';
   ujianAiBusy = true;
 
-  // Show user msg
   const msgs = document.getElementById('ujian-ai-msgs');
   const userDiv = document.createElement('div');
   userDiv.style.cssText = 'text-align:right;margin-bottom:2px';
@@ -1007,7 +933,6 @@ async function sendUjianAi() {
   msgs.appendChild(userDiv);
   msgs.scrollTop = 99999;
 
-  // Typing
   const typing = document.createElement('div');
   typing.className = 'ujian-ai-bubble';
   typing.id = 'ujian-typing';
@@ -1037,7 +962,6 @@ async function sendUjianAi() {
   ujianAiBusy = false;
 }
 
-// ── QUIZ ──
 let currentQS = [];
 const QS = [
   { q:'Apa tujuan utama analisis data statistika?', opts:['Mengumpulkan data mentah','Menyimpulkan informasi dari data','Membuat grafik saja','Menghitung rata-rata'], ans:1, exp:'Analisis data bertujuan menyimpulkan informasi bermakna dari data mentah untuk mendukung pengambilan keputusan.' },
@@ -1101,7 +1025,6 @@ function pickOpt(i) {
     score++;
     document.getElementById('quiz-badge').textContent=`Benar ${score}/${currentQS.length}`;
     showToast('Jawaban benar! +10 XP');
-    // Update XP ke Supabase
     const studentId = getStudentId();
     fetch(N8N_UPDATE_STATS_URL, {
       method: 'POST',
@@ -1116,7 +1039,6 @@ function pickOpt(i) {
     .then(res => res.json())
     .then(data => {
       console.log('Stats updated:', data);
-      // Optimis: tambah 10 XP di tampilan dulu, lalu tarik ulang peringkat terbaru
       const newXP = (window._studentXP || 0) + 10;
       window._studentXP = newXP;
       renderLevelXP(newXP);
@@ -1160,18 +1082,11 @@ function showResult(){
 
 function retryQuiz(){curQ=0;score=0;answered=false;renderQ(0);}
 
-// ═══════════════════════════════════════
-//   PODIUM LEADERBOARD (100% dari Supabase, gak ada data dummy)
-// ═══════════════════════════════════════
 const LB_COLORS = ['#a855f7','#f97316','#22c55e','#6366f1','#ec4899','#3b82f6','#eab308'];
 
-// Ubah hasil webhook n8n [{student_id, nickname, xp}] jadi format buildLB()
-// rows boleh kosong ([]) -> artinya beneran belum ada peserta ber-XP
 function renderLeaderboardUI(rows, myStudentId, state) {
   if (!rows || rows.length === 0) { buildLB([], state); return; }
 
-  // Urutan ulang berdasarkan XP asli (DESC) -> siapapun XP-nya lebih tinggi otomatis naik ke rank 1,
-  // gak peduli urutan yang dibalikin n8n
   const sorted = [...rows].sort((a, b) => (b.xp || 0) - (a.xp || 0));
 
   const list = sorted.map((row, i) => {
@@ -1194,11 +1109,9 @@ function buildLB(list, state){
   const podiumEl = document.getElementById('lb-podium');
   const listEl = document.getElementById('lb-list');
 
-  // Update jam "Diperbarui" tiap kali data ditarik ulang
   const updTxt = document.getElementById('lb-updated-txt');
   if (updTxt) updTxt.textContent = 'Diperbarui: Hari ini, ' + getTime();
 
-  // Belum ada peserta ber-XP sama sekali -> tampilan kosong, BUKAN data dummy
   if (!list || list.length === 0) {
     podiumEl.innerHTML = '';
     const msg = state === 'error'
@@ -1216,7 +1129,6 @@ function buildLB(list, state){
 
   const LB = list;
 
-  // ── Ringkasanmu (data asli: posisi & total peserta, bukan angka rekaan) ──
   const meRow = LB.find(p => p.me);
   const total = LB.length;
   const topXP = LB[0].xp || 1;
@@ -1239,9 +1151,8 @@ function buildLB(list, state){
     if (pctFillEl) pctFillEl.style.width = '0%';
     if (pctEndEl) pctEndEl.textContent = '#' + total;
   }
-  // PODIUM (top 3) — kalau pesertanya cuma 1-2 orang, slot sisanya ditampilin kosong/samar
   const top3 = LB.slice(0, 3);
-  const podiumOrder = [top3[1], top3[0], top3[2]]; // [2nd, 1st, 3rd]
+  const podiumOrder = [top3[1], top3[0], top3[2]];
   const podiumClasses = ['second','first','third'];
   const podiumCrowns = ['','👑',''];
   const podiumRanks = ['2','1','3'];
@@ -1276,7 +1187,6 @@ function buildLB(list, state){
     </div>`;
   }).join('');
 
-  // LIST (rank 4+)
   const rest = LB.slice(3);
   listEl.innerHTML = rest.length ? rest.map((p)=>{
     const rowPct = Math.max(4, Math.min(100, Math.round((p.xp / topXP) * 100)));
@@ -1295,7 +1205,6 @@ function buildLB(list, state){
   }).join('') : '';
 }
 
-// ── Tabs & filter chips kosmetik (data lain seperti Kampus/Kelas & filter granular belum tersedia dari backend) ──
 function switchLbTab(el, tab){
   document.querySelectorAll('.lb-tab').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
@@ -1307,10 +1216,8 @@ function setLbFilter(el){
   if (el.textContent.trim() !== 'Semua') showToast('Filter ' + el.textContent.trim() + ' segera hadir');
 }
 
-// TODO: DUMMY SEMENTARA — nilai XP harian di bawah ini karangan/placeholder, belum diambil dari data asli.
-// Ganti array ini (atau sambungkan ke endpoint XP-per-hari) begitu sumber datanya sudah ada.
 function renderLbWeekChart(){
-  const dummyDaily = [20, 45, 38, 55, 48, 62, 90]; // Sen..Min, skala 0-100 (karangan)
+  const dummyDaily = [20, 45, 38, 55, 48, 62, 90];
   const line = document.getElementById('lb-week-line');
   const dot = document.getElementById('lb-week-dot');
   if (!line) return;
@@ -1327,7 +1234,6 @@ function renderLbWeekChart(){
   if (dot) { dot.setAttribute('cx', last[0]); dot.setAttribute('cy', last[1]); }
 }
 
-// ── NALA AI CHAT ──
 let chatHist=[], chatBusy=false;
 
 function chatKey(e){
@@ -1388,11 +1294,10 @@ async function sendMsg(){
   const school = p.school || 'belum diketahui';
   const goal = p.goal || 'belajar lebih baik';
   try{
-    // Kirim ke n8n webhook — format bebas, n8n yang proses
     const reply = await callN8N(N8N_CHAT_URL, {
       message: txt,
       student_id: getStudentId(),
-      history: chatHist.slice(-10), // kirim 10 pesan terakhir sebagai konteks
+      history: chatHist.slice(-10),
       userContext: {
         name: nick,
         school: school,
@@ -1417,9 +1322,6 @@ function openTopic(t){
   setTimeout(()=>quickAsk(`Buat ringkasan singkat materi yang sudah aku pelajari tentang ${t}`),300);
 }
 
-// ═══════════════════════════════════════
-//   PLAGIARISM CHECKER
-// ═══════════════════════════════════════
 function openPlagiarism() {
   resetPlag();
   showPage('pg-plagiarism');
@@ -1447,13 +1349,11 @@ async function runPlagCheck() {
     return;
   }
 
-  // Show loading
   document.getElementById('plag-form').style.display = 'none';
   document.getElementById('plag-result').style.display = 'none';
   const loading = document.getElementById('plag-loading');
   loading.style.display = 'flex';
 
-  // Animate loading steps
   const steps = ['pls-1','pls-2','pls-3','pls-4'];
   let si = 0;
   const stepInt = setInterval(() => {
@@ -1509,7 +1409,6 @@ function showPlagResult(r) {
   const resultDiv = document.getElementById('plag-result');
   resultDiv.style.display = 'block';
 
-  // Ring animation
   const pct = Math.min(100, Math.max(0, r.similarity || 0));
   const circumference = 339.3;
   const offset = circumference - (pct / 100) * circumference;
@@ -1525,12 +1424,10 @@ function showPlagResult(r) {
     document.getElementById('plag-pct-txt').textContent = pct + '%';
   }, 100);
 
-  // Verdict
   const vEl = document.getElementById('plag-verdict');
   vEl.textContent = r.verdict || (pct < 20 ? 'Orisinal' : pct < 50 ? 'Mungkin Mirip' : 'Terindikasi Plagiat');
   vEl.className = 'plag-verdict ' + (pct < 20 ? 'low' : pct < 50 ? 'med' : 'high');
 
-  // Breakdown
   const sources = r.sources || [];
   if (r.ai_detection !== undefined) {
     sources.push({name:'Deteksi Teks AI', pct: r.ai_detection, color: r.ai_detection > 30 ? 'red' : 'yellow'});
@@ -1550,7 +1447,6 @@ function showPlagResult(r) {
     });
   }, 200);
 
-  // Highlights
   const hl = r.highlights || [];
   if (hl.length > 0 && pct > 10) {
     document.getElementById('plag-hl-section').style.display = 'block';
@@ -1563,7 +1459,6 @@ function showPlagResult(r) {
     document.getElementById('plag-hl-section').style.display = 'none';
   }
 
-  // AI Recommendation
   document.getElementById('plag-ai-rec-txt').textContent = r.recommendation || 'Teksmu terlihat orisinal. Pertahankan gaya penulisanmu sendiri!';
 }
 
@@ -1578,7 +1473,6 @@ function resetPlag() {
   });
 }
 
-// ── TOAST ──
 function showToast(msg,isErr=false){
   document.querySelectorAll('.toast').forEach(t=>t.remove());
   const el=document.createElement('div');

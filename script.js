@@ -489,7 +489,7 @@ function setDate() {
 
 const ZAE_MSGS = [
   'Waktu terbaikmu adalah malam ini pukul 19.00. Siapkan dirimu!',
-  'Risiko lupa pada materi Analisis Data cukup tinggi — review sekarang!',
+  'Risiko lupa pada materi Analisis Data cukup tinggi review sekarang!',
   'Energimu sedang optimal. Pelajari materi baru hari ini!',
   'Kamu sudah 2 hari tidak belajar. Sesi pendek 15 menit sudah cukup.',
   'Berdasarkan ritme belajarmu, sekarang adalah waktu yang tepat untuk belajar.',
